@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="HORNEBIFF01Engine_Horne">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=HORNEBIFF01;Initial Catalog=Engine_Horne</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>1150df40-9ca5-4e8f-8fa2-1e9d6cb07110</DataSourceID>
+</RptDataSource>
