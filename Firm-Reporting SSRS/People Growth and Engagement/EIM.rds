@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="EIM">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=HORNEPSORSQL01;Initial Catalog=EIM</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>44fc79f4-85a2-4fd9-b81b-e7dc058a5545</DataSourceID>
+</RptDataSource>
