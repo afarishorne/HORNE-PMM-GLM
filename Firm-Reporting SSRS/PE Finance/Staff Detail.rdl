@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01EngineHorne">
-      <DataSourceReference>HORNEBIFF01EngineHorne</DataSourceReference>
+    <DataSource Name="Reporting_Engine_Horne">
+      <DataSourceReference>Reporting_Engine_Horne</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>892074f9-2ee8-49ad-8e14-4aeb488a6c76</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01EngineHorne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@StaffDepartment">
             <Value>=Parameters!StaffDepartment.Value</Value>
@@ -111,7 +111,7 @@ and [StaffOffice] like (@StaffOffice)</CommandText>
     </DataSet>
     <DataSet Name="StaffDepartments">
       <Query>
-        <DataSourceName>HORNEBIFF01EngineHorne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT [StaffDepartment] AS Value, [StaffDepartment] AS Description, 1 AS Indexer
 FROM     [client_vw_StaffDetail]
 UNION
@@ -135,7 +135,7 @@ ORDER BY Indexer, Description</CommandText>
     </DataSet>
     <DataSet Name="StaffOffices">
       <Query>
-        <DataSourceName>HORNEBIFF01EngineHorne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT [StaffOffice] AS Value, [StaffOffice] AS Description, 1 AS Indexer
 FROM     [client_vw_StaffDetail]
 UNION
@@ -1397,7 +1397,7 @@ ORDER BY Indexer, Description</CommandText>
             <DataSetName>DataSet1</DataSetName>
             <Top>0.37in</Top>
             <Height>0.43in</Height>
-            <Width>23.46667in</Width>
+            <Width>23.46666in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>

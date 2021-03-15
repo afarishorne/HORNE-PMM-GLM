@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01EDW">
-      <DataSourceReference>HORNEBIFF01EDW</DataSourceReference>
+    <DataSource Name="Reporting_EDW">
+      <DataSourceReference>Reporting_EDW</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>75e366eb-27ef-4c3f-a4f9-060887877261</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@Year">
             <Value>=Parameters!Year.Value</Value>
@@ -80,7 +80,7 @@ ORDER BY EventDate,
     </DataSet>
     <DataSet Name="Years">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <CommandText>SELECT YEAR(DATEADD(YEAR, - 1, GETDATE())) AS Value, YEAR(DATEADD(YEAR, - 1, GETDATE())) AS Description, 0 AS Indexer
 UNION
 SELECT YEAR(GETDATE()) AS Value, YEAR(GETDATE()) AS Description, 1 AS Indexer
@@ -105,7 +105,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="CurrentYear">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <CommandText>SELECT YEAR(GETDATE()) AS Value,
        YEAR(GETDATE()) AS [Description]</CommandText>
       </Query>
@@ -122,7 +122,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="Months">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <CommandText>SELECT '%' AS Value,
        'All Months' AS [Description],
        0 AS Indexer
@@ -150,7 +150,7 @@ ORDER BY Indexer</CommandText>
     </DataSet>
     <DataSet Name="CurrentMonth">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <CommandText>SELECT FORMAT(GETDATE(), 'MMM') AS Value, FORMAT(GETDATE(), 'MMM') AS Description</CommandText>
       </Query>
       <Fields>
@@ -166,7 +166,7 @@ ORDER BY Indexer</CommandText>
     </DataSet>
     <DataSet Name="EventTypes">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <CommandText>SELECT '%' AS Value, 'All Event Types' AS Description, 0 AS Indexer
 UNION
 SELECT EventType AS Value, EventType AS Description, 1 AS Indexer
@@ -190,7 +190,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="FocusAreas">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <CommandText>SELECT DISTINCT FocusArea AS Value, FocusArea AS Description, 1 AS Indexer
 FROM     Jostle.vw_BirthdayAnniversaryCalendar
 ORDER BY Indexer, Value</CommandText>
@@ -212,7 +212,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="Locations">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <CommandText>SELECT DISTINCT Location AS Value, Location AS Description, 1 AS Indexer
 FROM     Jostle.vw_BirthdayAnniversaryCalendar
 ORDER BY Indexer, Value</CommandText>
@@ -234,7 +234,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="ServiceLines">
       <Query>
-        <DataSourceName>HORNEBIFF01EDW</DataSourceName>
+        <DataSourceName>Reporting_EDW</DataSourceName>
         <CommandText>SELECT DISTINCT ServiceLine AS Value, ServiceLine AS Description, 1 AS Indexer
 FROM     Jostle.vw_BirthdayAnniversaryCalendar
 ORDER BY Indexer, Value</CommandText>
@@ -799,7 +799,6 @@ IIF(
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>0.38389in</Top>
-            <Left>0in</Left>
             <Height>0.25in</Height>
             <Width>12.475in</Width>
             <ZIndex>2</ZIndex>

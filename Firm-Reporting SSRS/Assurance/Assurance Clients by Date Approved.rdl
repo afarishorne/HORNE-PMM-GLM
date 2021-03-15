@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01Engine_Horne">
-      <DataSourceReference>HORNEBIFF01Engine_Horne</DataSourceReference>
+    <DataSource Name="Reporting_Engine_Horne">
+      <DataSourceReference>Reporting_Engine_Horne</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>fb138557-6bcc-4913-b160-8f727e8ec293</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@StartDate">
             <Value>=Parameters!StartDate.Value</Value>
@@ -84,7 +84,7 @@ ORDER BY [PG],
     </DataSet>
     <DataSet Name="MinDate">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT DATEADD(dd, - 14, CONVERT(DATE, GETDATE())) AS Value</CommandText>
       </Query>
       <Fields>
@@ -96,7 +96,7 @@ ORDER BY [PG],
     </DataSet>
     <DataSet Name="MaxDate">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT DATEADD(dd,-1,CONVERT(DATE,GETDATE())) as Value</CommandText>
       </Query>
       <Fields>

@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01Engine_Horne">
-      <DataSourceReference>HORNEBIFF01Engine_Horne</DataSourceReference>
+    <DataSource Name="Reporting_Engine_Horne">
+      <DataSourceReference>Reporting_Engine_Horne</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>0695fa8b-06fd-4f59-ba44-540eabf6d3fe</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT e.ClientDepartment AS PG,
        s.StaffName AS ClientPartner,
        e.ClientCode,

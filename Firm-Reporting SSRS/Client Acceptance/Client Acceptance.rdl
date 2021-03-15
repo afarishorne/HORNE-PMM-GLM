@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01HorneReports">
-      <DataSourceReference>HORNEBIFF01HorneReports</DataSourceReference>
+    <DataSource Name="HorneReports">
+      <DataSourceReference>HorneReports</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>4b2271af-fc0d-40f4-8447-a8a8a424126d</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01HorneReports</DataSourceName>
+        <DataSourceName>HorneReports</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@StartDate">
             <Value>=Parameters!StartDate.Value</Value>
@@ -121,7 +121,7 @@ ORDER BY PG,
     </DataSet>
     <DataSet Name="MinDate">
       <Query>
-        <DataSourceName>HORNEBIFF01HorneReports</DataSourceName>
+        <DataSourceName>HorneReports</DataSourceName>
         <CommandText>SELECT CONVERT(Date, CONVERT(VARCHAR, DATEADD(d, - DAY(DATEADD(m, - 1, GETDATE() - 2)), DATEADD(m, - 1, GETDATE() - 1)), 106)) AS MinDate</CommandText>
       </Query>
       <Fields>
@@ -133,7 +133,7 @@ ORDER BY PG,
     </DataSet>
     <DataSet Name="MaxDate">
       <Query>
-        <DataSourceName>HORNEBIFF01HorneReports</DataSourceName>
+        <DataSourceName>HorneReports</DataSourceName>
         <CommandText>SELECT CONVERT(Date, CONVERT(VARCHAR, DATEADD(d, - DAY(GETDATE()), GETDATE()), 106)) AS MaxDate</CommandText>
       </Query>
       <Fields>
@@ -145,7 +145,7 @@ ORDER BY PG,
     </DataSet>
     <DataSet Name="AVPUsed">
       <Query>
-        <DataSourceName>HORNEBIFF01HorneReports</DataSourceName>
+        <DataSourceName>HorneReports</DataSourceName>
         <CommandText>SELECT '%' AS Value, 'All AVP Used' AS Description, 0 AS Indexer
 UNION
 SELECT DISTINCT AVPUsed AS Value, AVPUsed AS Description, 1 AS Indexer
@@ -169,7 +169,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="PracticeGroups">
       <Query>
-        <DataSourceName>HORNEBIFF01HorneReports</DataSourceName>
+        <DataSourceName>HorneReports</DataSourceName>
         <CommandText>SELECT '%' AS Value, 'All Practice Groups' AS Description, 0 AS Indexer
 union
 SELECT DISTINCT [PG] AS Value, [PG] AS Description, 1 AS Indexer FROM [HorneReports].[dbo].[tblClientAcceptanceAdvancedPricing]
@@ -192,7 +192,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="Layout">
       <Query>
-        <DataSourceName>HORNEBIFF01HorneReports</DataSourceName>
+        <DataSourceName>HorneReports</DataSourceName>
         <CommandText>SELECT DISTINCT 1 AS Value, 'Standard' AS Description, 0 AS Indexer
 UNION
 SELECT DISTINCT 2 AS Value, 'Separate No AVP' AS Description, 0 AS Indexer
@@ -215,7 +215,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="NoAvp">
       <Query>
-        <DataSourceName>HORNEBIFF01HorneReports</DataSourceName>
+        <DataSourceName>HorneReports</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@StartDate">
             <Value>=Parameters!StartDate.Value</Value>
@@ -321,7 +321,7 @@ ORDER BY PG, ClientId</CommandText>
                           <FontFamily>Tahoma</FontFamily>
                           <FontSize>20pt</FontSize>
                           <FontWeight>Bold</FontWeight>
-                          <Color>#0857C3</Color>
+                          <Color>#0857c3</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -453,7 +453,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -489,7 +489,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -525,7 +525,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -561,7 +561,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -597,7 +597,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -633,7 +633,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -669,7 +669,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -705,7 +705,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -741,7 +741,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -777,7 +777,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -813,7 +813,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -849,7 +849,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -885,7 +885,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -924,7 +924,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -963,7 +963,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -999,7 +999,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -1608,7 +1608,7 @@ ORDER BY PG, ClientId</CommandText>
                           <FontFamily>Tahoma</FontFamily>
                           <FontSize>20pt</FontSize>
                           <FontWeight>Bold</FontWeight>
-                          <Color>#0857C3</Color>
+                          <Color>#0857c3</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -1740,7 +1740,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -1776,7 +1776,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -1812,7 +1812,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -1848,7 +1848,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -1884,7 +1884,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -1920,7 +1920,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -1956,7 +1956,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -1992,7 +1992,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -2028,7 +2028,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -2064,7 +2064,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -2100,7 +2100,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -2136,7 +2136,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -2172,7 +2172,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -2211,7 +2211,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -2250,7 +2250,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -2286,7 +2286,7 @@ ORDER BY PG, ClientId</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>

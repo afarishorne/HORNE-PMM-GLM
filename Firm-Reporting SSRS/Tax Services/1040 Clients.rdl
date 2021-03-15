@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01Engine_Horne">
-      <DataSourceReference>HORNEBIFF01Engine_Horne</DataSourceReference>
+    <DataSource Name="Reporting_Engine_Horne">
+      <DataSourceReference>Reporting_Engine_Horne</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>1647dfd4-4788-4410-bd52-7bb6f0b250e9</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@StartDate">
             <Value>=Parameters!StartDate.Value</Value>
@@ -118,7 +118,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
     </DataSet>
     <DataSet Name="StartDate">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT CONVERT(DATE, DATEADD(dd, - 7, GETDATE())) AS StartDate</CommandText>
       </Query>
       <Fields>
@@ -130,7 +130,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
     </DataSet>
     <DataSet Name="EndDate">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>Select CONVERT(DATE,DATEADD(dd,-1,GETDATE())) as EndDate</CommandText>
       </Query>
       <Fields>

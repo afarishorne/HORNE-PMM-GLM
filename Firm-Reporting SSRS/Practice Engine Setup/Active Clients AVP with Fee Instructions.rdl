@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01Engine_Horne">
-      <DataSourceReference>HORNEBIFF01Engine_Horne</DataSourceReference>
+    <DataSource Name="Reporting_Engine_Horne">
+      <DataSourceReference>Reporting_Engine_Horne</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>75093486-bdcc-4611-8e0b-f674f3dc679f</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@PracticeGroup">
             <Value>=Parameters!PracticeGroup.Value</Value>
@@ -82,7 +82,7 @@ e.ClientName</CommandText>
     </DataSet>
     <DataSet Name="PracticeGroups">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT '%' AS Value, 'ALL Practice Groups' AS Description, 0 AS Indexer
 union
 SELECT DISTINCT ClientDepartment AS Value, ClientDepartment AS Description, 1 AS Indexer FROM dbo.tblEngagement e
@@ -106,7 +106,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="Layouts">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT 1 AS Value, 'Standard' AS Description, 0 AS Indexer
 UNION
 SELECT 2 AS Value, 'Include a separate No AVP Clients List' AS Description, 1 AS Indexer
@@ -129,7 +129,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="DataSet2">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@PracticeGroup">
             <Value>=Parameters!PracticeGroup.Value</Value>
