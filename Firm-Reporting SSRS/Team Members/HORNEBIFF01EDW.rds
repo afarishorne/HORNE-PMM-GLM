@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="HORNEBIFF01EDW">
-  <ConnectionProperties>
-    <Extension>SQL</Extension>
-    <ConnectString>Data Source=HORNEBIFF01;Initial Catalog=EDW</ConnectString>
-  </ConnectionProperties>
-  <DataSourceID>51cb7270-53f8-432f-8cfd-7751bc54d694</DataSourceID>
-</RptDataSource>

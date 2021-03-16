@@ -49,7 +49,7 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="HORNEBIFF01HorneReports.rds" />
+    <DataSource Include="HorneReports.rds" />
   </ItemGroup>
   <ItemGroup>
     <Report Include="Active Staff CPE Approvers.rdl" />

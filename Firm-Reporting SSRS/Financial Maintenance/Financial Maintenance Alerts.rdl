@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01FinancialMaintenance">
-      <DataSourceReference>HORNEBIFF01FinancialMaintenance</DataSourceReference>
+    <DataSource Name="FinancialMaintenance">
+      <DataSourceReference>FinancialMaintenance</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>5b7da6fa-8aa5-437d-9f35-f04d84bf933a</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01FinancialMaintenance</DataSourceName>
+        <DataSourceName>FinancialMaintenance</DataSourceName>
         <CommandText>SELECT [ItemID],
        [Name],
        [URL]
@@ -58,7 +58,7 @@ ORDER BY [Name]</CommandText>
                       <FontFamily>Tahoma</FontFamily>
                       <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                      <Color>#0857C3</Color>
+                      <Color>#0857c3</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -113,7 +113,7 @@ ORDER BY [Name]</CommandText>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>#0857C3</BackgroundColor>
+                            <BackgroundColor>#0857c3</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>

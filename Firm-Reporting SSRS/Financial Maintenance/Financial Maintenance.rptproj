@@ -49,7 +49,7 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="HORNEBIFF01FinancialMaintenance.rds" />
+    <DataSource Include="FinancialMaintenance.rds" />
   </ItemGroup>
   <ItemGroup>
     <Report Include="Client Services Setup Changes.rdl" />

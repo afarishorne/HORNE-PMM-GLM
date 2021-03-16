@@ -3,8 +3,8 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="HORNEBIFF01Engine_Horne">
-      <DataSourceReference>HORNEBIFF01Engine_Horne</DataSourceReference>
+    <DataSource Name="Reporting_Engine_Horne">
+      <DataSourceReference>Reporting_Engine_Horne</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>75093486-bdcc-4611-8e0b-f674f3dc679f</rd:DataSourceID>
     </DataSource>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@PracticeGroup">
             <Value>=Parameters!PracticeGroup.Value</Value>
@@ -61,7 +61,7 @@ ORDER BY ea.AttrValDate, e.ClientDepartment, s.StaffName,e.ClientCode</CommandTe
     </DataSet>
     <DataSet Name="PracticeGroups">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT '%' AS Value, 'ALL Practice Groups' AS Description, 0 AS Indexer
 union
 SELECT DISTINCT ClientDepartment AS Value, ClientDepartment AS Description, 1 AS Indexer FROM dbo.tblEngagement e
@@ -85,7 +85,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="Layouts">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <CommandText>SELECT 1 AS Value, 'BAA Received Only' AS Description, 0 AS Indexer
 UNION
 SELECT 2 AS Value, 'Include a separate Outstanding BAA Clients List' AS Description, 1 AS Indexer
@@ -108,7 +108,7 @@ ORDER BY Indexer, Value</CommandText>
     </DataSet>
     <DataSet Name="DataSet2">
       <Query>
-        <DataSourceName>HORNEBIFF01Engine_Horne</DataSourceName>
+        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@PracticeGroup">
             <Value>=Parameters!PracticeGroup.Value</Value>
@@ -197,7 +197,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -233,7 +233,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -269,7 +269,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -305,7 +305,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -341,7 +341,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -569,7 +569,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                           <FontFamily>Tahoma</FontFamily>
                           <FontSize>20pt</FontSize>
                           <FontWeight>Bold</FontWeight>
-                          <Color>#0857C3</Color>
+                          <Color>#0857c3</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -619,7 +619,6 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Left>0in</Left>
             <Height>1.06389in</Height>
             <Width>10.41667in</Width>
             <Style>
@@ -677,7 +676,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -713,7 +712,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -749,7 +748,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -785,7 +784,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                                   <Color>LightGrey</Color>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>#0857C3</BackgroundColor>
+                                <BackgroundColor>#0857c3</BackgroundColor>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -963,7 +962,6 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                 <DataSetName>DataSet2</DataSetName>
                 <PageName>Active Clients BAA Outstanding</PageName>
                 <Top>0.64778in</Top>
-                <Left>0in</Left>
                 <Height>0.43in</Height>
                 <Width>10.41667in</Width>
                 <Style />
@@ -980,7 +978,7 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                           <FontFamily>Tahoma</FontFamily>
                           <FontSize>20pt</FontSize>
                           <FontWeight>Bold</FontWeight>
-                          <Color>#0857C3</Color>
+                          <Color>#0857c3</Color>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -1015,7 +1013,6 @@ ORDER BY PG, ClientPartner, e.ClientCode</CommandText>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
                 <Top>0.38389in</Top>
-                <Left>0in</Left>
                 <Height>0.25in</Height>
                 <Width>10.41667in</Width>
                 <ZIndex>2</ZIndex>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="HorneReports">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=HorneReportData;Initial Catalog=HorneReports</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>b4e337ad-3ea7-478d-bd95-4463c48429ae</DataSourceID>
+</RptDataSource>

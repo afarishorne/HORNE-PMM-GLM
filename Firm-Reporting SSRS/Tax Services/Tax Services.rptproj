@@ -49,8 +49,7 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="HORNEBIFF01EDW.rds" />
-    <DataSource Include="HORNEBIFF01Engine_Horne.rds" />
+    <DataSource Include="Reporting_Engine_Horne.rds" />
   </ItemGroup>
   <ItemGroup>
     <Report Include="1040 Clients.rdl" />
