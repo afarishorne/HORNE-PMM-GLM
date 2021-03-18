@@ -53,9 +53,11 @@
     <DataSource Include="Reporting_EDW.rds" />
   </ItemGroup>
   <ItemGroup>
+    <Report Include="GS New Hire Onboarding.rdl" />
     <Report Include="GS Team Member Listing.rdl" />
     <Report Include="New Hire Listing.rdl" />
     <Report Include="New Hire Listing2.rdl" />
+    <Report Include="New Hire Onboarding.rdl" />
     <Report Include="PMM Team Member Listing.rdl" />
     <Report Include="Team Member Events.rdl" />
     <Report Include="Team Member Listing.rdl" />
