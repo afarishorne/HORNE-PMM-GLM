@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide/Team Members</TargetReportFolder>
-    <TargetDatasetFolder>Firmwide/Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Firmwide/Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Team Members/GS Onboarding</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Team Members/GS Onboarding/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Team Members/GS Onboarding/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Team Members</TargetReportFolder>
+    <TargetReportFolder>GS Onboarding</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Team Members</TargetReportFolder>
+    <TargetReportFolder>GS Onboarding</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -50,15 +50,9 @@
   </PropertyGroup>
   <ItemGroup>
     <DataSource Include="HORNE.rds" />
-    <DataSource Include="Reporting_EDW.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="GS Team Member Listing.rdl" />
-    <Report Include="New Hire Listing.rdl" />
-    <Report Include="New Hire Onboarding.rdl" />
-    <Report Include="PMM Team Member Listing.rdl" />
-    <Report Include="Team Member Events.rdl" />
-    <Report Include="Team Member Listing.rdl" />
+    <Report Include="GS New Hire Onboarding.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
