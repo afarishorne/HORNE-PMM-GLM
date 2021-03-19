@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide/Practice Engine Setup</TargetReportFolder>
-    <TargetDatasetFolder>Firmwide/Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Firmwide/Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Finance/PE Finance Live Data/</TargetReportFolder>
+    <TargetDatasetFolder>Finance/PE Finance Live Data/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Finance/PE Finance Live Data/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Practice Engine Setup</TargetReportFolder>
+    <TargetReportFolder>PE Finance Live Data</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Practice Engine Setup</TargetReportFolder>
+    <TargetReportFolder>PE Finance Live Data</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,17 +49,10 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="Reporting_Engine_Horne.rds" />
+    <DataSource Include="PE Live.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Active Clients AVP with Fee Instructions.rdl" />
-    <Report Include="Active Clients AVP.rdl" />
-    <Report Include="Active Clients BAA.rdl" />
-    <Report Include="Active Clients No AVP Unfiltered.rdl" />
-    <Report Include="Active Clients without Client Group.rdl" />
-    <Report Include="Client Services.rdl" />
-    <Report Include="Interoffice Rates.rdl" />
-    <Report Include="Staff Detail.rdl" />
+    <Report Include="GS WIP Reconciliation.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

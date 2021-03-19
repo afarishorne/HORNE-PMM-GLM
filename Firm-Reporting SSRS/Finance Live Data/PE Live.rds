@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="PE Live">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=HORNESQL02;Initial Catalog=Engine_Horne</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>ee47d94f-a3f8-48c0-ab47-45fc2e7a1400</DataSourceID>
+</RptDataSource>
