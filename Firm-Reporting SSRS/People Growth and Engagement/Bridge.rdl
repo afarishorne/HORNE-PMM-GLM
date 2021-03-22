@@ -3,7 +3,7 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="firm_database_windows_net">
+    <DataSource Name="HORNE">
       <DataSourceReference>HORNE</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>a6919aca-72fa-4d32-b726-def702579e9a</rd:DataSourceID>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>firm_database_windows_net</DataSourceName>
+        <DataSourceName>HORNE</DataSourceName>
         <CommandText>SELECT 
 	 [LOGIN ID] =  SB.[LOGIN_ID] 
 	,[MANAGER ID] =  SB.[MANAGER_ID] 

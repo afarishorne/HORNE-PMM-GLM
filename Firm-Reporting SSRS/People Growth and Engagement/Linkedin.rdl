@@ -3,7 +3,7 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="firmdatabasewindowsnet">
+    <DataSource Name="HORNE">
       <DataSourceReference>HORNE</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>545f4b8a-dfd4-4e8a-8571-8db576630af6</rd:DataSourceID>
@@ -12,7 +12,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>firmdatabasewindowsnet</DataSourceName>
+        <DataSourceName>HORNE</DataSourceName>
         <CommandText>SELECT 
 	 preferred_first_name
 	, preferred_last_name
