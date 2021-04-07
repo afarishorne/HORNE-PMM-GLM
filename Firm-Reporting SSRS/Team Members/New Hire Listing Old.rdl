@@ -18,7 +18,7 @@
             <Value>=Parameters!Filter.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT DISTINCT					     
+        <CommandText>	  SELECT DISTINCT					     
 	 [First Name] = S.FirstName
 	,[Last Name]  =  S.LastName
 	,[Email] =       S.EmailAddress
@@ -26,11 +26,24 @@
 	,[Seniority Date] = S.SeniorityDate
 	,[Load Date] = S.LoadDate
 	,[FocusArea] = S.FocusArea
-	,[CostCenter] = S.CostCenter        
+	,[CostCenter] = S.CostCenter
+	,[Filter] = CASE WHEN CAST(S.SeniorityDate AS DATE) = CONVERT(VARCHAR(10), DATEADD(dd,-1,GETDATE()), 101)
+	            THEN 'Yesterday'
+				WHEN CAST(S.SeniorityDate AS DATE) = CONVERT(VARCHAR(10),GETDATE(), 101)
+				THEN 'Today'
+				ELSE ''
+	            END	          
 FROM
     HORNE.DM.StaffDetail  AS S
+       ---[DM].[vw_NewHireDistribution] 
+
 WHERE
-CAST(S.SeniorityDate AS DATE) IN (@Filter)
+	  CASE WHEN CAST(S.SeniorityDate AS DATE) = CONVERT(VARCHAR(10), DATEADD(dd,-1,GETDATE()), 101)
+	            THEN 'Yesterday'
+				WHEN CAST(S.SeniorityDate AS DATE) = CONVERT(VARCHAR(10),GETDATE(), 101)
+				THEN 'Today'
+				ELSE ''
+	            END	 = @Filter 
 ORDER BY S.SeniorityDate DESC</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -67,24 +80,35 @@ ORDER BY S.SeniorityDate DESC</CommandText>
           <DataField>CostCenter</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Filter">
+          <DataField>Filter</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
     <DataSet Name="DataSet2">
       <Query>
         <DataSourceName>HORNE</DataSourceName>
-        <CommandText>SELECT CONVERT(VARCHAR(10),GETDATE(), 101) AS Value, 'Today' AS Description
-UNION
-SELECT CONVERT(VARCHAR(10), DATEADD(dd,-1,GETDATE()), 101) AS Value, 'Yesterday' AS Description
-ORDER BY  Description</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <CommandText>SELECT DISTINCT					  
+[Filter] = CASE WHEN CAST(S.SeniorityDate AS DATE) = CONVERT(VARCHAR(10), DATEADD(dd,-1,GETDATE()), 101)
+	            THEN 'Yesterday'
+				WHEN CAST(S.SeniorityDate AS DATE) = CONVERT(VARCHAR(10),GETDATE(), 101)
+				THEN 'Today'
+				ELSE ''
+	            END	                 
+FROM
+    HORNE.DM.StaffDetail  AS S
+       ---[DM].[vw_NewHireDistribution] 
+
+WHERE
+	  CAST(SeniorityDate AS DATE) 
+	  BETWEEN DATEADD(DAY,-1,CAST(GETDATE() AS DATE))AND CAST(GETDATE() AS DATE)
+	  --OR S.SeniorityDate = CONVERT(VARCHAR(10), DATEADD(dd,+1,GETDATE()), 101)
+</CommandText>
       </Query>
       <Fields>
-        <Field Name="Value">
-          <DataField>Value</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
+        <Field Name="Filter">
+          <DataField>Filter</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -728,24 +752,22 @@ ORDER BY  Description</CommandText>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <NoRowsMessage>No data available for selected filter.</NoRowsMessage>
             <DataSetName>DataSet1</DataSetName>
+            <Top>0.10417in</Top>
             <Height>0.43in</Height>
             <Width>15.0625in</Width>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>0.43in</Height>
+        <Height>0.88834in</Height>
         <Style />
       </Body>
-      <Width>15.0625in</Width>
+      <Width>29.56251in</Width>
       <Page>
-        <PageHeight>8.5in</PageHeight>
-        <PageWidth>16.5in</PageWidth>
-        <LeftMargin>0.5in</LeftMargin>
-        <RightMargin>0.5in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -757,8 +779,8 @@ ORDER BY  Description</CommandText>
       <ValidValues>
         <DataSetReference>
           <DataSetName>DataSet2</DataSetName>
-          <ValueField>Value</ValueField>
-          <LabelField>Description</LabelField>
+          <ValueField>Filter</ValueField>
+          <LabelField>Filter</LabelField>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
