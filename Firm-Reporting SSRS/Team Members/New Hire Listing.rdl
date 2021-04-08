@@ -728,7 +728,7 @@ ORDER BY  Description</CommandText>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <NoRowsMessage>    No data available for selected filter</NoRowsMessage>
+            <NoRowsMessage>   No data available for selected filter</NoRowsMessage>
             <DataSetName>DataSet1</DataSetName>
             <Height>0.43in</Height>
             <Width>15.0625in</Width>
