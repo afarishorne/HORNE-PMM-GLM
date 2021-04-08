@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
-  <AutoRefresh>30</AutoRefresh>
+  <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="HORNE">
       <DataSourceReference>HORNE</DataSourceReference>
@@ -728,7 +728,7 @@ ORDER BY  Description</CommandText>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <NoRowsMessage>="   No data available for selected filter " &amp; First(Fields!Description.Value, "DataSet2")</NoRowsMessage>
+            <NoRowsMessage>    No data available for selected filter</NoRowsMessage>
             <DataSetName>DataSet1</DataSetName>
             <Height>0.43in</Height>
             <Width>15.0625in</Width>
