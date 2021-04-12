@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="GS Team Member Listing.rdl" />
-    <Report Include="New Hire Listing Old.rdl" />
     <Report Include="New Hire Listing.rdl" />
     <Report Include="New Hire Onboarding.rdl" />
     <Report Include="PMM Team Member Listing.rdl" />
