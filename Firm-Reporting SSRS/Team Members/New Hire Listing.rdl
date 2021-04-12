@@ -89,6 +89,19 @@ ORDER BY  Description</CommandText>
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="Today">
+      <Query>
+        <DataSourceName>HORNE</DataSourceName>
+        <CommandText>SELECT CONVERT(VARCHAR(10),GETDATE(), 101) as Value</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Value">
+          <DataField>Value</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -753,6 +766,12 @@ ORDER BY  Description</CommandText>
   <ReportParameters>
     <ReportParameter Name="Filter">
       <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Today</DataSetName>
+          <ValueField>Value</ValueField>
+        </DataSetReference>
+      </DefaultValue>
       <Prompt>Please Select :</Prompt>
       <ValidValues>
         <DataSetReference>
