@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="HorneDataWarehouse">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=bpmdata;Initial Catalog=HorneDataWarehouse</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>6717781f-64bf-4f0c-a5fb-ac44af8b46ce</DataSourceID>
+</RptDataSource>
