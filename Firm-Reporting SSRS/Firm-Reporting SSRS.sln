@@ -43,6 +43,8 @@ Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy Metrics", "Legacy Me
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy QA Alerts", "Legacy QA Alerts\Legacy QA Alerts.rptproj", "{23754330-BAF9-4DB8-BA51-5672621BF36C}"
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy Franchise", "Legacy Franchise\Legacy Franchise.rptproj", "{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -211,6 +213,14 @@ Global
 		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Release|Default.ActiveCfg = Release
 		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Release|Default.Build.0 = Release
 		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Release|Default.Deploy.0 = Release
+		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Debug|Default.ActiveCfg = Debug
+		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Debug|Default.Build.0 = Debug
+		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Debug|Default.Deploy.0 = Debug
+		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.DebugLocal|Default.Build.0 = DebugLocal
+		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Release|Default.ActiveCfg = Release
+		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Release|Default.Build.0 = Release
+		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Release|Default.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
