@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsFirmAdmin">
+      <DataSourceReference>FirmAdmin</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>62024274-b100-4867-bb4a-b52096e3e726</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="PracticeEngine">
+      <DataSourceReference>PracticeEngine</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>296ff43d-3256-4434-81b3-a392984f1282</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="Activity_Codes_By_Day">
+      <Query>
+        <DataSourceName>PracticeEngine</DataSourceName>
+        <CommandText>SELECT top 10
+	ts.StaffId
+,	ts.StaffName
+,	StartDate = CAST('4/1/2020' as DATETIME)
+,	EndDate = CAST('4/15/2020'  as DATETIME)
+,	SUM(ts.ChargeableHours) AS BillHours
+,	ClientGroup = 33582
+FROM
+	dbo.client_vw_Timesheets ts
+JOIN
+	dbo.tblEngagement E ON E.ContIndex=ts.ContIndex
+WHERE 
+	ts.EntryDate BETWEEN '4/1/2020' AND '4/15/2020'
+AND E.ClientHold = (SELECT ContIndex FROM dbo.tblContacts WHERE ContName='xxxxxNCORR-SINGLE FAMILY HOUSING' )
+AND ts.StaffId IN (SELECT StaffId FROM bpmdata.HorneDataWarehouse.OLAP.StaffDimension)
+GROUP BY 
+	ts.StaffId,ts.StaffName 
+HAVING SUM(ts.ChargeableHours) &gt; 0
+ORDER BY
+	ts.StaffId</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="StaffId">
+          <DataField>StaffId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StaffName">
+          <DataField>StaffName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="BillHours">
+          <DataField>BillHours</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ClientGroup">
+          <DataField>ClientGroup</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ClientGroup">
+      <Query>
+        <DataSourceName>PracticeEngine</DataSourceName>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; 
+
+SELECT DISTINCT C.ContName,C.ContIndex
+FROM
+	tblPortfolio_Selection P 
+JOIN
+	tblEngagement E ON P.ContIndex = E.ContIndex
+JOIN
+	tblContacts C ON P.ClientHold = C.ContIndex
+WHERE 
+	e.clientorganisation = 3 
+ORDER BY C.ContName</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ContName">
+          <DataField>ContName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ContIndex">
+          <DataField>ContIndex</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Staff">
+      <Query>
+        <DataSourceName>PracticeEngine</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@StartDate">
+            <Value>=Parameters!StartDate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ClientGroup">
+            <Value>=Parameters!ClientGroup.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>/*
+
+
+
+SELECT DISTINCT
+	staff.FirstName + ' ' + staff.LastName AS FullName
+,	StaffId
+FROM
+	HorneDataWarehouse.OLAP.StaffDimension staff
+WHERE
+	Active=1
+OR (Active = 0 AND staff.DateLeft &gt;= GETDATE()-365)
+ORDER BY
+	FullName
+*/
+SELECT DISTINCT ts.StaffId, ts.StaffName
+FROM     client_vw_Timesheets AS ts INNER JOIN
+                  tblEngagement AS E ON E.ContIndex = ts.ContIndex
+WHERE  (ts.EntryDate BETWEEN @StartDate AND @EndDate) AND (E.ClientHold IN
+                      (SELECT ContIndex
+                       FROM      tblContacts
+                       WHERE   (ContIndex = @ClientGroup))) AND (ts.StaffId IN
+                      (SELECT ts.StaffId
+                       FROM      BPMData.HorneDataWarehouse.OLAP.StaffDimension AS StaffDimension_1))
+ORDER BY ts.StaffName</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="StaffId">
+          <DataField>StaffId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StaffName">
+          <DataField>StaffName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Selections">
+      <Query>
+        <DataSourceName>dsFirmAdmin</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Staff">
+            <Value>=Parameters!Staff.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT DISTINCT
+	staff.FirstName + ' ' + staff.LastName AS FullName
+,	StaffId
+FROM
+	HorneDataWarehouse.OLAP.StaffDimension staff
+WHERE
+	StaffId IN (@Staff)
+ORDER BY
+	FullName</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="FullName">
+          <DataField>FullName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StaffId">
+          <DataField>StaffId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix4">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>10.7in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>4in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Subreport Name="Subreport9">
+                          <ReportName>TimesheetApproval_IndividualTimesheet_GS</ReportName>
+                          <Parameters>
+                            <Parameter Name="StartDate">
+                              <Value>=Parameters!StartDate.Value</Value>
+                            </Parameter>
+                            <Parameter Name="EndDate">
+                              <Value>=Parameters!EndDate.Value</Value>
+                            </Parameter>
+                            <Parameter Name="Individual">
+                              <Value>=Fields!StaffId.Value</Value>
+                            </Parameter>
+                            <Parameter Name="ClientGroup">
+                              <Value>=Parameters!ClientGroup.Value</Value>
+                            </Parameter>
+                          </Parameters>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Subreport>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>Selections</DataSetName>
+            <Left>0.025in</Left>
+            <Height>4in</Height>
+            <Width>10.7in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>4.08333in</Height>
+        <Style />
+      </Body>
+      <Width>10.74167in</Width>
+      <Page>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>11in</PageWidth>
+        <InteractiveHeight>11in</InteractiveHeight>
+        <InteractiveWidth>8.5in</InteractiveWidth>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="StartDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>03/01/2020 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>StartDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EndDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>03/15/2020 00:00:00</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>EndDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ClientGroup">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>33582</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Client Group:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ClientGroup</DataSetName>
+          <ValueField>ContIndex</ValueField>
+          <LabelField>ContName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <cl:ComponentMetadata>
+        <cl:HideUpdateNotifications>true</cl:HideUpdateNotifications>
+      </cl:ComponentMetadata>
+    </ReportParameter>
+    <ReportParameter Name="Staff">
+      <DataType>String</DataType>
+      <Prompt>Staff</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Staff</DataSetName>
+          <ValueField>StaffId</ValueField>
+          <LabelField>StaffName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+      <cl:ComponentMetadata>
+        <cl:HideUpdateNotifications>true</cl:HideUpdateNotifications>
+      </cl:ComponentMetadata>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>StartDate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>EndDate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>ClientGroup</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>Staff</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>deb50a7d-2b64-470b-838a-62ec0c690e64</rd:ReportID>
+</Report>

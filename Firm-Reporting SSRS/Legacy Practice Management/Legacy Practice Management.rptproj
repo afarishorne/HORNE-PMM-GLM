@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Legacy/Practice Management</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Practice Management</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Practice Management</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,14 +49,30 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="EIM.rds" />
-    <DataSource Include="HORNE.rds" />
+    <DataSource Include="HumanResources.rds" />
+    <DataSource Include="Metastorm.rds" />
+    <DataSource Include="Metastorm9.rds" />
+    <DataSource Include="PracticeEngine.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Bridge Call Center.rdl" />
-    <Report Include="Bridge Data Check.rdl" />
-    <Report Include="Bridge.rdl" />
-    <Report Include="Linkedin.rdl" />
+    <Report Include="AR Adjustment Report.rdl" />
+    <Report Include="AR Summary Firmwide.rdl" />
+    <Report Include="AR-WIP Report Firmwide.rdl" />
+    <Report Include="AR-WIP Report for PIC.rdl" />
+    <Report Include="AR-WIP Report Svc Ptr Firmwide.rdl" />
+    <Report Include="AR-WIP Report Svc Ptr PIC.rdl" />
+    <Report Include="AR-WIP Report Svc Ptr.rdl" />
+    <Report Include="AR-WIP Report.rdl" />
+    <Report Include="Assurance AICPA Service Level Exception.rdl" />
+    <Report Include="Assurance Inspection Report By Date (Current) - Excel.rdl" />
+    <Report Include="Assurance Inspection Report By Date (Historical) - Excel.rdl" />
+    <Report Include="Assurance Internal Inspection Report for REVW By Date - Excel.rdl" />
+    <Report Include="Attest Client List.rdl" />
+    <Report Include="Client Finance Charge Exception.rdl" />
+    <Report Include="Client ID Exception Report.rdl" />
+    <Report Include="Client List Service Summary.rdl" />
+    <Report Include="Mailing List.rdl" />
+    <Report Include="New Clients Revenue YTD Firmwide.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Legacy/Business Advisory and Accounting</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Business Advisory and Accounting</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Business Advisory and Accounting</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,14 +49,48 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="EIM.rds" />
-    <DataSource Include="HORNE.rds" />
+    <DataSource Include="HorneDataWarehouse.rds" />
+    <DataSource Include="JANPFRA.rds" />
+    <DataSource Include="Metastorm.rds" />
+    <DataSource Include="PracticeEngine.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Bridge Call Center.rdl" />
-    <Report Include="Bridge Data Check.rdl" />
-    <Report Include="Bridge.rdl" />
-    <Report Include="Linkedin.rdl" />
+    <Report Include="Annual Forms Status Report.rdl" />
+    <Report Include="Client List by Partner - Manager - Biller.rdl" />
+    <Report Include="Client Services.rdl" />
+    <Report Include="Completed Projects.rdl" />
+    <Report Include="Dominos Upload Report (DDS).rdl" />
+    <Report Include="Dominos Upload Report.rdl" />
+    <Report Include="HEA_YTD_BILLINGS.rdl" />
+    <Report Include="IAR v2.rdl" />
+    <Report Include="Incomplete Services.rdl" />
+    <Report Include="Job Initiator Stagnant Notifier.rdl" />
+    <Report Include="Master Task List by Staff.rdl" />
+    <Report Include="Missing POS Data Report Details.rdl" />
+    <Report Include="Missing POS Data Report.rdl" />
+    <Report Include="Nobody on To Do List.rdl" />
+    <Report Include="Open Services by Preparer Report.rdl" />
+    <Report Include="Phone Interaction Needed.rdl" />
+    <Report Include="POS Info Report.rdl" />
+    <Report Include="Project Assignments - All.rdl" />
+    <Report Include="Project Assignments FRA.rdl" />
+    <Report Include="Project Assignments.rdl" />
+    <Report Include="Project Manager Report.rdl" />
+    <Report Include="Project Status Futures.rdl" />
+    <Report Include="Project Status.rdl" />
+    <Report Include="Quality Scoring.rdl" />
+    <Report Include="Sales Tax Due.rdl" />
+    <Report Include="Service Actions Report.rdl" />
+    <Report Include="Service and Client Notes Report.rdl" />
+    <Report Include="Service Setup by Preparer.rdl" />
+    <Report Include="Team Service Budget Detail.rdl" />
+    <Report Include="Team Service Budget Summary.rdl" />
+    <Report Include="Turnaround by Plan.rdl" />
+    <Report Include="Turnaround Report.rdl" />
+    <Report Include="Unit Listing by DBA Corporate.rdl" />
+    <Report Include="Unit Listing by DBA.rdl" />
+    <Report Include="Unit Listing.rdl" />
+    <Report Include="Unit Location Communication.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

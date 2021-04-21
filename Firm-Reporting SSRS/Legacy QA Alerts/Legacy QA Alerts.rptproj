@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Legacy/Business Advisory and Accounting/QA Alerts</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy QA Alerts</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy QA Alerts</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,14 +49,23 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="EIM.rds" />
-    <DataSource Include="HORNE.rds" />
+    <DataSource Include="Franchise_Azure.rds" />
+    <DataSource Include="Intacct.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Bridge Call Center.rdl" />
-    <Report Include="Bridge Data Check.rdl" />
-    <Report Include="Bridge.rdl" />
-    <Report Include="Linkedin.rdl" />
+    <Report Include="Average Check Amount Alert (Larger Checks) Intacct.rdl" />
+    <Report Include="Average Check Amount Alert (Smaller Checks) Intacct.rdl" />
+    <Report Include="Average Invoice Alert (Larger Invoices) Intacct.rdl" />
+    <Report Include="Average Invoice Alert (Smaller Invoices) Intacct.rdl" />
+    <Report Include="Check Run Paid Amount Alert Intacct.rdl" />
+    <Report Include="Checks Cut Alert Intacct.rdl" />
+    <Report Include="Duplicate Transaction Alert Intacct.rdl" />
+    <Report Include="Inter-Related Company Alert Intacct.rdl" />
+    <Report Include="Invoice Amount Alert Intacct.rdl" />
+    <Report Include="Invoice Payment Alert Intacct.rdl" />
+    <Report Include="Invoice-Vendor Address Alert Intacct.rdl" />
+    <Report Include="Repeat Vendor Alert.rdl" />
+    <Report Include="Tax Vendor Payment Alert.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

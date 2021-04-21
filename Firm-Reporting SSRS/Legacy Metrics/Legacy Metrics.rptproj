@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Legacy/Business Advisory and Accounting/Metrics</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Metrics</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Metrics</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,14 +49,21 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="EIM.rds" />
-    <DataSource Include="HORNE.rds" />
+    <DataSource Include="Metastorm.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Bridge Call Center.rdl" />
-    <Report Include="Bridge Data Check.rdl" />
-    <Report Include="Bridge.rdl" />
-    <Report Include="Linkedin.rdl" />
+    <Report Include="Delivery Acceptance Percentage Detail Report.rdl" />
+    <Report Include="Delivery Acceptance Percentage Summary Report.rdl" />
+    <Report Include="First Pass Accuracy Detail Report.rdl" />
+    <Report Include="First Pass Accuracy Summary Report.rdl" />
+    <Report Include="Franchise Team Quality Report.rdl" />
+    <Report Include="Leverage Report.rdl" />
+    <Report Include="On-Time Delivery Report.rdl" />
+    <Report Include="Quality Data Report.rdl" />
+    <Report Include="Rate per Hour Report.rdl" />
+    <Report Include="Ready To Prep Lead Time Report.rdl" />
+    <Report Include="Scorecard Report.rdl" />
+    <Report Include="Turnaround Time Report.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
