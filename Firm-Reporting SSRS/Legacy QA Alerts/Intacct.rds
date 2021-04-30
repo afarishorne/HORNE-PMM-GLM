@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Intacct">
-  <ConnectionProperties>
-    <Extension>SQL</Extension>
-    <ConnectString>Data Source=JANPFRA;Initial Catalog=Intacct</ConnectString>
-  </ConnectionProperties>
-  <DataSourceID>19112862-75ef-43aa-b57d-273d5c4aaa97</DataSourceID>
-</RptDataSource>

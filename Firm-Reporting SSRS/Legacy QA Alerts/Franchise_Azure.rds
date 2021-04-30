@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Franchise_Azure">
-  <ConnectionProperties>
-    <Extension>SQLAZURE</Extension>
-    <ConnectString>Data Source=spiuepnz1o.database.windows.net;Initial Catalog=FranchiseDataWarehouse</ConnectString>
-  </ConnectionProperties>
-  <DataSourceID>fa3262d8-7902-48bc-b085-769ca3952222</DataSourceID>
-</RptDataSource>
