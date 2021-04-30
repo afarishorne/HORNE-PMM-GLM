@@ -41,8 +41,6 @@ Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy Financial Services",
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy Metrics", "Legacy Metrics\Legacy Metrics.rptproj", "{1172A1FE-3616-4801-BD8F-2E9DBA200FB8}"
 EndProject
-Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy QA Alerts", "Legacy QA Alerts\Legacy QA Alerts.rptproj", "{23754330-BAF9-4DB8-BA51-5672621BF36C}"
-EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy Franchise", "Legacy Franchise\Legacy Franchise.rptproj", "{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}"
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy Health Care Valuation", "Legacy Health Care Valuation\Legacy Health Care Valuation.rptproj", "{30AD3CE4-B4B5-4C45-9142-144E59DC76BE}"
@@ -211,14 +209,6 @@ Global
 		{1172A1FE-3616-4801-BD8F-2E9DBA200FB8}.Release|Default.ActiveCfg = Release
 		{1172A1FE-3616-4801-BD8F-2E9DBA200FB8}.Release|Default.Build.0 = Release
 		{1172A1FE-3616-4801-BD8F-2E9DBA200FB8}.Release|Default.Deploy.0 = Release
-		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Debug|Default.ActiveCfg = Debug
-		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Debug|Default.Build.0 = Debug
-		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Debug|Default.Deploy.0 = Debug
-		{23754330-BAF9-4DB8-BA51-5672621BF36C}.DebugLocal|Default.ActiveCfg = DebugLocal
-		{23754330-BAF9-4DB8-BA51-5672621BF36C}.DebugLocal|Default.Build.0 = DebugLocal
-		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Release|Default.ActiveCfg = Release
-		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Release|Default.Build.0 = Release
-		{23754330-BAF9-4DB8-BA51-5672621BF36C}.Release|Default.Deploy.0 = Release
 		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Debug|Default.ActiveCfg = Debug
 		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Debug|Default.Build.0 = Debug
 		{C7108747-D5AC-464A-BA52-C2FD4FC2B79C}.Debug|Default.Deploy.0 = Debug
