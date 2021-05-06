@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Legacy/Timesheet Approval</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Timesheet Approval</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Timesheet Approval</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,14 +49,27 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="EIM.rds" />
-    <DataSource Include="HORNE.rds" />
+    <DataSource Include="FirmAdmin.rds" />
+    <DataSource Include="PracticeEngine.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Bridge Call Center.rdl" />
-    <Report Include="Bridge Data Check.rdl" />
-    <Report Include="Bridge.rdl" />
-    <Report Include="Linkedin.rdl" />
+    <Report Include="TimesheetApproval_ApproverSetup.rdl" />
+    <Report Include="TimesheetApproval_ApproveTimesheetsReminder.rdl" />
+    <Report Include="TimesheetApproval_CheckExpenseStatus.rdl" />
+    <Report Include="TimesheetApproval_CheckOverallStatus.rdl" />
+    <Report Include="TimesheetApproval_DiscrepencyAlert.rdl" />
+    <Report Include="TimesheetApproval_IndividualExpense.rdl" />
+    <Report Include="TimesheetApproval_IndividualExpenseSummary.rdl" />
+    <Report Include="TimesheetApproval_IndividualTimesheet.rdl" />
+    <Report Include="TimesheetApproval_IndividualTimesheet_GS.rdl" />
+    <Report Include="TimesheetApproval_IndividualTimesheet_GS_AllStaff.rdl" />
+    <Report Include="TimesheetApproval_MasterTaskList.rdl" />
+    <Report Include="TimesheetApproval_OutstandingTimesheetsReminder.rdl" />
+    <Report Include="TimesheetApproval_ReturnedReports.rdl" />
+    <Report Include="TimesheetApproval_ReturnsByPayPeriod.rdl" />
+    <Report Include="TimesheetApproval_SignTimesheetsReminder.rdl" />
+    <Report Include="TimesheetApproval_StandardHoursException.rdl" />
+    <Report Include="TimesheetApproval_StandardHoursExceptionSummary.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

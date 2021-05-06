@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Legacy/Health Care Valuation</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Health Care Valuation</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Health Care Valuation</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,14 +49,31 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="EIM.rds" />
-    <DataSource Include="HORNE.rds" />
+    <DataSource Include="Metastorm9.rds" />
+    <DataSource Include="PracticeEngine.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Bridge Call Center.rdl" />
-    <Report Include="Bridge Data Check.rdl" />
-    <Report Include="Bridge.rdl" />
-    <Report Include="Linkedin.rdl" />
+    <Report Include="HCV ValueStorm Client Status Report.rdl" />
+    <Report Include="HCV ValueStorm Closed Projects.rdl" />
+    <Report Include="HCV ValueStorm Cycle Time Drilldown.rdl" />
+    <Report Include="HCV ValueStorm Cycle Time.rdl" />
+    <Report Include="HCV ValueStorm Dashboard.rdl" />
+    <Report Include="HCV ValueStorm Drilldown.rdl" />
+    <Report Include="HCV ValueStorm Engagement Aging.rdl" />
+    <Report Include="HCV ValueStorm Engagement WinRate.rdl" />
+    <Report Include="HCV ValueStorm Expiration Report.rdl" />
+    <Report Include="HCV ValueStorm Net Billings Drilldown.rdl" />
+    <Report Include="HCV ValueStorm Net Billings.rdl" />
+    <Report Include="HCV ValueStorm Opinion Follow Up Report.rdl" />
+    <Report Include="HCV ValueStorm Opinion Follow Up Summary.rdl" />
+    <Report Include="HCV ValueStorm Opinion WinRate.rdl" />
+    <Report Include="HCV ValueStorm Pipeline Report.rdl" />
+    <Report Include="HCV ValueStorm Project Owner Subscription.rdl" />
+    <Report Include="HCV ValueStorm Project Owner.rdl" />
+    <Report Include="HCV ValueStorm Project Status Report (clean).rdl" />
+    <Report Include="HCV ValueStorm Project Status Report (Sectional).rdl" />
+    <Report Include="HCV ValueStorm Qualified Leads Report.rdl" />
+    <Report Include="HCV ValueStorm WIP.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

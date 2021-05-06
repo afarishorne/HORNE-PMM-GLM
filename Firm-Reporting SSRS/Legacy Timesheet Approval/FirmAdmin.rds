@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="FirmAdmin">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=bpmdata;Initial Catalog=FirmAdmin</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>a7ae1dec-0d61-4872-943f-3ff7e1698a42</DataSourceID>
+</RptDataSource>

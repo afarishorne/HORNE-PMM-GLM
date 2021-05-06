@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="JANPFRA">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=janpfra;Initial Catalog=Franchise</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>a696330a-81c0-45c3-9afa-33c408687348</DataSourceID>
+</RptDataSource>

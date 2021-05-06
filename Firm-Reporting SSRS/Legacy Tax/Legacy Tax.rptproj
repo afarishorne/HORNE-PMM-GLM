@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Legacy/Tax</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Tax</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
+    <TargetReportFolder>Legacy Tax</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,14 +49,34 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="EIM.rds" />
-    <DataSource Include="HORNE.rds" />
+    <DataSource Include="HorneDataWarehouse.rds" />
+    <DataSource Include="Metastorm.rds" />
+    <DataSource Include="PracticeEngine.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Bridge Call Center.rdl" />
-    <Report Include="Bridge Data Check.rdl" />
-    <Report Include="Bridge.rdl" />
-    <Report Include="Linkedin.rdl" />
+    <Report Include="Backlog Report.rdl" />
+    <Report Include="Completed Returns.rdl" />
+    <Report Include="Completed Stages Report.rdl" />
+    <Report Include="Docket Export.rdl" />
+    <Report Include="Due Date Report by Return Type.rdl" />
+    <Report Include="Due Date Report.rdl" />
+    <Report Include="Invoice Preview.rdl" />
+    <Report Include="Master To Do List Report.rdl" />
+    <Report Include="Nobody On To Do List.rdl" />
+    <Report Include="Open Services Report.rdl" />
+    <Report Include="Returned to Preparer Detail.rdl" />
+    <Report Include="Returned to Preparer.rdl" />
+    <Report Include="Returns In and Out Detail.rdl" />
+    <Report Include="Returns In and Out.rdl" />
+    <Report Include="Stage Duration Report.rdl" />
+    <Report Include="Status Report.rdl" />
+    <Report Include="Tax Error Occurrence Report.rdl" />
+    <Report Include="Tax Notice Status.rdl" />
+    <Report Include="Tax Notices.rdl" />
+    <Report Include="Tax Return Workflow Dashboard.rdl" />
+    <Report Include="To Do List Report.rdl" />
+    <Report Include="Turnaround Time Report.rdl" />
+    <Report Include="WIP Report.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
