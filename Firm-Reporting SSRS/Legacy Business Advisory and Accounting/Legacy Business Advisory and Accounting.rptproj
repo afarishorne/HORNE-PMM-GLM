@@ -62,7 +62,6 @@
     <Report Include="Dominos Upload Report (DDS).rdl" />
     <Report Include="Dominos Upload Report.rdl" />
     <Report Include="HEA_YTD_BILLINGS.rdl" />
-    <Report Include="IAR v2.rdl" />
     <Report Include="Incomplete Services.rdl" />
     <Report Include="Job Initiator Stagnant Notifier.rdl" />
     <Report Include="Master Task List by Staff.rdl" />
