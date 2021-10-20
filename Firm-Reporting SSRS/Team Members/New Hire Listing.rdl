@@ -18,27 +18,32 @@
             <Value>=Parameters!Filter.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT DISTINCT					     
-	 [First Name] = S.FirstName
-	,[Last Name]  =  S.LastName
-	,[Email] =       S.EmailAddress
-	,[Focus Area]=  S.FocusArea
-                   ,[Cost Center] = S.CostCenter
-                   ,[Service Line] = S.ServiceLine
-                   ,[Staff Group] = S.StaffClassification
-                   ,[Alternate Title] = S.JobTitle
-           	,[Start Date] =  S.StartDate
-	,[Seniority Date] = S.SeniorityDate
-	,[Load Date] = S.LoadDate
-
-FROM
-    HORNE.DM.StaffDetail  AS S
-WHERE
-
-       (DATEDIFF(DAY, GETDATE(), S.SeniorityDate) &gt;= (@Filter * -1) 
-       OR DATEDIFF(DAY, GETDATE(), S.LoadDate) &gt;= (@Filter* -1))
-       AND DATEDIFF(DAY, GETDATE(), S.SeniorityDate) &lt;= 0
-ORDER BY S.SeniorityDate DESC, S.LoadDate DESC</CommandText>
+        <CommandText>SELECT
+	DISTINCT [First Name] = S.FirstName
+,	[Last Name] = S.LastName
+,	[Email] =S.EmailAddress
+,	[Focus Area]= S.FocusArea
+,[Cost Center] = S.CostCenter
+,[Service Line] = S.ServiceLine
+,[Staff Group] = S.StaffClassification
+,[Alternate Title] = S.JobTitle
+,[Start Date] = S.StartDate
+,[Seniority Date] = S.SeniorityDate
+,[Load Date] = S.LoadDate 
+FROM HORNE.DM.StaffDetail AS S
+WHERE 
+	CASE 
+		WHEN @Filter &gt; 0 AND
+			(CAST (S.SeniorityDate AS DATE) &lt;= CAST(DATEADD(DAY, @Filter, getdate()) AS DATE)
+				OR CAST (S.LoadDate AS DATE) &lt;= CAST(DATEADD(DAY, @Filter, getdate()) AS DATE)
+			) AND DATEDIFF(DAY, GETDATE(), S.SeniorityDate) &gt;=0 THEN 1
+		WHEN @Filter &lt;= 0 AND
+			(CAST (S.SeniorityDate AS DATE) &gt;= CAST(DATEADD(DAY, @Filter, getdate()) AS DATE)
+				OR CAST (S.LoadDate AS DATE) &gt;= CAST(DATEADD(DAY, @Filter, getdate()) AS DATE)
+			) AND DATEDIFF(DAY, GETDATE(), S.SeniorityDate) &lt;=0 THEN 1
+		ELSE 0 END = 1
+			
+ORDER BY S.SeniorityDate</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -58,10 +63,6 @@ ORDER BY S.SeniorityDate DESC, S.LoadDate DESC</CommandText>
           <DataField>Focus Area</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Seniority_Date">
-          <DataField>Seniority Date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
         <Field Name="Cost_Center">
           <DataField>Cost Center</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -80,6 +81,10 @@ ORDER BY S.SeniorityDate DESC, S.LoadDate DESC</CommandText>
         </Field>
         <Field Name="Start_Date">
           <DataField>Start Date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Seniority_Date">
+          <DataField>Seniority Date</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="Load_Date">
@@ -1002,7 +1007,7 @@ ORDER BY S.SeniorityDate DESC, S.LoadDate DESC</CommandText>
   </ReportSections>
   <ReportParameters>
     <ReportParameter Name="Filter">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <DefaultValue>
         <Values>
           <Value>=0</Value>
@@ -1016,16 +1021,24 @@ ORDER BY S.SeniorityDate DESC, S.LoadDate DESC</CommandText>
             <Label>Today</Label>
           </ParameterValue>
           <ParameterValue>
-            <Value>1</Value>
+            <Value>-1</Value>
             <Label>Since Yesterday</Label>
           </ParameterValue>
           <ParameterValue>
-            <Value>14</Value>
+            <Value>-14</Value>
             <Label>Last 14 Days</Label>
           </ParameterValue>
           <ParameterValue>
-            <Value>30</Value>
+            <Value>-30</Value>
             <Label>Last 30 Days</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>14</Value>
+            <Label>Next 14 Days </Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>30</Value>
+            <Label>Next 30 Days </Label>
           </ParameterValue>
         </ParameterValues>
       </ValidValues>

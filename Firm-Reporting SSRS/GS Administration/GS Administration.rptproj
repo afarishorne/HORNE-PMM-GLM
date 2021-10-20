@@ -8,7 +8,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Focus Area Operations/Government Services/GS Administration/GS Administration</TargetReportFolder>
+    <TargetReportFolder>Focus Area Operations/Government Services/GS Administration</TargetReportFolder>
     <TargetDatasetFolder>Focus Area Operations/Government Services/GS Administration/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Focus Area Operations/Government Services/GS Administration/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -48,5 +48,11 @@
     <DataSets>@(DataSet)</DataSets>
     <Reports>@(Report)</Reports>
   </PropertyGroup>
+  <ItemGroup>
+    <DataSource Include="HORNE.rds" />
+  </ItemGroup>
+  <ItemGroup>
+    <Report Include="Team Member PTO Balances.rdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

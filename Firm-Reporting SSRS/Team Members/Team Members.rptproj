@@ -53,11 +53,13 @@
     <DataSource Include="Reporting_EDW.rds" />
   </ItemGroup>
   <ItemGroup>
+    <Report Include="Call Center Team Members.rdl" />
     <Report Include="GS Team Member Listing.rdl" />
     <Report Include="New Hire Listing.rdl" />
     <Report Include="New Hire Onboarding.rdl" />
     <Report Include="PMM Team Member Listing.rdl" />
     <Report Include="Team Member Events.rdl" />
+    <Report Include="Team Member Listing Update.rdl" />
     <Report Include="Team Member Listing.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
