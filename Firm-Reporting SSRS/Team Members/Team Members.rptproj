@@ -58,6 +58,7 @@
     <Report Include="New Hire Listing.rdl" />
     <Report Include="New Hire Onboarding.rdl" />
     <Report Include="PMM Team Member Listing.rdl" />
+    <Report Include="Talent Pipeline.rdl" />
     <Report Include="Team Member Events.rdl" />
     <Report Include="Team Member Listing Update.rdl" />
     <Report Include="Team Member Listing.rdl" />
