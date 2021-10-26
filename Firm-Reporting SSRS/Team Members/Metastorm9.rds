@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Metastorm9">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=HORNEBPMPSQL01;Initial Catalog=Metastorm9</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>c3260ac6-829e-46b7-832f-f4ec9f938def</DataSourceID>
+</RptDataSource>

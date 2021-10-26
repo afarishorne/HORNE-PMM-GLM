@@ -8,11 +8,11 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide/Team Members</TargetReportFolder>
+    <TargetReportFolder>Firmwide/Audit Quality</TargetReportFolder>
     <TargetDatasetFolder>Firmwide/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Firmwide/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
+    <TargetServerURL>http://hornepowerbid01/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -50,9 +50,11 @@
   </PropertyGroup>
   <ItemGroup>
     <DataSource Include="HORNE.rds" />
+    <DataSource Include="Metastorm9.rds" />
     <DataSource Include="Reporting_EDW.rds" />
   </ItemGroup>
   <ItemGroup>
+    <Report Include="Annual Independence Check Report.rdl" />
     <Report Include="Call Center Team Members.rdl" />
     <Report Include="GS Team Member Listing.rdl" />
     <Report Include="New Hire Listing.rdl" />
