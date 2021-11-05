@@ -1,0 +1,2673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="PEReporting">
+      <DataSourceReference>PEReporting</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>494bec51-09f9-4fa2-b2d9-7ed558cede02</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="ClientGroup">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+SELECT DISTINCT
+       C.ContName
+FROM tblPortfolio_Selection P
+    INNER JOIN tblEngagement E
+        ON P.ContIndex = E.ContIndex
+    INNER JOIN tblContacts C
+        ON P.ClientHold = C.ContIndex
+WHERE (
+         e.ClientCode = 'hea5000942'
+      )
+UNION
+SELECT 'ALL'</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="ContName">
+          <DataField>ContName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Office">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; Select distinct 
+      [StaffOffice]
+  FROM [Engine_Horne].[dbo].[tblStaff]
+  where StaffOffice not in ('0006', '0012', '0078')
+Union Select 'ALL'</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="StaffOffice">
+          <DataField>StaffOffice</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Staff">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+SELECT DISTINCT
+       *
+FROM
+(
+    --SELECT StaffCode,
+    --       StaffName
+    --FROM dbo.tblStaff staff
+    --UNION
+    --SELECT 'All1',
+    --       '(Choose Me for ALL)'
+    --UNION
+    SELECT DISTINCT
+           staff.StaffCode,
+           StaffName
+    FROM [tblTSO_Details] det
+        INNER JOIN dbo.tblTSO_Header head
+            ON det.HeaderIndex = head.HeaderIndex
+        INNER JOIN dbo.tblStaff staff
+            ON staff.StaffIndex = head.StaffIndex
+        INNER JOIN dbo.tblEngagement eng
+            ON eng.ContIndex = det.ClientIndex
+        INNER JOIN tblJob_Header J
+            ON det.ServPeriod = J.Job_Idx
+        LEFT JOIN tblContacts C
+            ON eng.ClientHold = C.ContIndex
+    WHERE (
+             eng.ClientCode = 'hea5000942'
+          )
+    --UNION
+    --SELECT 'NOSTAFF',
+    --       'No Staff Allocated'
+    --UNION
+    --SELECT 'ALL',
+    --       'Catch-all'
+    --UNION
+    --SELECT 'Z-AnchorStaff',
+    --       '(Z-Anchor Staff)'
+    --UNION
+    --SELECT 'Z-TidalStaff',
+    --       '(Z-Tidal Staff)'
+) t1
+ORDER BY StaffName</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="StaffCode">
+          <DataField>StaffCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StaffName">
+          <DataField>StaffName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Client">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+SELECT ClientCode,
+       1 SortOrder
+FROM dbo.tblEngagement eng
+WHERE (
+         eng.ClientCode = 'hea5000942'
+      )
+UNION
+SELECT 'ALL',
+       0 SortOrder
+ORDER BY SortOrder ASC</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="ClientCode">
+          <DataField>ClientCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SortOrder">
+          <DataField>SortOrder</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="AnalysisCode">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; Select distinct 
+AnalysisCode
+from dbo.tblTSO_Details
+Union 
+Select distinct Disbcode
+from dbo.tblExpenseDetail det
+Union Select '901'
+Union Select '902'
+Union Select '903'
+Union 
+Select 'ALL'</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="AnalysisCode">
+          <DataField>AnalysisCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Jobs">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+SELECT DISTINCT
+       J.Job_Name,
+       J.Job_Code
+FROM tblJob_Header J
+    LEFT JOIN tblContacts C
+        ON J.ContIndex = C.ContIndex
+    INNER JOIN dbo.tblEngagement eng
+        ON eng.ContIndex = C.ContIndex
+WHERE (
+         eng.ClientCode = 'hea5000942'
+      )
+ORDER BY J.Job_Name</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Job_Name">
+          <DataField>Job_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Job_Code">
+          <DataField>Job_Code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Tasks">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+SELECT DISTINCT
+       [Task_Subject]
+FROM [Engine_Horne].[dbo].[tblJob_Task] task
+    INNER JOIN tblJob_Header J
+        ON task.JobIdx = J.Job_Idx
+    LEFT JOIN tblContacts C
+        ON J.ContIndex = C.ContIndex
+    INNER JOIN dbo.tblEngagement eng
+        ON eng.ContIndex = C.ContIndex
+WHERE (
+         eng.ClientCode = 'hea5000942'
+      )</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Task_Subject">
+          <DataField>Task_Subject</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="dsTEJournal">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Billed1">
+            <Value>=Parameters!Billed1.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@BillType1">
+            <Value>=Parameters!BillType1.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@BeginDate1">
+            <Value>=Parameters!BeginDate1.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EndDate1">
+            <Value>=Parameters!EndDate1.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@TorE1">
+            <Value>=Parameters!TorE1.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Office">
+            <Value>=Parameters!Office.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@GroupName">
+            <Value>=Parameters!GroupName.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Staff">
+            <Value>=Parameters!Staff.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Client">
+            <Value>=Parameters!Client.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Analysis">
+            <Value>=Parameters!Analysis.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+DECLARE @Billed VARCHAR(50)
+DECLARE @BillType VARCHAR(50)
+DECLARE @BeginDate DATETIME
+DECLARE @EndDate DATETIME
+--Declare @Client varchar(50)
+DECLARE @TorE VARCHAR(50)
+
+SELECT @Billed = @Billed1,
+       @BillType = @BillType1,
+       @BeginDate = @BeginDate1,
+       @EndDate = @EndDate1,
+       --,@Client = @Client1
+       @TorE = @TorE1
+
+SELECT DISTINCT
+       *
+FROM
+(
+    SELECT DISTINCT
+           eng.ClientCode AS ClientID,
+           [Job_Code] AS EventId,
+           AnalysisCode AS workcodeid,
+           [ServiceCode] AS engagementid,
+           EntryDate AS 'Date',
+           --DurationUnits as 'Hours',
+           'Hours' = CASE
+                         WHEN tmp.StaffCode IS NULL THEN
+                             DurationUnits
+                         ELSE
+                             CASE
+                                 WHEN (
+                                          'All' IN ( @Office )
+                                          OR tmp.StaffOffice IN ( @Office )
+                                      )
+                                      AND EntryDate &lt; tmp.StaffStarted THEN
+                                     DurationUnits
+                                 WHEN (
+                                          'All' IN ( @Office )
+                                          OR staff.StaffOffice IN ( @Office )
+                                      )
+                                      AND EntryDate &gt;= tmp.StaffStarted THEN
+                                     DurationUnits
+                                 ELSE
+                                     0
+                             END
+                     END,
+           --Amount = ChargeAmount,	
+           Amount = CASE
+                        WHEN tmp.StaffCode IS NULL THEN
+                            CASE
+                                WHEN ChargeAmount != WIPOutstanding
+                                     AND WIPOutstanding != 0 THEN
+                                    WIPOutstanding
+                                WHEN ChargeAmount != WIPBilled
+                                     AND WIPOutstanding = 0 THEN
+                                    WIPBilled
+                                ELSE
+                                    ROUND(ChargeRate * DurationUnits, 2)
+                            END
+                        ELSE
+                            CASE
+                                WHEN (
+                                         'All' IN ( @Office )
+                                         OR tmp.StaffOffice IN ( @Office )
+                                     )
+                                     AND EntryDate &lt; tmp.StaffStarted THEN
+                                    CASE
+                                        WHEN EntryDate
+                                             BETWEEN '7/28/2014' AND '7/30/2014'
+                                             AND staff.StaffName IN ( 'Michael Rawlinson', 'Tara Dinter' ) THEN
+                                            ROUND(ChargeRate * DurationUnits, 2)
+                                        ELSE
+                                            CASE
+                                                WHEN ChargeAmount != WIPOutstanding
+                                                     AND WIPOutstanding != 0 THEN
+                                                    WIPOutstanding
+                                                WHEN ChargeAmount != WIPBilled
+                                                     AND WIPOutstanding = 0 THEN
+                                                    WIPBilled
+                                                ELSE
+                                                    ROUND(ChargeRate * DurationUnits, 2)
+                                            END
+                                    END
+                                WHEN (
+                                         'All' IN ( @Office )
+                                         OR staff.StaffOffice IN ( @Office )
+                                     )
+                                     AND EntryDate &gt;= tmp.StaffStarted THEN
+                                    CASE
+                                        WHEN EntryDate
+                                             BETWEEN '7/28/2014' AND '7/30/2014'
+                                             AND staff.StaffName IN ( 'Michael Rawlinson', 'Tara Dinter' ) THEN
+                                            ROUND(ChargeRate * DurationUnits, 2)
+                                        ELSE
+                                            CASE
+                                                WHEN ChargeAmount != WIPOutstanding
+                                                     AND WIPOutstanding != 0 THEN
+                                                    WIPOutstanding
+                                                WHEN ChargeAmount != WIPBilled
+                                                     AND WIPOutstanding = 0 THEN
+                                                    WIPBilled
+                                                ELSE
+                                                    ROUND(ChargeRate * DurationUnits, 2)
+                                            END
+                                    END
+                                ELSE
+                                    0
+                            END
+                    END,
+           staff.StaffName,
+           eng.ClientName,
+           StaffNextOfKin AS StaffLevel,
+           expamount = NULL,
+           'Description' = det.Description,
+           Company = CASE
+                         WHEN tmp.StaffCode IS NULL THEN
+                             staff.StaffOffice
+                         ELSE
+                             CASE
+                                 WHEN EntryDate &lt; tmp.StaffStarted THEN
+                                     tmp.StaffOffice
+                                 ELSE
+                                     staff.StaffOffice
+                             END
+                     END,
+           CASE
+               WHEN wip.WIPRate IS NULL THEN
+                   det.ChargeRate
+               ELSE
+                   wip.WIPRate
+           END AS DollarRate,
+           staff.StaffCode AS StaffId,
+           Task_Subject,
+           det.DetailIndex,
+           location_Header.JurisName AS PELocation,
+           location_Detail.JurisName AS PELocationDetail,
+           Job_Name AS JobDescription,
+           ContName AS GroupName
+    --WIPAmount, 
+    -- WIPWoff,
+    --WIPBilled
+
+    FROM [Engine_Horne].[dbo].[tblTSO_Details] det
+        INNER JOIN [Engine_Horne].[dbo].[tblTSO_Header] head
+            ON det.HeaderIndex = head.HeaderIndex
+        INNER JOIN [Engine_Horne].[dbo].[tblStaff] staff
+            ON staff.StaffIndex = head.StaffIndex
+        INNER JOIN [Engine_Horne].[dbo].[tblEngagement] eng
+            ON eng.ContIndex = det.ClientIndex
+        LEFT JOIN [Engine_Horne].[dbo].[tblJob_Header] J
+            ON det.ServPeriod = J.Job_Idx
+        LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C
+            ON eng.ClientHold = C.ContIndex
+        LEFT JOIN [Engine_Horne].[dbo].[tblJob_Task] task
+            ON task.TaskIndex = det.TaskIndex
+        LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip
+            ON det.DetailIndex = wip.WIPRef
+               AND eng.ContIndex = wip.ContIndex
+        LEFT JOIN
+        (SELECT * FROM Engine_Horne.dbo.client_fn_Select_Sub_To_Perm() ) AS tmp
+            ON tmp.StaffCode = staff.StaffCode
+        LEFT JOIN [Engine_Horne].[dbo].[tblStateJurisdiction] location_Header
+            ON location_Header.JurisIndex = head.Location
+        LEFT JOIN [Engine_Horne].[dbo].[tblStateJurisdiction] location_Detail
+            ON location_Detail.JurisIndex = det.Location
+    WHERE (
+             eng.ClientCode = 'hea5000942'
+          )
+          AND 1 = CASE
+                      WHEN @Billed = 'All' THEN
+                          1
+                      WHEN @Billed = 'Billed'
+                           AND
+                           (
+                               (WIPAmount = WIPWoff)
+                               OR
+                               (
+                                   WIPBilled != 0
+                                   AND WIPBilled IS NOT NULL
+                               )
+                           ) THEN
+                          1
+                      WHEN @Billed = 'NotBilled'
+                           AND
+                           (
+                               (
+                                   WIPAmount != WIPWoff
+                                   AND
+                                   (
+                                       WIPBilled = 0
+                                       OR WIPBilled IS NULL
+                                   )
+                               )
+                               OR WIPRef IS NULL
+                           ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN 'ALL' IN ( @GroupName ) THEN
+                          1
+                      WHEN C.ContName IN ( @GroupName ) THEN
+                          1
+                      WHEN 'TXPA-9999' IN ( @GroupName )
+                           AND eng.ClientCode = 'TXPA-1111' THEN
+                          1
+                      WHEN 'Pm - General Project Management' IN ( @GroupName )
+                           AND eng.ClientCode = '1111PM' THEN
+                          1
+                      WHEN 'Small Rental  Assistance Program' IN ( @GroupName )
+                           AND eng.ClientCode = '1111SR' THEN
+                          1
+                      WHEN 'Small Rental Assistance Program II' IN ( @GroupName )
+                           AND eng.ClientCode = 'SR2-1111' THEN
+                          1
+                      WHEN 'Long Term Workforce Housing Program' IN ( @GroupName )
+                           AND eng.ClientCode = '1111LT' THEN
+                          1
+                      WHEN 'Hmgp Administrative' IN ( @GroupName )
+                           AND eng.ClientCode = '1111HM' THEN
+                          1
+                      WHEN 'MONITORING-TEXAS PA 3.0' IN ( @GroupName )
+                           AND eng.ClientCode = 'TXAF-1111' THEN
+                          1
+                      WHEN 'Texas Department of Information Resources' IN ( @GroupName )
+                           AND eng.ClientCode = 'MIS2601435' THEN
+                          1
+                      WHEN 'Texas - CDBG' IN ( @GroupName )
+                           AND eng.ClientCode IN ( 'TXCDBG1111', 'TCBRN1111', 'TCGL1-1111' ) THEN
+                          1
+                      WHEN 'SOUTH CAROLINA - PROGRAM MANAGEMENT' IN ( @GroupName )
+                           AND eng.ClientCode = 'SC-1111' THEN
+                          1
+                      WHEN 'GENERAL ADMINISTRATIVE' IN ( @GroupName )
+                           AND
+                           (
+                               eng.ClientCode = 'SPE1111'
+                               OR eng.ClientCode = 'SPE9999999'
+                           ) THEN
+                          1
+                      WHEN 'CALIFORNIA DEPARTMENT OF WATER RESOURCES' IN ( @GroupName )
+                           AND eng.ClientCode = 'CADWR-1111' THEN
+                          1
+                      WHEN 'NORTHWELL SIUH' IN ( @GroupName )
+                           AND eng.ClientCode = 'NWSIUH9999' THEN
+                          1
+                      WHEN 'PUERTO RICO' IN ( @GroupName )
+                           AND eng.ClientCode = 'PR-9999' THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN 'ALL' IN ( @Office ) THEN
+                          1
+                      WHEN CASE
+                               WHEN tmp.StaffCode IS NULL THEN
+                                   staff.StaffOffice
+                               ELSE
+                                   CASE
+                                       WHEN EntryDate &lt; tmp.StaffStarted THEN
+                                           tmp.StaffOffice
+                                       WHEN EntryDate &gt;= tmp.StaffStarted THEN
+                                           staff.StaffOffice
+                                   END
+                           END IN ( @Office ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND det.EntryDate
+          BETWEEN @BeginDate AND @EndDate
+          AND 1 = CASE
+                      WHEN @BillType = 'Billable'
+                           AND [ServiceCode] = 'BAA' THEN
+                          1
+                      WHEN @BillType = 'Non-Billable'
+                           AND [ServiceCode] != 'BAA' THEN
+                          1
+                      WHEN @BillType = 'Both' THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN @TorE = 'Expenses' THEN
+                          0
+                      ELSE
+                          1
+                  END
+          AND 1 = CASE
+                      WHEN 'All1' IN ( @Staff ) THEN
+                          1
+                      WHEN staff.StaffCode IN ( @Staff ) THEN
+                          1
+                      WHEN 'Z-AnchorStaff' IN ( @Staff )
+                           AND staff.StaffOffice = 'Z-Anchor' THEN
+                          1
+                      WHEN 'Z-TidalStaff' IN ( @Staff )
+                           AND staff.StaffOffice = 'Z-TIDAL' THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN 'All' IN ( @Client ) THEN
+                          1
+                      WHEN eng.ClientCode IN ( @Client ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN 'All' IN ( @Analysis ) THEN
+                          1
+                      WHEN AnalysisCode IN ( @Analysis ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+    UNION ALL
+    SELECT DISTINCT
+           eng.ClientCode AS ClientID,
+           [Job_Code] AS EventId,
+           [DisbCode] AS workcodeid,
+           [ServiceCode] AS engagementid,
+           det.ExpDate AS 'Date',
+           NULL AS 'Hours',
+           Amount = NULL,
+           staff.StaffName,
+           eng.ClientName,
+           StaffNextOfKin AS StaffLevel,
+           expamount = --ChargeAmount	
+           CASE
+               WHEN tmp.StaffCode IS NULL THEN
+                   ChargeAmount
+               ELSE
+                   CASE
+                       WHEN (
+                                'All' IN ( @Office )
+                                OR tmp.StaffOffice IN ( @Office )
+                            )
+                            AND det.ExpDate &lt; tmp.StaffStarted THEN
+                           ChargeAmount
+                       WHEN (
+                                'All' IN ( @Office )
+                                OR staff.StaffOffice IN ( @Office )
+                            )
+                            AND det.ExpDate &gt;= tmp.StaffStarted THEN
+                           ChargeAmount
+                       ELSE
+                           0
+                   END
+           END,
+           'Description' = det.Description,
+           Company = CASE
+                         WHEN tmp.StaffCode IS NULL THEN
+                             staff.StaffOffice
+                         ELSE
+                             CASE
+                                 WHEN det.ExpDate &lt; tmp.StaffStarted THEN
+                                     tmp.StaffOffice
+                                 WHEN det.ExpDate &gt;= tmp.StaffStarted THEN
+                                     staff.StaffOffice
+                                 ELSE
+                                     staff.StaffOffice
+                             END
+                     END,
+           NULL AS DollarRate,
+           staff.StaffCode AS StaffId,
+           NULL AS Task_Subject,
+           det.DetailIndex,
+           --WIPAmount, 
+           -- WIPWoff,
+           --WIPBilled
+           NULL AS PELocation,
+           NULL AS PELocationDetail,
+           Job_Name AS JobDescription,
+           ContName AS GroupName
+    FROM [Engine_Horne].[dbo].[tblExpenseDetail] det
+        INNER JOIN [Engine_Horne].[dbo].[tblExpenseHeader] head
+            ON det.ExpIndex = head.ExpIndex
+        INNER JOIN [Engine_Horne].[dbo].[tblStaff] staff
+            ON staff.StaffIndex = head.ExpStaff
+        INNER JOIN [Engine_Horne].[dbo].[tblEngagement] eng
+            ON eng.ContIndex = det.ClientIndex
+        LEFT JOIN [Engine_Horne].[dbo].[tblJob_Header] J
+            ON det.ServPeriod = J.Job_Idx
+        LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C
+            ON eng.ClientHold = C.ContIndex
+        LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip
+            ON det.DetailIndex = wip.WIPRef
+               AND WIPType = 'DISB'
+               AND eng.ContIndex = wip.ContIndex
+        LEFT JOIN
+        (SELECT * FROM Engine_Horne.dbo.client_fn_Select_Sub_To_Perm() ) AS tmp
+            ON tmp.StaffCode = staff.StaffCode
+    WHERE (
+             eng.ClientCode = 'hea5000942'
+          )
+          AND 1 = CASE
+                      WHEN @Billed = 'All' THEN
+                          1
+                      WHEN @Billed = 'Billed'
+                           AND
+                           (
+                               (WIPAmount = WIPWoff)
+                               OR
+                               (
+                                   WIPBilled != 0
+                                   AND WIPBilled IS NOT NULL
+                               )
+                           ) THEN
+                          1
+                      WHEN @Billed = 'NotBilled'
+                           AND
+                           (
+                               (
+                                   WIPAmount != WIPWoff
+                                   AND
+                                   (
+                                       WIPBilled = 0
+                                       OR WIPBilled IS NULL
+                                   )
+                               )
+                               OR WIPRef IS NULL
+                           ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN 'ALL' IN ( @GroupName ) THEN
+                          1
+                      WHEN C.ContName IN ( @GroupName ) THEN
+                          1
+                      WHEN 'TXPA-9999' IN ( @GroupName )
+                           AND eng.ClientCode = 'TXPA-1111' THEN
+                          1
+                      WHEN 'Pm - General Project Management' IN ( @GroupName )
+                           AND eng.ClientCode = '1111PM' THEN
+                          1
+                      WHEN 'Small Rental  Assistance Program' IN ( @GroupName )
+                           AND eng.ClientCode = '1111SR' THEN
+                          1
+                      WHEN 'Small Rental Assistance Program II' IN ( @GroupName )
+                           AND eng.ClientCode = 'SR2-1111' THEN
+                          1
+                      WHEN 'Long Term Workforce Housing Program' IN ( @GroupName )
+                           AND eng.ClientCode = '1111LT' THEN
+                          1
+                      WHEN 'Hmgp Administrative' IN ( @GroupName )
+                           AND eng.ClientCode = '1111HM' THEN
+                          1
+                      WHEN 'MONITORING-TEXAS PA 3.0' IN ( @GroupName )
+                           AND eng.ClientCode = 'TXAF-1111' THEN
+                          1
+                      WHEN 'Texas Department of Information Resources' IN ( @GroupName )
+                           AND eng.ClientCode = 'MIS2601435' THEN
+                          1
+                      WHEN 'Texas - CDBG' IN ( @GroupName )
+                           AND eng.ClientCode IN ( 'TXCDBG1111', 'TCBRN1111', 'TCGL1-1111' ) THEN
+                          1
+                      WHEN 'SOUTH CAROLINA - PROGRAM MANAGEMENT' IN ( @GroupName )
+                           AND eng.ClientCode = 'SC-1111' THEN
+                          1
+                      WHEN 'GENERAL ADMINISTRATIVE' IN ( @GroupName )
+                           AND
+                           (
+                               eng.ClientCode = 'SPE1111'
+                               OR eng.ClientCode = 'SPE9999999'
+                           ) THEN
+                          1
+                      WHEN 'CALIFORNIA DEPARTMENT OF WATER RESOURCES' IN ( @GroupName )
+                           AND eng.ClientCode = 'CADWR-1111' THEN
+                          1
+                      WHEN 'NORTHWELL SIUH' IN ( @GroupName )
+                           AND eng.ClientCode = 'NWSIUH9999' THEN
+                          1
+                      WHEN 'PUERTO RICO' IN ( @GroupName )
+                           AND eng.ClientCode = 'PR-9999' THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN 'ALL' IN ( @Office ) THEN
+                          1
+                      WHEN CASE
+                               WHEN tmp.StaffCode IS NULL THEN
+                                   staff.StaffOffice
+                               ELSE
+                                   CASE
+                                       WHEN det.ExpDate &lt; tmp.StaffStarted THEN
+                                           tmp.StaffOffice
+                                       WHEN det.ExpDate &gt;= tmp.StaffStarted THEN
+                                           staff.StaffOffice
+                                   END
+                           END IN ( @Office ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND det.ExpDate
+          BETWEEN @BeginDate AND @EndDate
+          AND 1 = CASE
+                      WHEN @BillType = 'Billable'
+                           AND [ServiceCode] = 'BAA' THEN
+                          1
+                      WHEN @BillType = 'Non-Billable'
+                           AND [ServiceCode] != 'BAA' THEN
+                          1
+                      WHEN @BillType = 'Both' THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN @TorE = 'Time' THEN
+                          0
+                      ELSE
+                          1
+                  END
+          AND 1 = CASE
+                      WHEN 'All1' IN ( @Staff ) THEN
+                          1
+                      WHEN staff.StaffCode IN ( @Staff ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN 'All' IN ( @Client ) THEN
+                          1
+                      WHEN eng.ClientCode IN ( @Client ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+          AND 1 = CASE
+                      WHEN 'All' IN ( @Analysis ) THEN
+                          1
+                      WHEN [DisbCode] IN ( @Analysis ) THEN
+                          1
+                      ELSE
+                          0
+                  END
+) t1
+ORDER BY t1.StaffId,
+         Date</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="ClientID">
+          <DataField>ClientID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EventId">
+          <DataField>EventId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="workcodeid">
+          <DataField>workcodeid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="engagementid">
+          <DataField>engagementid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Hours">
+          <DataField>Hours</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="StaffName">
+          <DataField>StaffName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClientName">
+          <DataField>ClientName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StaffLevel">
+          <DataField>StaffLevel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="expamount">
+          <DataField>expamount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Company">
+          <DataField>Company</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DollarRate">
+          <DataField>DollarRate</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="StaffId">
+          <DataField>StaffId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Task_Subject">
+          <DataField>Task_Subject</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="detailindex">
+          <DataField>DetailIndex</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PELocation">
+          <DataField>PELocation</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PELocationDetail">
+          <DataField>PELocationDetail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="JobDescription">
+          <DataField>JobDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GroupName">
+          <DataField>GroupName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DateRange">
+      <Query>
+        <DataSourceName>PEReporting</DataSourceName>
+        <CommandText>SELECT DATEADD(month, DATEDIFF(month, -1, getdate()) - 2, 0) as BeginDate1,
+
+DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="BeginDate1">
+          <DataField>BeginDate1</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="EndDate1">
+          <DataField>EndDate1</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="table1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.125in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.625in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.5in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.25in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.5in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.625in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.875in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.125in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.125in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.2in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>detailindex</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox5</rd:DefaultName>
+                          <ZIndex>39</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox56">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Staff ID</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox56</rd:DefaultName>
+                          <ZIndex>38</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Staff Name</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox11</rd:DefaultName>
+                          <ZIndex>37</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Office</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox4</rd:DefaultName>
+                          <ZIndex>36</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Client ID</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox1</rd:DefaultName>
+                          <ZIndex>35</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox25">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Organization Name</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox25</rd:DefaultName>
+                          <ZIndex>34</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox16">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Eng ID</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox16</rd:DefaultName>
+                          <ZIndex>33</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox43">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>WC</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox43</rd:DefaultName>
+                          <ZIndex>32</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox49">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Event ID</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox49</rd:DefaultName>
+                          <ZIndex>31</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Job Description</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox8</rd:DefaultName>
+                          <ZIndex>30</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Task</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox2</rd:DefaultName>
+                          <ZIndex>29</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Date</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox10</rd:DefaultName>
+                          <ZIndex>28</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox33">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Rate</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox33</rd:DefaultName>
+                          <ZIndex>27</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Hours</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox3</rd:DefaultName>
+                          <ZIndex>26</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox61">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Amount</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox61</rd:DefaultName>
+                          <ZIndex>25</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox55">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Exp Amt</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox55</rd:DefaultName>
+                          <ZIndex>24</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox18">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Description</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox18</rd:DefaultName>
+                          <ZIndex>23</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Location Header</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox6</rd:DefaultName>
+                          <ZIndex>22</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Location Detail</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox7</rd:DefaultName>
+                          <ZIndex>21</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox9">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Group Name</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox9</rd:DefaultName>
+                          <ZIndex>20</ZIndex>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.2in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="detailindex">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!detailindex.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>detailindex</rd:DefaultName>
+                          <ZIndex>19</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="staffid_2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!StaffId.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>staffid_2</rd:DefaultName>
+                          <ZIndex>18</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="StaffName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!StaffName.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>StaffName</rd:DefaultName>
+                          <ZIndex>17</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Company">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Company.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Company</rd:DefaultName>
+                          <ZIndex>16</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ClientId">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ClientID.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ClientId</rd:DefaultName>
+                          <ZIndex>15</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ClientName">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ClientName.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ClientName</rd:DefaultName>
+                          <ZIndex>14</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="engagementid">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!engagementid.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>engagementid</rd:DefaultName>
+                          <ZIndex>13</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="workcodeid">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!workcodeid.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>workcodeid</rd:DefaultName>
+                          <ZIndex>12</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EventId">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!EventId.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EventId</rd:DefaultName>
+                          <ZIndex>11</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="JobDescription">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!JobDescription.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>JobDescription</rd:DefaultName>
+                          <ZIndex>10</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Task_Subject">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Task_Subject.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                    <Format>MM/dd/yyyy</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Task_Subject</rd:DefaultName>
+                          <ZIndex>9</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Date">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Date.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                    <Format>MM/dd/yyyy</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Date</rd:DefaultName>
+                          <ZIndex>8</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DollarRate">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!DollarRate.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                    <Format>#00.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DollarRate</rd:DefaultName>
+                          <ZIndex>7</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Hours">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Hours.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Hours</rd:DefaultName>
+                          <ZIndex>6</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="amount">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Amount.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                    <Format>$#,##0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>amount</rd:DefaultName>
+                          <ZIndex>5</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="expamount">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!expamount.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                    <Format>$#,##0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>expamount</rd:DefaultName>
+                          <ZIndex>4</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Description">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Description.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                    <Format>$#,##0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Description</rd:DefaultName>
+                          <ZIndex>3</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PELocation">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!PELocation.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>PELocation</rd:DefaultName>
+                          <ZIndex>2</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PELocationDetail">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!PELocationDetail.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>PELocationDetail</rd:DefaultName>
+                          <ZIndex>1</ZIndex>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="GroupName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!GroupName.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>GroupName</rd:DefaultName>
+                          <Style>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="table1_Details_Group">
+                    <DataElementName>Detail</DataElementName>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!StaffName.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                  <DataElementName>Detail_Collection</DataElementName>
+                  <DataElementOutput>Output</DataElementOutput>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>dsTEJournal</DataSetName>
+            <Height>0.4in</Height>
+            <Width>16.25in</Width>
+            <Style />
+          </Tablix>
+        </ReportItems>
+        <Height>0.4in</Height>
+        <Style />
+      </Body>
+      <Width>16.25in</Width>
+      <Page>
+        <LeftMargin>0.25in</LeftMargin>
+        <RightMargin>0.25in</RightMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="GroupName">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ALL</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Client Group</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ClientGroup</DataSetName>
+          <ValueField>ContName</ValueField>
+          <LabelField>ContName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Office">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ALL</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Office</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Office</DataSetName>
+          <ValueField>StaffOffice</ValueField>
+          <LabelField>StaffOffice</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Client">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ALL</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Client</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Client</DataSetName>
+          <ValueField>ClientCode</ValueField>
+          <LabelField>ClientCode</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Staff">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>All1</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Staff</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Staff</DataSetName>
+          <ValueField>StaffCode</ValueField>
+          <LabelField>StaffName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="BillType1">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Both</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BillType</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>Both</Value>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Billable</Value>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Non-Billable</Value>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="TorE1">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Both</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Time/Expenses</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>Both</Value>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Time</Value>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Expenses</Value>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="Analysis">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ALL</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Analysis</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>AnalysisCode</DataSetName>
+          <ValueField>AnalysisCode</ValueField>
+          <LabelField>AnalysisCode</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Billed1">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>All</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Billed/NonBilled</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>All</Value>
+            <Label>ALL</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Billed</Value>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>NotBilled</Value>
+            <Label>Not Billed</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="BeginDate1">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>BeginDate1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EndDate1">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>EndDate1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>5</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>GroupName</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Office</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>Client</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>Staff</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>BillType1</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>TorE1</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>Analysis</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>Billed1</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>BeginDate1</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>EndDate1</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>87eb74c4-e1f6-44f6-9b80-10d0c311e0a8</rd:ReportID>
+</Report>

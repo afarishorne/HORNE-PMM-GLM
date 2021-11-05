@@ -51,6 +51,8 @@ Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Legacy Tax", "Legacy Tax\Le
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "GS Administration", "GS Administration\GS Administration.rptproj", "{29F6BA8D-C9BC-4DD9-8377-BE5D07E9DBC1}"
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Virginia Tourism", "Virginia Tourism\Virginia Tourism.rptproj", "{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -251,6 +253,14 @@ Global
 		{29F6BA8D-C9BC-4DD9-8377-BE5D07E9DBC1}.Release|Default.ActiveCfg = Release
 		{29F6BA8D-C9BC-4DD9-8377-BE5D07E9DBC1}.Release|Default.Build.0 = Release
 		{29F6BA8D-C9BC-4DD9-8377-BE5D07E9DBC1}.Release|Default.Deploy.0 = Release
+		{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}.Debug|Default.ActiveCfg = Debug
+		{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}.Debug|Default.Build.0 = Debug
+		{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}.Debug|Default.Deploy.0 = Debug
+		{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}.DebugLocal|Default.Build.0 = DebugLocal
+		{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}.Release|Default.ActiveCfg = Release
+		{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}.Release|Default.Build.0 = Release
+		{EA44CE11-2960-4EDF-8B01-58F0B674D4D0}.Release|Default.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
