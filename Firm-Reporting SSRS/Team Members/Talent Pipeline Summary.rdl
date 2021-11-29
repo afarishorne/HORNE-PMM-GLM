@@ -648,6 +648,7 @@ END</CommandText>
         </DataSetReference>
       </DefaultValue>
       <Prompt>Start Date</Prompt>
+      <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="EndDate">
       <DataType>DateTime</DataType>
@@ -658,6 +659,7 @@ END</CommandText>
         </DataSetReference>
       </DefaultValue>
       <Prompt>End Date</Prompt>
+      <Hidden>true</Hidden>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>

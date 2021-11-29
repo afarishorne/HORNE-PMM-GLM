@@ -197,9 +197,13 @@ ORDER BY ccsd.ServiceLine  ASC</CommandText>
     <DataSet Name="staffGroup">
       <Query>
         <DataSourceName>HORNE</DataSourceName>
-        <CommandText>-- Staff Group Filter
+        <CommandText>/*-- Staff Group Filter
 SELECT DISTINCT ccsd.StaffClassification FROM  DM.vw_CallCenterStaffDetail AS ccsd 
-ORDER BY ccsd.StaffClassification ASC</CommandText>
+ORDER BY ccsd.StaffClassification ASC */
+
+
+SELECT DISTINCT sd.StaffClassification FROM  DM.StaffDetail AS sd 
+ORDER BY sd.StaffClassification ASC</CommandText>
       </Query>
       <Fields>
         <Field Name="StaffClassification">

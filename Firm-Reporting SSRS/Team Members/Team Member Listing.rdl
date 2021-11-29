@@ -29,12 +29,18 @@
     ,[Cost Center] = S.CostCenter 
     ,[Service Line] = S.ServiceLine
     ,[Performance Advisor] = CONCAT(S.PALastName, ', ', S.PAPreferredName) 
-    ,[Second PA] = SA.PA2Name  
-    ,[Consistency Reviewer] = SA.ConsistencyReviewerName 
+    ,CASE 
+	      WHEN CONCAT(S.PA2LastName, ', ', S.PA2LastName) IN ('TeamMember, TeamMember')THEN 'N/A' 
+		  ELSE CONCAT(S.PA2LastName, ', ', S.PA2LastName) 
+     END AS [Second PA]   --SA.PA2Name     
+    ,CASE WHEN S.ConsistencyReviewerPreferredName IN ('TeamMember')THEN 'N/A'
+	       WHEN S.ConsistencyReviewerLastName IN ('TeamMember') THEN 'N/A'
+	       ELSE CONCAT(S.ConsistencyReviewerPreferredName, ', ', S.ConsistencyReviewerLastName) 
+	 END AS [Consistency Reviewer] --SA.ConsistencyReviewerName 
     ,[Employee Type] = S.EmployeeType
     ,[FT/PT] = S.FTPT                                                 
-    ,[CPE Approver] = SA.CPEApproverName            
-    ,[Time Approver] = SA.TimesheetApproverName
+    ,[CPE Approver] = CONCAT(S.CPEApproverLastName, ', ', S.CPEApproverPreferredName)       --SA.CPEApproverName         
+    ,[Time Approver] = CONCAT(S.TimesheetApproverLastName, ', ', S.CPEApproverPreferredName) --SA.TimesheetApproverName
     ,[Physical Location] = S.PhysicalOfficeLocation 
     ,[Office Assignment] =  S.OfficeAssignment 
     ,[HRMSID] = S.StaffBKey
@@ -1723,7 +1729,7 @@ ORDER BY s.FocusAreaCode</CommandText>
             </SortExpressions>
             <Top>0.23667in</Top>
             <Height>0.43in</Height>
-            <Width>39.8229in</Width>
+            <Width>39.82289in</Width>
             <Style />
           </Tablix>
         </ReportItems>

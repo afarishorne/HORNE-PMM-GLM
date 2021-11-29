@@ -13,7 +13,7 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>HORNE</DataSourceName>
-        <CommandText>SELECT								     
+        <CommandText> SELECT								   
      [Team Member Name] = CONCAT (S.LastName, ', ',S.PreferredName)      
     ,[Preferred Name]  = S.PreferredName
     ,[Email Address] = S.EmailAddress
@@ -24,11 +24,17 @@
     ,[Focus Area] = S.FocusArea  
     ,[Cost Center] = S.CostCenter 
     ,[Service Line] = S.ServiceLine
-    ,[Performance Advisor] = CONCAT(S.PALastName, ', ', S.PAPreferredName) 
-    ,[Second PA] = SA.PA2Name                                                
-    ,[Consistency Reviewer] = SA.ConsistencyReviewerName                     
-    ,[CPE Approver] = SA.CPEApproverName            
-    ,[Time Approver] = SA.TimesheetApproverName
+    ,[Performance Advisor] = CONCAT(S.PALastName, ', ', S.PAPreferredName)
+	 ,CASE 
+	      WHEN CONCAT(S.PA2LastName, ', ', S.PA2LastName) IN ('TeamMember, TeamMember')THEN 'N/A' 
+		  ELSE CONCAT(S.PA2LastName, ', ', S.PA2LastName) 
+     END AS [Second PA]   --SA.PA2Name                                             
+     ,CASE WHEN S.ConsistencyReviewerPreferredName IN ('TeamMember')THEN 'N/A'
+	       WHEN S.ConsistencyReviewerLastName IN ('TeamMember') THEN 'N/A'
+	       ELSE CONCAT(S.ConsistencyReviewerPreferredName, ', ', S.ConsistencyReviewerLastName)
+	 END AS [Consistency Reviewer] --SA.CPEApproverName                        
+    ,[CPE Approver] = CONCAT(S.CPEApproverLastName, ', ', S.CPEApproverPreferredName)   --SA.CPEApproverName         
+    ,[Time Approver] = CONCAT(S.TimesheetApproverLastName, ', ', S.CPEApproverPreferredName) --SA.TimesheetApproverName
     ,[Physical Location] = S.PhysicalOfficeLocation 
     ,[Office Assignment] =  S.OfficeAssignment 
     ,[HRMSID] = S.StaffBKey
@@ -1542,14 +1548,14 @@ AND
             <DataSetName>DataSet1</DataSetName>
             <Left>0.10417in</Left>
             <Height>0.46125in</Height>
-            <Width>34.4852in</Width>
+            <Width>34.48524in</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>0.53417in</Height>
         <Style />
       </Body>
-      <Width>34.58937in</Width>
+      <Width>34.58941in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
