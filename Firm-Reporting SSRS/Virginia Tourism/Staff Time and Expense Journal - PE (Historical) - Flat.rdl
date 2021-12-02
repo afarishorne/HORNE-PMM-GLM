@@ -21,7 +21,7 @@ FROM tblPortfolio_Selection P
     INNER JOIN tblContacts C
         ON P.ClientHold = C.ContIndex
 WHERE (
-         e.ClientCode = 'hea5000942'
+         e.ClientCode = 'hea5000942' or e.ClientCode = 'hea1111111'
       )
 UNION
 SELECT 'ALL'</CommandText>
@@ -119,7 +119,7 @@ SELECT ClientCode,
        1 SortOrder
 FROM dbo.tblEngagement eng
 WHERE (
-         eng.ClientCode = 'hea5000942'
+         eng.ClientCode = 'hea5000942' or eng.ClientCode = 'hea1111111'
       )
 UNION
 SELECT 'ALL',
@@ -174,7 +174,7 @@ FROM tblJob_Header J
     INNER JOIN dbo.tblEngagement eng
         ON eng.ContIndex = C.ContIndex
 WHERE (
-         eng.ClientCode = 'hea5000942'
+         eng.ClientCode = 'hea5000942' or eng.ClientCode ='hea1111111'
       )
 ORDER BY J.Job_Name</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -204,7 +204,7 @@ FROM [Engine_Horne].[dbo].[tblJob_Task] task
     INNER JOIN dbo.tblEngagement eng
         ON eng.ContIndex = C.ContIndex
 WHERE (
-         eng.ClientCode = 'hea5000942'
+         eng.ClientCode = 'hea5000942' or eng.ClientCode='hea1111111'
       )</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -417,7 +417,7 @@ FROM
         LEFT JOIN [Engine_Horne].[dbo].[tblStateJurisdiction] location_Detail
             ON location_Detail.JurisIndex = det.Location
     WHERE (
-             eng.ClientCode = 'hea5000942'
+             eng.ClientCode = 'hea5000942' OR eng.ClientCode='hea1111111'
           )
           AND 1 = CASE
                       WHEN @Billed = 'All' THEN
@@ -650,7 +650,7 @@ FROM
         (SELECT * FROM Engine_Horne.dbo.client_fn_Select_Sub_To_Perm() ) AS tmp
             ON tmp.StaffCode = staff.StaffCode
     WHERE (
-             eng.ClientCode = 'hea5000942'
+             eng.ClientCode = 'hea5000942' OR eng.ClientCode='hea1111111'
           )
           AND 1 = CASE
                       WHEN @Billed = 'All' THEN
@@ -919,22 +919,13 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.75in</Width>
+                  <Width>1.075in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.75in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.75in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>0.75in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>0.75in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.125in</Width>
+                  <Width>2.375in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.625in</Width>
@@ -943,10 +934,10 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                   <Width>0.5in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.75in</Width>
+                  <Width>1.58333in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.25in</Width>
+                  <Width>1.74167in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.75in</Width>
@@ -967,99 +958,13 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                   <Width>0.75in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.75in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.125in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.125in</Width>
+                  <Width>4.9in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
                   <Height>0.2in</Height>
                   <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox5">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>detailindex</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <FontFamily />
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox5</rd:DefaultName>
-                          <ZIndex>39</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox56">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Staff ID</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox56</rd:DefaultName>
-                          <ZIndex>38</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="textbox11">
@@ -1081,43 +986,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                           </Paragraphs>
                           <rd:DefaultName>textbox11</rd:DefaultName>
                           <ZIndex>37</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox4">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Office</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox4</rd:DefaultName>
-                          <ZIndex>36</ZIndex>
                           <Style>
                             <TopBorder>
                               <Style>Solid</Style>
@@ -1615,187 +1483,11 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                         </Textbox>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox6">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Location Header</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox6</rd:DefaultName>
-                          <ZIndex>22</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox7">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Location Detail</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox7</rd:DefaultName>
-                          <ZIndex>21</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox9">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Group Name</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox9</rd:DefaultName>
-                          <ZIndex>20</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
                   <Height>0.2in</Height>
                   <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="detailindex">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!detailindex.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <FontFamily />
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>detailindex</rd:DefaultName>
-                          <ZIndex>19</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="staffid_2">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!StaffId.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>staffid_2</rd:DefaultName>
-                          <ZIndex>18</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="StaffName">
@@ -1817,37 +1509,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                           </Paragraphs>
                           <rd:DefaultName>StaffName</rd:DefaultName>
                           <ZIndex>17</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Company">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Company.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Company</rd:DefaultName>
-                          <ZIndex>16</ZIndex>
                           <Style>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
@@ -2278,110 +1939,12 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                         </Textbox>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="PELocation">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PELocation.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>PELocation</rd:DefaultName>
-                          <ZIndex>2</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="PELocationDetail">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PELocationDetail.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>PELocationDetail</rd:DefaultName>
-                          <ZIndex>1</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="GroupName">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!GroupName.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>GroupName</rd:DefaultName>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -2425,15 +1988,17 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
             </TablixRowHierarchy>
             <DataSetName>dsTEJournal</DataSetName>
             <Height>0.4in</Height>
-            <Width>16.25in</Width>
+            <Width>17.8in</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>0.4in</Height>
         <Style />
       </Body>
-      <Width>16.25in</Width>
+      <Width>17.8in</Width>
       <Page>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>18.5in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>
@@ -2598,14 +2163,12 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
       </ValidValues>
     </ReportParameter>
     <ReportParameter Name="BeginDate1">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>BeginDate1</Prompt>
+      <DataType>DateTime</DataType>
+      <Prompt>BeginDate</Prompt>
     </ReportParameter>
     <ReportParameter Name="EndDate1">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>EndDate1</Prompt>
+      <DataType>DateTime</DataType>
+      <Prompt>EndDate</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
