@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <DataSource Include="HORNE.rds" />
+    <DataSource Include="HorneReports.rds" />
     <DataSource Include="Metastorm9.rds" />
     <DataSource Include="Reporting_EDW.rds" />
   </ItemGroup>
