@@ -8,11 +8,11 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firm FIRST/People Growth and Engagement</TargetReportFolder>
+    <TargetDatasetFolder>Firm FIRST/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firm FIRST/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
+    <TargetServerURL>http://powerbi.horne.com/reports</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -53,6 +53,7 @@
     <DataSource Include="HORNE.rds" />
   </ItemGroup>
   <ItemGroup>
+    <Report Include="Bridge Call Center Data Check.rdl" />
     <Report Include="Bridge Call Center.rdl" />
     <Report Include="Bridge Data Check.rdl" />
     <Report Include="Bridge.rdl" />
