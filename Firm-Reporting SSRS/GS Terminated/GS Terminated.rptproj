@@ -8,7 +8,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide/Team Members</TargetReportFolder>
+    <TargetReportFolder>Firmwide/Team Members/GS Terminated</TargetReportFolder>
     <TargetDatasetFolder>Firmwide/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Firmwide/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Team Members</TargetReportFolder>
+    <TargetReportFolder>GS Terminated</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Team Members</TargetReportFolder>
+    <TargetReportFolder>GS Terminated</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -50,21 +50,9 @@
   </PropertyGroup>
   <ItemGroup>
     <DataSource Include="HORNE.rds" />
-    <DataSource Include="HorneReports.rds" />
-    <DataSource Include="Metastorm9.rds" />
-    <DataSource Include="Reporting_EDW.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Annual Independence Check Report.rdl" />
-    <Report Include="Call Center Team Members.rdl" />
-    <Report Include="GS Team Member Listing.rdl" />
-    <Report Include="New Hire Listing.rdl" />
-    <Report Include="New Hire Onboarding.rdl" />
-    <Report Include="PMM Team Member Listing.rdl" />
-    <Report Include="Talent Pipeline Summary.rdl" />
-    <Report Include="Team Member Events.rdl" />
-    <Report Include="Team Member Listing Update.rdl" />
-    <Report Include="Team Member Listing.rdl" />
+    <Report Include="GS Terminated Team Member Listing.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
