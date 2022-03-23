@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DashboardMaster">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=HorneReportData;Initial Catalog=DashboardMaster</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>516bd9d7-d588-4d06-bff5-d37e1733a963</DataSourceID>
+</RptDataSource>

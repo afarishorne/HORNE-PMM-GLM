@@ -55,6 +55,8 @@ Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Virginia Tourism", "Virgini
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "GS Terminated", "GS Terminated\GS Terminated.rptproj", "{AE3C0035-FE32-44BD-A8C1-A4576777B863}"
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Cyber Financial", "Cyber Financial\Cyber Financial.rptproj", "{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -271,6 +273,14 @@ Global
 		{AE3C0035-FE32-44BD-A8C1-A4576777B863}.Release|Default.ActiveCfg = Release
 		{AE3C0035-FE32-44BD-A8C1-A4576777B863}.Release|Default.Build.0 = Release
 		{AE3C0035-FE32-44BD-A8C1-A4576777B863}.Release|Default.Deploy.0 = Release
+		{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}.Debug|Default.ActiveCfg = Debug
+		{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}.Debug|Default.Build.0 = Debug
+		{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}.Debug|Default.Deploy.0 = Debug
+		{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}.DebugLocal|Default.Build.0 = DebugLocal
+		{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}.Release|Default.ActiveCfg = Release
+		{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}.Release|Default.Build.0 = Release
+		{E4FCFB7E-4FE9-4910-8076-5AF04A8ED9DE}.Release|Default.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
