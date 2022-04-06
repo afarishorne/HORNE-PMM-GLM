@@ -8,11 +8,11 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide/Team Members</TargetReportFolder>
-    <TargetDatasetFolder>Firmwide/Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Firmwide/Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Cyber/Cyber Financial</TargetReportFolder>
+    <TargetDatasetFolder>Cyber/Cyber Financial/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Cyber/Cyber Financial/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbi.horne.com/reports</TargetServerURL>
+    <TargetServerURL>https://powerbi.horne.com/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Team Members</TargetReportFolder>
+    <TargetReportFolder>Cyber Financial</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Team Members</TargetReportFolder>
+    <TargetReportFolder>Cyber Financial</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,22 +49,12 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="HORNE.rds" />
-    <DataSource Include="HorneReports.rds" />
-    <DataSource Include="Metastorm9.rds" />
-    <DataSource Include="Reporting_EDW.rds" />
+    <DataSource Include="DashboardMaster.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Annual Independence Check Report.rdl" />
-    <Report Include="Call Center Team Members.rdl" />
-    <Report Include="GS Team Member Listing.rdl" />
-    <Report Include="New Hire Listing.rdl" />
-    <Report Include="New Hire Onboarding.rdl" />
-    <Report Include="PMM Team Member Listing.rdl" />
-    <Report Include="Talent Pipeline Summary.rdl" />
-    <Report Include="Team Member Events.rdl" />
-    <Report Include="Team Member Listing Update.rdl" />
-    <Report Include="Team Member Listing.rdl" />
+    <Report Include="AR Aging.rdl" />
+    <Report Include="AR Outstanding.rdl" />
+    <Report Include="Cyber AR.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
