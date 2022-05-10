@@ -515,7 +515,7 @@
                           <ActionInfo>
                             <Actions>
                               <Action>
-                                <Hyperlink>="javascript: void window.open('http://hornebpmpapp01/MetastormSSO/eexternalform.asp?service=Metastorm+BPM+Server&amp;redirect=http://janpbpm01/metastorm/eFolder.aspx?FolderID=" + Fields!eFolderId.Value + "%2526Service=Metastorm+BPM+Server');"</Hyperlink>
+                                <Hyperlink>="javascript: void window.open('http://hornebpmpapp01/MetastormSSO/eexternalform.asp?service=Metastorm+BPM+Server&amp;redirect=http://hornebpmpapp01/metastorm/eFolder.aspx?FolderID=" + Fields!eFolderId.Value + "%2526Service=Metastorm+BPM+Server');"</Hyperlink>
                               </Action>
                             </Actions>
                           </ActionInfo>
