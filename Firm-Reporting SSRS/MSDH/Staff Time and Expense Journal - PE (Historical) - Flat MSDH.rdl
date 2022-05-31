@@ -21,7 +21,7 @@ FROM tblPortfolio_Selection P
     INNER JOIN tblContacts C
         ON P.ClientHold = C.ContIndex
 WHERE (
-         e.ClientCode = 'hea5000942' or e.ClientCode = 'hea1111111' or e.ClientCode = 'HEA5000973'
+         e.ClientCode = 'HEA5001036' or e.ClientCode = '11-HEAMDHS'
       )
 UNION
 SELECT 'ALL'</CommandText>
@@ -81,7 +81,7 @@ FROM
         LEFT JOIN tblContacts C
             ON eng.ClientHold = C.ContIndex
     WHERE (
-             eng.ClientCode = 'hea5000942' or eng.ClientCode = 'hea1111111' or eng.ClientCode = 'HEA5000973'
+             eng.ClientCode = 'HEA5001036' or eng.ClientCode = '11-HEAMDHS'
 
           )
     --UNION
@@ -120,7 +120,7 @@ SELECT ClientCode,
        1 SortOrder
 FROM dbo.tblEngagement eng
 WHERE (
-         eng.ClientCode = 'hea5000942' or eng.ClientCode = 'hea1111111' or eng.ClientCode = 'HEA5000973'
+         eng.ClientCode = 'HEA5001036' or eng.ClientCode = '11-HEAMDHS'
       )
 UNION
 SELECT 'ALL',
@@ -175,7 +175,7 @@ FROM tblJob_Header J
     INNER JOIN dbo.tblEngagement eng
         ON eng.ContIndex = C.ContIndex
 WHERE (
-         eng.ClientCode = 'hea5000942' or eng.ClientCode ='hea1111111' or eng.ClientCode = 'HEA5000973'
+         eng.ClientCode = 'HEA5001036' or eng.ClientCode ='11-HEAMDHS'
       )
 ORDER BY J.Job_Name</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -205,7 +205,7 @@ FROM [Engine_Horne].[dbo].[tblJob_Task] task
     INNER JOIN dbo.tblEngagement eng
         ON eng.ContIndex = C.ContIndex
 WHERE (
-         eng.ClientCode = 'hea5000942' or eng.ClientCode='hea1111111' or eng.ClientCode = 'HEA5000973'
+         eng.ClientCode = 'HEA5001036' or eng.ClientCode='11-HEAMDHS'
       )</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -418,7 +418,7 @@ FROM
         LEFT JOIN [Engine_Horne].[dbo].[tblStateJurisdiction] location_Detail
             ON location_Detail.JurisIndex = det.Location
     WHERE (
-             eng.ClientCode = 'hea5000942' OR eng.ClientCode='hea1111111' or eng.ClientCode = 'HEA5000973'
+             eng.ClientCode = 'HEA5001036' OR eng.ClientCode='11-HEAMDHS'
           )
           AND 1 = CASE
                       WHEN @Billed = 'All' THEN
@@ -651,7 +651,7 @@ FROM
         (SELECT * FROM Engine_Horne.dbo.client_fn_Select_Sub_To_Perm() ) AS tmp
             ON tmp.StaffCode = staff.StaffCode
     WHERE (
-             eng.ClientCode = 'hea5000942' OR eng.ClientCode='hea1111111' or eng.ClientCode = 'HEA5000973'
+             eng.ClientCode = 'HEA5001036' OR eng.ClientCode='11-HEAMDHS'
           )
           AND 1 = CASE
                       WHEN @Billed = 'All' THEN
@@ -929,7 +929,7 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                   <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.54167in</Width>
+                  <Width>1.53333in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.10833in</Width>
@@ -1664,14 +1664,14 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
             </TablixRowHierarchy>
             <DataSetName>dsTEJournal</DataSetName>
             <Height>0.4in</Height>
-            <Width>19.34167in</Width>
+            <Width>19.33333in</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>0.4in</Height>
         <Style />
       </Body>
-      <Width>19.34167in</Width>
+      <Width>19.33333in</Width>
       <Page>
         <PageHeight>8.5in</PageHeight>
         <PageWidth>20in</PageWidth>
