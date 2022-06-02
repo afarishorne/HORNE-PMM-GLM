@@ -362,6 +362,7 @@ FROM
                             END
                     END,
            staff.StaffName,
+           cat.CatName AS ProjectTitle,
            eng.ClientName,
            StaffNextOfKin AS StaffLevel,
            expamount = NULL,
@@ -405,6 +406,12 @@ FROM
             ON det.ServPeriod = J.Job_Idx
         LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C
             ON eng.ClientHold = C.ContIndex
+        LEFT JOIN [Engine_Horne].dbo.tblContactAttributes ca
+            ON ca.ContIndex = staff.StaffIndex
+               AND ca.AttrIndex = 91
+        LEFT JOIN [Engine_Horne].dbo.tblCategory cat
+            ON cat.Category = ca.AttrValid
+               AND cat.CatType IN ( 'HEA-MDHS' )
         LEFT JOIN [Engine_Horne].[dbo].[tblJob_Task] task
             ON task.TaskIndex = det.TaskIndex
         LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip
@@ -418,7 +425,8 @@ FROM
         LEFT JOIN [Engine_Horne].[dbo].[tblStateJurisdiction] location_Detail
             ON location_Detail.JurisIndex = det.Location
     WHERE (
-             eng.ClientCode = 'HEA5001036' OR eng.ClientCode='11-HEAMDHS'
+              eng.ClientCode = 'HEA5001036'
+              OR eng.ClientCode = '11-HEAMDHS'
           )
           AND 1 = CASE
                       WHEN @Billed = 'All' THEN
@@ -583,6 +591,7 @@ FROM
            NULL AS 'Hours',
            Amount = NULL,
            staff.StaffName,
+           cat.CatName ProjectTitle,
            eng.ClientName,
            StaffNextOfKin AS StaffLevel,
            expamount = --ChargeAmount	
@@ -643,6 +652,12 @@ FROM
             ON det.ServPeriod = J.Job_Idx
         LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C
             ON eng.ClientHold = C.ContIndex
+        LEFT JOIN [Engine_Horne].dbo.tblContactAttributes ca
+            ON ca.ContIndex = staff.StaffIndex
+               AND ca.AttrIndex = 91
+        LEFT JOIN [Engine_Horne].dbo.tblCategory cat
+            ON cat.Category = ca.AttrValid
+               AND cat.CatType IN ( 'HEA-MDHS' )
         LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip
             ON det.DetailIndex = wip.WIPRef
                AND WIPType = 'DISB'
@@ -651,7 +666,8 @@ FROM
         (SELECT * FROM Engine_Horne.dbo.client_fn_Select_Sub_To_Perm() ) AS tmp
             ON tmp.StaffCode = staff.StaffCode
     WHERE (
-             eng.ClientCode = 'HEA5001036' OR eng.ClientCode='11-HEAMDHS'
+              eng.ClientCode = 'HEA5001036'
+              OR eng.ClientCode = '11-HEAMDHS'
           )
           AND 1 = CASE
                       WHEN @Billed = 'All' THEN
@@ -838,6 +854,10 @@ ORDER BY t1.StaffId,
           <DataField>StaffName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ProjectTitle">
+          <DataField>ProjectTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="ClientName">
           <DataField>ClientName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -933,6 +953,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.10833in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.575in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.65834in</Width>
@@ -1118,6 +1141,40 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                               <Style>Solid</Style>
                             </BottomBorder>
                             <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Project Title</Value>
+                                  <Style>
+                                    <FontFamily />
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1457,6 +1514,34 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="ProjectTitle">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ProjectTitle.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ProjectTitle</rd:DefaultName>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="JobDescription">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1635,6 +1720,7 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -1664,17 +1750,17 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
             </TablixRowHierarchy>
             <DataSetName>dsTEJournal</DataSetName>
             <Height>0.4in</Height>
-            <Width>19.33333in</Width>
+            <Width>20.90833in</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>0.4in</Height>
         <Style />
       </Body>
-      <Width>19.33333in</Width>
+      <Width>20.90833in</Width>
       <Page>
         <PageHeight>8.5in</PageHeight>
-        <PageWidth>20in</PageWidth>
+        <PageWidth>21.5in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>
