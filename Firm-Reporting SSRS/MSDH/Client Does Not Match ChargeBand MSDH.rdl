@@ -60,6 +60,8 @@ FROM
             ON cband.ChargeBand = det.ChargeBand
     WHERE (
              eng.ClientCode IN ('HEA5001036','11-HEAMDHS')
+			 OR
+             eng.ClientCode LIKE 'HEAMDHS%'
           )
           AND ServiceCode NOT IN ( 'ADMIN', 'LEAVE' )
           AND 1 = CASE WHEN det.ChargeBand != eng.ClientChargeBand THEN

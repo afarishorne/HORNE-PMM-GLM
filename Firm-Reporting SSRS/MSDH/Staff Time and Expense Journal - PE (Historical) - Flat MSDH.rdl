@@ -21,7 +21,7 @@ FROM tblPortfolio_Selection P
     INNER JOIN tblContacts C
         ON P.ClientHold = C.ContIndex
 WHERE (
-         e.ClientCode = 'HEA5001036' or e.ClientCode = '11-HEAMDHS'
+         e.ClientCode = 'HEA5001036' or e.ClientCode = '11-HEAMDHS' OR e.ClientCode LIKE 'HEAMDHS%'
       )
 UNION
 SELECT 'ALL'</CommandText>
@@ -59,13 +59,6 @@ SELECT DISTINCT
        *
 FROM
 (
-    --SELECT StaffCode,
-    --       StaffName
-    --FROM dbo.tblStaff staff
-    --UNION
-    --SELECT 'All1',
-    --       '(Choose Me for ALL)'
-    --UNION
     SELECT DISTINCT
            staff.StaffCode,
            StaffName
@@ -81,21 +74,10 @@ FROM
         LEFT JOIN tblContacts C
             ON eng.ClientHold = C.ContIndex
     WHERE (
-             eng.ClientCode = 'HEA5001036' or eng.ClientCode = '11-HEAMDHS'
+             eng.ClientCode = 'HEA5001036' or eng.ClientCode = '11-HEAMDHS' OR eng.ClientCode LIKE 'HEAMDHS%'
 
           )
-    --UNION
-    --SELECT 'NOSTAFF',
-    --       'No Staff Allocated'
-    --UNION
-    --SELECT 'ALL',
-    --       'Catch-all'
-    --UNION
-    --SELECT 'Z-AnchorStaff',
-    --       '(Z-Anchor Staff)'
-    --UNION
-    --SELECT 'Z-TidalStaff',
-    --       '(Z-Tidal Staff)'
+
 ) t1
 ORDER BY StaffName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -120,7 +102,7 @@ SELECT ClientCode,
        1 SortOrder
 FROM dbo.tblEngagement eng
 WHERE (
-         eng.ClientCode = 'HEA5001036' or eng.ClientCode = '11-HEAMDHS'
+         eng.ClientCode = 'HEA5001036' or eng.ClientCode = '11-HEAMDHS' OR eng.ClientCode LIKE 'HEAMDHS%'
       )
 UNION
 SELECT 'ALL',
@@ -175,7 +157,8 @@ FROM tblJob_Header J
     INNER JOIN dbo.tblEngagement eng
         ON eng.ContIndex = C.ContIndex
 WHERE (
-         eng.ClientCode = 'HEA5001036' or eng.ClientCode ='11-HEAMDHS'
+         eng.ClientCode = 'HEA5001036' or eng.ClientCode ='11-HEAMDHS' 
+		 OR eng.ClientCode LIKE 'HEAMDHS%'
       )
 ORDER BY J.Job_Name</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -205,7 +188,7 @@ FROM [Engine_Horne].[dbo].[tblJob_Task] task
     INNER JOIN dbo.tblEngagement eng
         ON eng.ContIndex = C.ContIndex
 WHERE (
-         eng.ClientCode = 'HEA5001036' or eng.ClientCode='11-HEAMDHS'
+         eng.ClientCode = 'HEA5001036' or eng.ClientCode='11-HEAMDHS' OR eng.ClientCode LIKE 'HEAMDHS%'
       )</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -427,6 +410,7 @@ FROM
     WHERE (
               eng.ClientCode = 'HEA5001036'
               OR eng.ClientCode = '11-HEAMDHS'
+			  OR eng.ClientCode LIKE 'HEAMDHS%'
           )
           AND 1 = CASE
                       WHEN @Billed = 'All' THEN
@@ -668,6 +652,7 @@ FROM
     WHERE (
               eng.ClientCode = 'HEA5001036'
               OR eng.ClientCode = '11-HEAMDHS'
+			  OR eng.ClientCode LIKE 'HEAMDHS%'
           )
           AND 1 = CASE
                       WHEN @Billed = 'All' THEN
