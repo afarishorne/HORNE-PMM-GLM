@@ -59,6 +59,8 @@ Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Cyber Financial", "Cyber Fi
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "MSDH", "MSDH\MSDH.rptproj", "{C26A1C43-6A40-440D-98FC-AA6BF179C0A2}"
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Covid Response Services", "Covid Response Services\Covid Response Services.rptproj", "{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -291,6 +293,14 @@ Global
 		{C26A1C43-6A40-440D-98FC-AA6BF179C0A2}.Release|Default.ActiveCfg = Release
 		{C26A1C43-6A40-440D-98FC-AA6BF179C0A2}.Release|Default.Build.0 = Release
 		{C26A1C43-6A40-440D-98FC-AA6BF179C0A2}.Release|Default.Deploy.0 = Release
+		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Debug|Default.ActiveCfg = Debug
+		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Debug|Default.Build.0 = Debug
+		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Debug|Default.Deploy.0 = Debug
+		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.DebugLocal|Default.Build.0 = DebugLocal
+		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.ActiveCfg = Release
+		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.Build.0 = Release
+		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
