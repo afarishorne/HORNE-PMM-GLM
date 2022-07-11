@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Healthcare/Workflow/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Healthcare/Workflow/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbidev.horne.com/reports</TargetServerURL>
+    <TargetServerURL>http://powerbi.horne.com/reports</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
