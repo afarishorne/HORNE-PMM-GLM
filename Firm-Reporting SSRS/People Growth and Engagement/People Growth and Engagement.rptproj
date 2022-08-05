@@ -8,11 +8,11 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firm FIRST/People Growth and Engagement</TargetReportFolder>
-    <TargetDatasetFolder>Firm FIRST/Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Firm FIRST/Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Tech SVT/Data Check</TargetReportFolder>
+    <TargetDatasetFolder>Tech SVT/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Tech SVT/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbi.horne.com/reports</TargetServerURL>
+    <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -58,6 +58,7 @@
     <Report Include="Bridge Data Check.rdl" />
     <Report Include="Bridge.rdl" />
     <Report Include="Linkedin.rdl" />
+    <Report Include="Staff Detail Data.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
