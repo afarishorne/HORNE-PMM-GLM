@@ -957,6 +957,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                 <TablixColumn>
                   <Width>0.875in</Width>
                 </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
@@ -1346,6 +1349,40 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Exp Amount</Value>
+                                  <Style>
+                                    <FontFamily />
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -1689,12 +1726,48 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="expamount">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!expamount.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <Format>'$'0.00;('$'0.00)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>expamount</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -1735,17 +1808,17 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
             </TablixRowHierarchy>
             <DataSetName>dsTEJournal</DataSetName>
             <Height>0.4in</Height>
-            <Width>20.90833in</Width>
+            <Width>21.90833in</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>0.4in</Height>
         <Style />
       </Body>
-      <Width>20.90833in</Width>
+      <Width>21.90833in</Width>
       <Page>
         <PageHeight>8.5in</PageHeight>
-        <PageWidth>21.5in</PageWidth>
+        <PageWidth>22.5in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>
