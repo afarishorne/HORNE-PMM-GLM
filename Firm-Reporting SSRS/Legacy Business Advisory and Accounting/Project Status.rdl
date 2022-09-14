@@ -950,7 +950,7 @@ END</CommandText>
         <DataSourceName>Metastorm</DataSourceName>
         <CommandText>SELECT DISTINCT Label = 'Stage'	, Value = 'eStageName'
 UNION
-SELECT DISTINCT Label = 'Preparer', Value = 'FullName'
+SELECT DISTINCT Label = 'Preparer', Value = 'PreparerFullName'
 UNION
 SELECT DISTINCT Label = 'Client', Value = 'txtClientId'
 UNION
@@ -2082,7 +2082,6 @@ SELECT DISTINCT Label = 'Team Leader', Value = 'TeamLeaderName'</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

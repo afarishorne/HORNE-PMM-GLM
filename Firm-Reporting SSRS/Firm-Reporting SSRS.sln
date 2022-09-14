@@ -61,6 +61,8 @@ Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "MSDH", "MSDH\MSDH.rptproj",
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Covid Response Services", "Covid Response Services\Covid Response Services.rptproj", "{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}"
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "GS Billing Team", "GS Billing Team\GS Billing Team.rptproj", "{E22DCB4F-D996-4CEE-8639-2C94E6543696}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -301,6 +303,14 @@ Global
 		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.ActiveCfg = Release
 		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.Build.0 = Release
 		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.Deploy.0 = Release
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Debug|Default.ActiveCfg = Debug
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Debug|Default.Build.0 = Debug
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Debug|Default.Deploy.0 = Debug
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.DebugLocal|Default.Build.0 = DebugLocal
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Release|Default.ActiveCfg = Release
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Release|Default.Build.0 = Release
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Release|Default.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
