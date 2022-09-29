@@ -2,7 +2,7 @@
 <RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Metastorm">
   <ConnectionProperties>
     <Extension>SQL</Extension>
-    <ConnectString>Data Source=bpmdata;Initial Catalog=Metastorm</ConnectString>
+    <ConnectString>Data Source=bpmdata-dev;Initial Catalog=Metastorm</ConnectString>
   </ConnectionProperties>
   <DataSourceID>b21fbc21-190e-4bfb-b397-411ae6050c0b</DataSourceID>
 </RptDataSource>

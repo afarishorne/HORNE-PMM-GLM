@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Focus Area Operations/Government Services/GS Billing Team</TargetReportFolder>
-    <TargetDatasetFolder>Focus Area Operations/Government Services/GS Billing Team/Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Focus Area Operations/Government Services/GS Billing Team/Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Government Services/Financial Management/Practice-Wide/GS Billing Team</TargetReportFolder>
+    <TargetDatasetFolder>Government Services/Financial Management/Practice-Wide/GS Billing Team/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Government Services/Financial Management/Practice-Wide/GS Billing Team/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>https://powerbi.horne.com/reportserver</TargetServerURL>
   </PropertyGroup>

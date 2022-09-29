@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbi.hornellp.com/reportserver</TargetServerURL>
+    <TargetServerURL>https://powerbi.horne.com/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
