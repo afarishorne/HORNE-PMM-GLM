@@ -8,11 +8,11 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide/Legacy/Business Advisory and Accounting/Financial Services</TargetReportFolder>
-    <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Healthcare/Management Reports</TargetReportFolder>
+    <TargetDatasetFolder>Healthcare/Management Reports/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Healthcare/Management Reports/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbidev.hornellp.com/reportserver</TargetServerURL>
+    <TargetServerURL>https://powerbidev.horne.com/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Legacy Financial Services</TargetReportFolder>
+    <TargetReportFolder>Management Reports</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Legacy Financial Services</TargetReportFolder>
+    <TargetReportFolder>Management Reports</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,18 +49,10 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="HorneDataWarehouse.rds" />
-    <DataSource Include="Metastorm.rds" />
+    <DataSource Include="PEReporting.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Financial Alerts.rdl" />
-    <Report Include="IAR.rdl" />
-    <Report Include="Missing Information (Financials).rdl" />
-    <Report Include="Missing Information Memo - DDS.rdl" />
-    <Report Include="Missing Information Memo.rdl" />
-    <Report Include="Transmittal Final.rdl" />
-    <Report Include="Transmittal Prelim as Final.rdl" />
-    <Report Include="Transmittal Prelim.rdl" />
+    <Report Include="Staff Time and Expense Journal - PE (Historical) - Flat HEA.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
