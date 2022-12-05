@@ -59,7 +59,6 @@
     <Report Include="Client List by Partner - Manager - Biller.rdl" />
     <Report Include="Client Services.rdl" />
     <Report Include="Completed Projects.rdl" />
-    <Report Include="Dominos Upload Report (DDS).rdl" />
     <Report Include="HEA_YTD_BILLINGS.rdl" />
     <Report Include="Incomplete Services.rdl" />
     <Report Include="Job Initiator Stagnant Notifier.rdl" />
