@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Healthcare/Management Reports/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Healthcare/Management Reports/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>https://powerbidev.horne.com/reportserver</TargetServerURL>
+    <TargetServerURL>https://powerbi.horne.com/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -52,7 +52,7 @@
     <DataSource Include="PEReporting.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Staff Time and Expense Journal - PE (Historical) - Flat HEA.rdl" />
+    <Report Include="Staff Time and Expense Journal - HEA Staff Department.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
