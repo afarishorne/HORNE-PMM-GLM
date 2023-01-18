@@ -52,6 +52,7 @@
     <DataSource Include="PEReporting.rds" />
   </ItemGroup>
   <ItemGroup>
+    <Report Include="Staff Time and Expense Journal - HEA Service Department.rdl" />
     <Report Include="Staff Time and Expense Journal - HEA Staff Department.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />

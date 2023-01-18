@@ -909,6 +909,7 @@ ORDER BY Indexer, Description</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>textbox1</rd:DefaultName>
+            <Top>0.01945in</Top>
             <Left>0.00833in</Left>
             <Height>0.37in</Height>
             <Width>25.89167in</Width>
