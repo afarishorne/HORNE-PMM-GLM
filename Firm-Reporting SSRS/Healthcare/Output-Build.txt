@@ -1,0 +1,9 @@
+﻿------ Build started: Project: Healthcare, Configuration: Debug ------
+Skipping 'MAS Active Project v2.rdl'. Item is up to date.
+Build complete -- 0 errors, 0 warnings
+------ Deploy started: Project: Healthcare, Configuration: Debug ------
+Deploying to http://powerbidev.horne.com/reports
+Deploying report '/Healthcare/Workflow/MAS Active Project v2'.
+Deploy complete -- 0 errors, 0 warnings
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+========== Deploy: 1 succeeded, 0 failed, 0 skipped ==========

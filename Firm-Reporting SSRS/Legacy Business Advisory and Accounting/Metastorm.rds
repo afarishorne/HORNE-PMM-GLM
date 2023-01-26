@@ -3,6 +3,7 @@
   <ConnectionProperties>
     <Extension>SQL</Extension>
     <ConnectString>Data Source=bpmdata;Initial Catalog=Metastorm</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
   </ConnectionProperties>
   <DataSourceID>b21fbc21-190e-4bfb-b397-411ae6050c0b</DataSourceID>
 </RptDataSource>

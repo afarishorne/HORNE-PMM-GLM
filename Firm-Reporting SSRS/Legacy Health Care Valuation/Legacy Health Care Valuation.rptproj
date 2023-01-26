@@ -8,9 +8,9 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Healthcare/Workflow</TargetReportFolder>
-    <TargetDatasetFolder>Healthcare/Workflow/Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Healthcare/Workflow/Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Firmwide/Legacy/Health Care Valuation</TargetReportFolder>
+    <TargetDatasetFolder>Firmwide/Legacy/Health Care Valuation/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
     <TargetServerURL>http://powerbi.horne.com/reports</TargetServerURL>
   </PropertyGroup>
@@ -72,10 +72,11 @@
     <Report Include="HCV ValueStorm Project Owner Subscription.rdl" />
     <Report Include="HCV ValueStorm Project Owner.rdl" />
     <Report Include="HCV ValueStorm Project Status Report (clean).rdl" />
+    <Report Include="HCV ValueStorm Project Status Report (clean)_V2.rdl" />
     <Report Include="HCV ValueStorm Project Status Report (Sectional).rdl" />
+    <Report Include="HCV ValueStorm Project Status Report (Sectional)_V2.rdl" />
     <Report Include="HCV ValueStorm Qualified Leads Report.rdl" />
     <Report Include="HCV ValueStorm WIP.rdl" />
-    <Report Include="MAS Active Project.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
