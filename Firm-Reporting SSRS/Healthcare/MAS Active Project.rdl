@@ -16,12 +16,27 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>HorneReports</DataSourceName>
-        <CommandText>SELECT * FROM HorneReports.[dbo].[tblTrackerJobHEA]</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@Preparer">
+            <Value>=Parameters!Preparer.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@PreparerFocusArea">
+            <Value>=Parameters!PreparerFocusArea.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ServiceLineFocusArea">
+            <Value>=Parameters!ServiceLineFocusArea.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT * FROM [dbo].[tblTrackerJobALL] AS tja
+WHERE 
+tja.FullName IN (@Preparer) 
+AND tja.PreparerFocusArea IN (@PreparerFocusArea)
+AND tja.ServiceLineFocusArea IN (@ServiceLineFocusArea)</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="TrackerJobHEAId">
-          <DataField>TrackerJobHEAId</DataField>
+        <Field Name="TrackerJobALLId">
+          <DataField>TrackerJobALLId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="intServiceId">
@@ -52,6 +67,10 @@
           <DataField>txtPreparer</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="FullName">
+          <DataField>FullName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="txtReviewer">
           <DataField>txtReviewer</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -63,6 +82,73 @@
         <Field Name="numPreparerBudget">
           <DataField>numPreparerBudget</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="ClientFocusArea">
+          <DataField>ClientFocusArea</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ServiceLineFocusArea">
+          <DataField>ServiceLineFocusArea</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PreparerFocusArea">
+          <DataField>PreparerFocusArea</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Preparers">
+      <Query>
+        <DataSourceName>HorneReports</DataSourceName>
+        <CommandText>SELECT DISTINCT 
+                tja.txtPreparer,
+                tja.FullName 
+FROM [dbo].[tblTrackerJobALL] AS tja
+--WHERE tja.PreparerFocusArea IN('HEA','PMM')
+ORDER BY tja.FullName ASC</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="txtPreparer">
+          <DataField>txtPreparer</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FullName">
+          <DataField>FullName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="PreparerFocusAreas">
+      <Query>
+        <DataSourceName>HorneReports</DataSourceName>
+        <CommandText>SELECT DISTINCT tja.PreparerFocusArea
+                ---tja.ServiceLineFocusArea
+               --,tja.ClientFocusArea
+FROM [dbo].[tblTrackerJobALL] AS tja
+--WHERE tja.PreparerFocusArea IN('HEA','PMM')
+ORDER BY tja.PreparerFocusArea ASC</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="PreparerFocusArea">
+          <DataField>PreparerFocusArea</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ServiceLineFocusAreas">
+      <Query>
+        <DataSourceName>HorneReports</DataSourceName>
+        <CommandText>SELECT DISTINCT --tja.PreparerFocusArea
+                tja.ServiceLineFocusArea
+               --,tja.ClientFocusArea
+FROM [dbo].[tblTrackerJobALL] AS tja
+--WHERE tja.PreparerFocusArea IN('HEA','PMM')
+ORDER BY tja.ServiceLineFocusArea ASC</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ServiceLineFocusArea">
+          <DataField>ServiceLineFocusArea</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -136,7 +222,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.22in</Height>
+                  <Height>0.27208in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -886,16 +972,16 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>0.36in</Top>
-            <Height>0.43in</Height>
+            <Height>0.48208in</Height>
             <Width>17.34028in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>0.79in</Height>
+        <Height>1.27958in</Height>
         <Style />
       </Body>
-      <Width>17.34028in</Width>
+      <Width>22.90278in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
@@ -905,10 +991,86 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="Preparer">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Preparers</DataSetName>
+          <ValueField>FullName</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Select Preparer</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Preparers</DataSetName>
+          <ValueField>FullName</ValueField>
+          <LabelField>FullName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="PreparerFocusArea">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>HEA</Value>
+          <Value>PMM</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Select Preparer Focus Area</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>PreparerFocusAreas</DataSetName>
+          <ValueField>PreparerFocusArea</ValueField>
+          <LabelField>PreparerFocusArea</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="ServiceLineFocusArea">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>HEA</Value>
+          <Value>PMM</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Select Service Line Focus Area</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ServiceLineFocusAreas</DataSetName>
+          <ValueField>ServiceLineFocusArea</ValueField>
+          <LabelField>ServiceLineFocusArea</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Preparer</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>PreparerFocusArea</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ServiceLineFocusArea</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <Language>en-US</Language>

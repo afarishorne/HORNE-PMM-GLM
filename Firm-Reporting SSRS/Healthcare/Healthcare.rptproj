@@ -52,7 +52,6 @@
     <DataSource Include="HorneReports.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="MAS Active Project v2.rdl" />
     <Report Include="MAS Active Project.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
