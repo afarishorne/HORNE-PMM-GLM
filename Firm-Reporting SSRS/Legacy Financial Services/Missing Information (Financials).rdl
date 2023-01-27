@@ -1,0 +1,1323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Tablix Name="Tablix4">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>0.89584in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.34375in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.48437in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.33333in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.89583in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.36146in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.24688in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.67396in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.55624in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.70833in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox136">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Client ID</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox136</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox137">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Client Name</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox137</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox139">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Unit</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox139</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox141">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>DBA</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox141</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox143">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>CSR</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox143</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox145">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Year</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox145</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox147">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Pd</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox147</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox149">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>PE Date</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox149</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox151">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Item Needed</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox151</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox153">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Partial</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox153</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ClientID">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ClientID.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <TextDecoration>Underline</TextDecoration>
+                                <Color>Blue</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>ClientID</rd:DefaultName>
+                      <ActionInfo>
+                        <Actions>
+                          <Action>
+                            <Hyperlink>="javascript: void window.open('http://janpbpm01/MetastormSSO/eexternalform.asp?service=Metastorm+BPM+Server&amp;redirect=http://janpbpm01/metastorm/eFolder.aspx?FolderID=" + Fields!eFolderId.Value + "%2526Service=Metastorm+BPM+Server');"</Hyperlink>
+                          </Action>
+                        </Actions>
+                      </ActionInfo>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ClientName">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ClientName.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <TextDecoration>None</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="StoreNum">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!StoreNum.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>StoreNum</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="txtDBA1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!txtDBA.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>txtDBA1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="txtCSR1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!txtCSR.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>txtCSR1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Year1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!Year.Value)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Year1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Period1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!Period.Value)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Period1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="PEDate1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!PEDate.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <Format>MM/dd/yy</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>PEDate1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ItemNeededOriginal1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ItemNeededOriginal.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>ItemNeededOriginal1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dtmDatePartialReceived1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!dtmDatePartialReceived.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <Format>MM/dd/yy</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>dtmDatePartialReceived1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <FixedData>true</FixedData>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="Details" />
+              <SortExpressions>
+                <SortExpression>
+                  <Value>=Fields!ClientName.Value</Value>
+                </SortExpression>
+                <SortExpression>
+                  <Value>=Fields!PEDate.Value</Value>
+                </SortExpression>
+                <SortExpression>
+                  <Value>=Fields!StoreNum.Value</Value>
+                </SortExpression>
+                <SortExpression>
+                  <Value>=Fields!ItemNeededOriginal.Value</Value>
+                </SortExpression>
+              </SortExpressions>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>MissingInformation</DataSetName>
+        <Top>0.06944in</Top>
+        <Height>0.5in</Height>
+        <Width>10.49999in</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+    </ReportItems>
+    <Height>0.75in</Height>
+    <Style />
+  </Body>
+  <Width>10.5in</Width>
+  <Page>
+    <PageHeader>
+      <Height>0.30917in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Financial Prep Missing Information</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>12pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <Height>0.25in</Height>
+          <Width>3.13542in</Width>
+          <Style>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Line Name="line3">
+          <Top>0.25in</Top>
+          <Height>0in</Height>
+          <Width>10.5in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+              <Width>2pt</Width>
+            </Border>
+          </Style>
+        </Line>
+      </ReportItems>
+      <Style />
+    </PageHeader>
+    <PageHeight>8.5in</PageHeight>
+    <PageWidth>11in</PageWidth>
+    <InteractiveHeight>7.5in</InteractiveHeight>
+    <InteractiveWidth>10.5in</InteractiveWidth>
+    <LeftMargin>0.25in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="Metastorm">
+      <DataSourceReference>Metastorm</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>44591af7-1214-48c2-8bcf-ac675180db81</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="HDW">
+      <DataSourceReference>HorneDataWarehouse</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>c38652ce-f53e-4e83-9791-bd3516bdcf0d</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="MissingInformation">
+      <Query>
+        <DataSourceName>Metastorm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EU">
+            <Value>=Parameters!EU.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ClientType">
+            <Value>=Parameters!ClientType.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Office">
+            <Value>=Parameters!Office.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Preparer">
+            <Value>=Parameters!Preparer.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT DISTINCT [ClientID]
+      ,[ClientName]
+      ,[StoreNum]
+      ,[RelMgr]
+      ,[Preparer]
+      ,[txtServiceSchedule]
+      ,[Year]
+      ,[Period]
+      ,[PSDate]
+      ,[PEDate]
+      ,[ItemNeededOriginal]
+      ,[intWeekNum]
+      ,[dtmDatePartialReceived]
+      ,[OfficeName]
+      ,[Office]
+      ,[txtDBA]
+      ,[txtClientType]
+      ,[txtCSR]
+      ,[OfficeId]
+      ,[EFOLDERID]
+  FROM [Metastorm].[dbo].[rpt_FinPrepMissingInfoMemo]
+WHERE [OfficeID] IN (@EU)
+	AND [txtClientType] IN (@ClientType)
+	AND [Office] IN (@Office)
+	AND [Preparer] = (@Preparer)</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="ClientName">
+          <DataField>ClientName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClientID">
+          <DataField>ClientID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OfficeName">
+          <DataField>OfficeName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StoreNum">
+          <DataField>StoreNum</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RelMgr">
+          <DataField>RelMgr</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Preparer">
+          <DataField>Preparer</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="txtDBA">
+          <DataField>txtDBA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="txtServiceSchedule">
+          <DataField>txtServiceSchedule</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="txtCSR">
+          <DataField>txtCSR</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PSDate">
+          <DataField>PSDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ItemNeededOriginal">
+          <DataField>ItemNeededOriginal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Year">
+          <DataField>Year</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Period">
+          <DataField>Period</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PEDate">
+          <DataField>PEDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="dtmDatePartialReceived">
+          <DataField>dtmDatePartialReceived</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Office">
+          <DataField>Office</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="intWeekNum">
+          <DataField>intWeekNum</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="txtserviceclass">
+          <DataField>txtserviceclass</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="txtclienttype">
+          <DataField>txtclienttype</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="OfficeId">
+          <DataField>OfficeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="eFolderId">
+          <DataField>eFolderId</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="EUDefault">
+      <Query>
+        <DataSourceName>Metastorm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@UserName">
+            <Value>=Parameters!UserName.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>IF EXISTS
+(
+	SELECT
+		*
+	FROM
+		dbo.BAA_REPORT_PARAMETERS
+	WHERE
+			UserName = @UserName
+		AND EU IS NOT NULL
+)
+BEGIN
+	SELECT	
+		'OfficeId' = EU
+		,OfficeName
+	FROM
+		dbo.BAA_REPORT_PARAMETERS p (NOLOCK)
+			INNER JOIN
+		[HorneDataWarehouse].[OLAP].[OfficeDimension] od (NOLOCK) ON od.OfficeId = p.EU
+	WHERE
+		UserName = @UserName
+END
+
+ELSE
+
+BEGIN
+
+	SELECT DISTINCT
+		 [OfficeId]
+	,	[OfficeName]
+	FROM
+		[HorneDataWarehouse].[OLAP].[OfficeDimension] od
+	WHERE
+			Active = 1
+		AND OfficeId IN ('FRA','COR','HEA','FRN')
+
+END</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="OfficeId">
+          <DataField>OfficeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OfficeName">
+          <DataField>OfficeName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="EUList">
+      <Query>
+        <DataSourceName>HDW</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>OLAP.usp_SelectActiveOffices</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="OfficeRowId">
+          <DataField>OfficeRowId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="OfficeId">
+          <DataField>OfficeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OfficeName">
+          <DataField>OfficeName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Active">
+          <DataField>Active</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ActiveStartDate">
+          <DataField>ActiveStartDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ActiveEndDate">
+          <DataField>ActiveEndDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="PICStaffId">
+          <DataField>PICStaffId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PICUserName">
+          <DataField>PICUserName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PICEmailAddress">
+          <DataField>PICEmailAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PICFullName">
+          <DataField>PICFullName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ClientTypeDefault">
+      <Query>
+        <DataSourceName>Metastorm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@UserName">
+            <Value>=Parameters!UserName.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>IF EXISTS
+(
+	SELECT
+		*
+	FROM
+		dbo.BAA_REPORT_PARAMETERS
+	WHERE
+			UserName = @UserName
+		AND Concept IS NOT NULL
+		AND Concept &lt;&gt;''
+)
+BEGIN
+	SELECT	
+		txtClientType = Concept
+	FROM
+		dbo.BAA_REPORT_PARAMETERS
+	WHERE
+		UserName = @UserName
+END
+
+ELSE
+
+BEGIN
+
+SELECT	txtClientType
+FROM	dbo.BAA_CLIENT_TYPE_OPTIONS
+ORDER BY txtClientType
+
+END</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="txtClientType">
+          <DataField>txtClientType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ClientTypeList">
+      <Query>
+        <DataSourceName>Metastorm</DataSourceName>
+        <CommandText>SELECT	txtClientType
+FROM	dbo.BAA_CLIENT_TYPE_OPTIONS
+ORDER BY txtClientType</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="txtClientType">
+          <DataField>txtClientType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="OfficeList">
+      <Query>
+        <DataSourceName>Metastorm</DataSourceName>
+        <CommandText>SELECT DISTINCT txtPhysicalOffice AS Office
+FROM         dbo.BAA_CLIENT_INFO
+WHERE     (txtPhysicalOffice IS NOT NULL) AND (txtPhysicalOffice &lt;&gt; '')
+UNION
+SELECT 'OTHER' AS Office</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Office">
+          <DataField>Office</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="PreparerList">
+      <Query>
+        <DataSourceName>Metastorm</DataSourceName>
+        <CommandText>SELECT DISTINCT	Staff.FullName AS Preparer
+FROM		dbo.BAA_SERVICES AS Serv 
+			INNER JOIN
+		HorneDataWarehouse.OLAP.StaffDimension AS Staff
+			ON Serv.txtPreparer = Staff.UserName
+WHERE		Serv.intServiceClass = 1
+		AND Serv.txtPreparer IS NOT NULL
+		AND Serv.txtPreparer &lt;&gt; ''
+UNION
+SELECT		'OTHER' AS Preparer
+ORDER BY	Preparer</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Preparer">
+          <DataField>Preparer</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="UserName">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=User!UserID</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>User Name</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="EU">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>EUDefault</DataSetName>
+          <ValueField>OfficeId</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Practice Group</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>EUList</DataSetName>
+          <ValueField>OfficeId</ValueField>
+          <LabelField>OfficeName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Office">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>OfficeList</DataSetName>
+          <ValueField>Office</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Office</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>OfficeList</DataSetName>
+          <ValueField>Office</ValueField>
+          <LabelField>Office</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="ClientType">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>ClientTypeDefault</DataSetName>
+          <ValueField>txtClientType</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Type</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ClientTypeList</DataSetName>
+          <ValueField>txtClientType</ValueField>
+          <LabelField>txtClientType</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Preparer">
+      <DataType>String</DataType>
+      <Prompt>Preparer</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>PreparerList</DataSetName>
+          <ValueField>Preparer</ValueField>
+          <LabelField>Preparer</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logo_new">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="blacklogo">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportServerUrl>http://janprpt01/reportserver</rd:ReportServerUrl>
+  <rd:ReportID>deb50a7d-2b64-470b-838a-62ec0c690e64</rd:ReportID>
+</Report>

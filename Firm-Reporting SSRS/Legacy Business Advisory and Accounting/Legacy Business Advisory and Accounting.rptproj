@@ -12,7 +12,11 @@
     <TargetDatasetFolder>Firmwide/Legacy/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Firmwide/Legacy/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+<<<<<<< HEAD
     <TargetServerURL>http://powerbi.horne.com/reports</TargetServerURL>
+=======
+    <TargetServerURL>https://powerbi.horne.com/reportserver</TargetServerURL>
+>>>>>>> c5ddc83f966f369a9d59850f7c33ff6a099cd8f0
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -59,8 +63,6 @@
     <Report Include="Client List by Partner - Manager - Biller.rdl" />
     <Report Include="Client Services.rdl" />
     <Report Include="Completed Projects.rdl" />
-    <Report Include="Dominos Upload Report (DDS).rdl" />
-    <Report Include="Dominos Upload Report.rdl" />
     <Report Include="HEA_YTD_BILLINGS.rdl" />
     <Report Include="Incomplete Services.rdl" />
     <Report Include="Job Initiator Stagnant Notifier.rdl" />

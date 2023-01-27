@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="HORNE">
+  <ConnectionProperties>
+    <Extension>SQLAZURE</Extension>
+    <ConnectString>Data Source=firm-dev.database.windows.net;Initial Catalog=HORNE</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>cc8f52ce-f9ab-4eba-b96e-ecef49644ab5</DataSourceID>
+</RptDataSource>

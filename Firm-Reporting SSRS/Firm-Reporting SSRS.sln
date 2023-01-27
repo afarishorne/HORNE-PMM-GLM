@@ -61,7 +61,13 @@ Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "MSDH", "MSDH\MSDH.rptproj",
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Covid Response Services", "Covid Response Services\Covid Response Services.rptproj", "{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}"
 EndProject
+<<<<<<< HEAD
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Healthcare", "Healthcare\Healthcare.rptproj", "{F82219F3-3F8D-4910-B175-2D577B2F7AB1}"
+=======
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "GS Billing Team", "GS Billing Team\GS Billing Team.rptproj", "{E22DCB4F-D996-4CEE-8639-2C94E6543696}"
+EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Management Reports", "Management Reports\Management Reports.rptproj", "{03EA0B76-D392-4554-BB17-EA2C76490834}"
+>>>>>>> c5ddc83f966f369a9d59850f7c33ff6a099cd8f0
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -303,6 +309,7 @@ Global
 		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.ActiveCfg = Release
 		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.Build.0 = Release
 		{CC15F7DC-2FEA-4C68-9D4D-6E3AD5516C3F}.Release|Default.Deploy.0 = Release
+<<<<<<< HEAD
 		{F82219F3-3F8D-4910-B175-2D577B2F7AB1}.Debug|Default.ActiveCfg = Debug
 		{F82219F3-3F8D-4910-B175-2D577B2F7AB1}.Debug|Default.Build.0 = Debug
 		{F82219F3-3F8D-4910-B175-2D577B2F7AB1}.Debug|Default.Deploy.0 = Debug
@@ -312,6 +319,24 @@ Global
 		{F82219F3-3F8D-4910-B175-2D577B2F7AB1}.Release|Default.ActiveCfg = Release
 		{F82219F3-3F8D-4910-B175-2D577B2F7AB1}.Release|Default.Build.0 = Release
 		{F82219F3-3F8D-4910-B175-2D577B2F7AB1}.Release|Default.Deploy.0 = Release
+=======
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Debug|Default.ActiveCfg = Debug
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Debug|Default.Build.0 = Debug
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Debug|Default.Deploy.0 = Debug
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.DebugLocal|Default.Build.0 = DebugLocal
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Release|Default.ActiveCfg = Release
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Release|Default.Build.0 = Release
+		{E22DCB4F-D996-4CEE-8639-2C94E6543696}.Release|Default.Deploy.0 = Release
+		{03EA0B76-D392-4554-BB17-EA2C76490834}.Debug|Default.ActiveCfg = Debug
+		{03EA0B76-D392-4554-BB17-EA2C76490834}.Debug|Default.Build.0 = Debug
+		{03EA0B76-D392-4554-BB17-EA2C76490834}.Debug|Default.Deploy.0 = Debug
+		{03EA0B76-D392-4554-BB17-EA2C76490834}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{03EA0B76-D392-4554-BB17-EA2C76490834}.DebugLocal|Default.Build.0 = DebugLocal
+		{03EA0B76-D392-4554-BB17-EA2C76490834}.Release|Default.ActiveCfg = Release
+		{03EA0B76-D392-4554-BB17-EA2C76490834}.Release|Default.Build.0 = Release
+		{03EA0B76-D392-4554-BB17-EA2C76490834}.Release|Default.Deploy.0 = Release
+>>>>>>> c5ddc83f966f369a9d59850f7c33ff6a099cd8f0
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
