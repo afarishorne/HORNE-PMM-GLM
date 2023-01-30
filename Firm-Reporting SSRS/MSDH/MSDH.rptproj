@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Client Does Not Match ChargeBand MSDH.rdl" />
+    <Report Include="Staff Time and Expense Journal - PE (Historical) - Flat MDHSF.rdl" />
     <Report Include="Staff Time and Expense Journal - PE (Historical) - Flat MSDH.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
