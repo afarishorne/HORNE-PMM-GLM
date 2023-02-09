@@ -3,16 +3,16 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="Reporting_Engine_Horne">
-      <DataSourceReference>Reporting_Engine_Horne</DataSourceReference>
+    <DataSource Name="PEReporting">
+      <DataSourceReference>PEReporting</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>1647dfd4-4788-4410-bd52-7bb6f0b250e9</rd:DataSourceID>
+      <rd:DataSourceID>5765b94c-6839-4a6f-a963-66e4c30ad26c</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
+        <DataSourceName>PEReporting</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@StartDate">
             <Value>=Parameters!StartDate.Value</Value>
@@ -20,133 +20,221 @@
           <QueryParameter Name="@EndDate">
             <Value>=Parameters!EndDate.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@ClientID">
+            <Value>=Parameters!ClientID.Value</Value>
+          </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT e.ClientDepartment AS PG,
-       e.ClientCode,
-       CAST(e.ClientCreated AS DATE) AS ClientCreated,
-       e.ClientName,
-       c.ContAddress AS Address,
-       c.ContTownCity AS City,
-       c.ContCounty AS State,
-       c.ContPostCode AS Zip,
-	   c.ContPhone,
-	   c.ContMobile,
-       c.ContEmail AS ClientEmail,
-       e.ClientOwnership AS EntityType,
-       cs.ServTitle AS Service,
-       sf.StaffName AS ClientPartner	   
-	   ,sm.StaffName AS ServiceManager
-	   ,e.ClientOffice
-FROM dbo.tblEngagement e
-    JOIN dbo.tblClientServices cs
-        ON cs.ContIndex = e.ContIndex
-    JOIN dbo.tblContacts c
-        ON c.ContIndex = e.ContIndex
-    JOIN dbo.tblServices s
-        ON s.ServIndex = cs.ServIndex
-    JOIN dbo.tblStaff sf
-        ON sf.StaffIndex = cs.ServPartner
-		LEFT JOIN dbo.tblStaff sm
-        ON cs.ServManager = sm.StaffIndex
-WHERE e.ClientStatus = 'Active'
-      AND cs.ServTitle = 'Tax Services'
-      AND e.ClientOwnership = 'INDV'
-      AND CAST(e.ClientCreated AS DATE)
-      BETWEEN @StartDate AND @EndDate
-ORDER BY CAST(e.ClientCreated AS DATE),
-         PG,
-         e.ClientCode,
-         e.ClientName</CommandText>
+        <CommandText>WITH TOTAL AS (
+
+
+SELECT DISTINCT
+	eng.ClientName Client
+	,eng.ClientCode AS ClientCode
+	,eng.ContIndex ClientIndex
+	,eng.ClientDepartment ClientDepartment
+	,eng.ClientOwnership ClientEntityType
+	,c.ContName ClientGroup
+	,eng.ClientIndustry
+	,staff.StaffName
+	,ClientPartner.StaffName ClientPartner
+	,ClientManager.StaffName ClientManager
+	,eng.ClientStatus
+	,EntryDate AS 'Date' 
+	,DurationUnits AS 'Hours'
+	,det.ChargeAmount
+	,wip.WIPAmount
+	,'Description' = det.Description
+
+FROM [Engine_Horne].[dbo].[tblTSO_Details] det
+LEFT JOIN [Engine_Horne].[dbo].[tblTSO_Header] head 
+	ON det.headerindex = head.headerindex
+LEFT JOIN [Engine_Horne].[dbo].[tblEngagement] eng 
+	ON eng.ContIndex = det.clientindex
+LEFT JOIN [Engine_Horne].[dbo].[tblStaff] staff 
+	ON staff.StaffIndex = head.StaffIndex
+LEFT JOIN [Engine_Horne].[dbo].[tblJob_Header] J 
+	ON det.ServPeriod = J.Job_Idx
+LEFT JOIN [Engine_Horne].[dbo].[tblJob_Task] task 
+	ON task.taskindex = det.taskindex
+LEFT JOIN [Engine_Horne].[dbo].[tblTimeChargeCode] AS TC 
+	ON det.AnalysisCode = TC.ChargeCode
+LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C 
+	ON eng.ClientHold = C.ContIndex
+LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip 
+	ON det.detailindex = wip.wipref
+
+LEFT JOIN [Engine_Horne].[dbo].[tblStaff] ClientPartner 
+	ON ClientPartner.StaffIndex = eng.ClientPartner
+LEFT JOIN [Engine_Horne].[dbo].[tblStaff] ClientManager 
+	ON ClientManager.StaffIndex = eng.ClientManager
+
+LEFT JOIN [Engine_Horne].dbo.tblClientServices cs
+    ON eng.ContIndex = cs.ContIndex
+LEFT JOIN [Engine_Horne].dbo.tblStaff ServicePartner  --Service Partner
+    ON cs.ServPartner = ServicePartner.StaffIndex
+	
+WHERE staff.StaffName 
+	IN ('Alex Dunmire','Anthony Patel','Ashley Irons','Cody Hawks','Crystal Frazier','Denise Lowe','Donald Crabtree','Elissa Roybal','Elizabeth Nix','Emily Carpenter'
+,'Fatima Bracamonte','Greg Kurth','Jackson Breland','Jennifer Cook','Jessica Johnson','Joel Bobo','Jonathan Tatum','Joseph Kasal','Joseph Summers','Justin Egger'
+,'Kaylee McCormick','LauraKatherine Tannehill','Lauren Hicks','Lauren Simpson','Laurie Hailey','Lee Klein','Lindy Wilkinson','Lucas Fairley','Lydia Koetting'
+,'Marcus Mallory','Mary Morgan Windham','Matt Elkins','Matt Ferrell','Matt Parker','Mitch Beckwith','Molly Scott','Monique Blystad','Morgan Condie','Morgan Freeman'
+,'Natalie Lewis','Nick Dubuisson','Olivia Prescott','Ross Broome','Sarah Todd','Scott Polczynski','Sims Cauthen','Stefanie Grant','Stephanie Brown','Stephen Massey'
+,'Sydney Cumberland','Tami Davis','Tammye Lundy','Trish Hildebrand','Tyra Singleton','Wesley Williams','Wesley Winborne','William Kasal','Julianne Loper','Jonathan Tatum'
+,'Zack Harrington','Sam McCoy','Chandra Doughty','Alex West','Olivia Prescott','Terrintha McClellan', 'David Wise', 'Kelsie Burrows', 'Ashley Broome'
+,'Peyton Gordon','Kelsie Burrows','Madison Oster','Alison Watson','Janki Patel','Bruce Ma','Berto Le Roux','Kevin McDonald','Jeffrey White','Luke Horst','Lauren Burkes')
+	and det.EntryDate Between @StartDate and @EndDate
+	AND (eng.ClientCode IN (@ClientID) OR @ClientID IS NULL)
+
+
+UNION ALL
+
+--EXPENSES
+SELECT DISTINCT 
+	eng.ClientName Client
+	,eng.ClientCode AS ClientCode
+	,eng.ContIndex ClientIndex
+	,eng.ClientDepartment ClientDepartment
+	,eng.ClientOwnership ClientEntityType
+	,c.ContName ClientGroup
+	,eng.ClientIndustry
+	,staff.StaffName
+	,ClientPartner.StaffName ClientPartner
+	,ClientManager.StaffName ClientManager
+	,eng.ClientStatus
+	,det.expDate AS 'Date'
+	,NULL AS 'Hours'
+	,ChargeAmount
+	,wip.WIPAmount
+	,'Description' = det.Description
+
+FROM [Engine_Horne].[dbo].[tblExpenseDetail] det
+INNER JOIN [Engine_Horne].[dbo].[tblExpenseHeader] head 
+	ON det.expindex = head.expindex
+INNER JOIN [Engine_Horne].[dbo].[tblEngagement] eng 
+	ON eng.ContIndex = det.clientindex
+INNER JOIN [Engine_Horne].[dbo].[tblStaff] staff 
+	ON staff.StaffIndex = head.ExpStaff
+LEFT JOIN [Engine_Horne].[dbo].[tblJob_Header] J 
+	ON det.ServPeriod = J.Job_Idx
+LEFT JOIN [Engine_Horne].[dbo].[tblTimeChargeCode] AS TC 
+	ON det.DisbCode = TC.ChargeCode
+LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C 
+	ON eng.ClientHold = C.ContIndex
+LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip 
+	ON det.detailindex = wip.wipref
+
+LEFT JOIN [Engine_Horne].[dbo].[tblStaff] ClientPartner 
+	ON ClientPartner.StaffIndex = eng.ClientPartner
+LEFT JOIN [Engine_Horne].[dbo].[tblStaff] ClientManager 
+	ON ClientManager.StaffIndex = eng.ClientManager
+LEFT JOIN [Engine_Horne].dbo.tblClientServices cs
+    ON eng.ContIndex = cs.ContIndex
+LEFT JOIN [Engine_Horne].dbo.tblStaff ServicePartner  --Service Partner
+    ON cs.ServPartner = ServicePartner.StaffIndex
+	
+	
+WHERE staff.StaffName 
+	IN ('Alex Dunmire','Anthony Patel','Ashley Irons','Cody Hawks','Crystal Frazier','Denise Lowe','Donald Crabtree','Elissa Roybal','Elizabeth Nix','Emily Carpenter'
+,'Fatima Bracamonte','Greg Kurth','Jackson Breland','Jennifer Cook','Jessica Johnson','Joel Bobo','Jonathan Tatum','Joseph Kasal','Joseph Summers','Justin Egger'
+,'Kaylee McCormick','LauraKatherine Tannehill','Lauren Hicks','Lauren Simpson','Laurie Hailey','Lee Klein','Lindy Wilkinson','Lucas Fairley','Lydia Koetting'
+,'Marcus Mallory','Mary Morgan Windham','Matt Elkins','Matt Ferrell','Matt Parker','Mitch Beckwith','Molly Scott','Monique Blystad','Morgan Condie','Morgan Freeman'
+,'Natalie Lewis','Nick Dubuisson','Olivia Prescott','Ross Broome','Sarah Todd','Scott Polczynski','Sims Cauthen','Stefanie Grant','Stephanie Brown','Stephen Massey'
+,'Sydney Cumberland','Tami Davis','Tammye Lundy','Trish Hildebrand','Tyra Singleton','Wesley Williams','Wesley Winborne','William Kasal','Julianne Loper','Jonathan Tatum'
+,'Zack Harrington','Sam McCoy','Chandra Doughty','Alex West','Olivia Prescott','Terrintha McClellan' ,'David Wise', 'Kelsie Burrows', 'Ashley Broome'
+,'Peyton Gordon','Kelsie Burrows','Madison Oster','Alison Watson','Janki Patel','Bruce Ma','Berto Le Roux','Kevin McDonald','Jeffrey White','Luke Horst','Lauren Burkes')
+	and det.expDate Between @StartDate and @EndDate
+	AND (eng.ClientCode IN (@ClientID) OR @ClientID IS NULL)
+		
+) 
+
+SELECT DISTINCT
+Client
+,ClientCode
+,ClientIndex
+,ClientDepartment
+,ClientEntityType
+,ClientGroup
+,ClientIndustry
+,StaffName
+,ClientPartner
+,ClientManager
+,ClientStatus
+,[Date]
+,[Hours]
+,ChargeAmount
+,WIPAmount
+,[Description]
+
+FROM TOTAL
+
+
+ORDER BY TOTAL.Client</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="PG">
-          <DataField>PG</DataField>
+        <Field Name="Client">
+          <DataField>Client</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ClientCode">
           <DataField>ClientCode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ClientCreated">
-          <DataField>ClientCreated</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+        <Field Name="ClientIndex">
+          <DataField>ClientIndex</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="ClientName">
-          <DataField>ClientName</DataField>
+        <Field Name="ClientDepartment">
+          <DataField>ClientDepartment</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Address">
-          <DataField>Address</DataField>
+        <Field Name="ClientEntityType">
+          <DataField>ClientEntityType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="City">
-          <DataField>City</DataField>
+        <Field Name="ClientGroup">
+          <DataField>ClientGroup</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ClientEmail">
-          <DataField>ClientEmail</DataField>
+        <Field Name="ClientIndustry">
+          <DataField>ClientIndustry</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="State">
-          <DataField>State</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ContPhone">
-          <DataField>ContPhone</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EntityType">
-          <DataField>EntityType</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Zip">
-          <DataField>Zip</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ContMobile">
-          <DataField>ContMobile</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Service">
-          <DataField>Service</DataField>
+        <Field Name="StaffName">
+          <DataField>StaffName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ClientPartner">
           <DataField>ClientPartner</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ServiceManager">
-          <DataField>ServiceManager</DataField>
+        <Field Name="ClientManager">
+          <DataField>ClientManager</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ClientOffice">
-          <DataField>ClientOffice</DataField>
+        <Field Name="ClientStatus">
+          <DataField>ClientStatus</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="StartDate">
-      <Query>
-        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
-        <CommandText>SELECT CONVERT(DATE, DATEADD(dd, - 7, GETDATE())) AS StartDate</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="StartDate">
-          <DataField>StartDate</DataField>
+        <Field Name="Date">
+          <DataField>Date</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="EndDate">
-      <Query>
-        <DataSourceName>Reporting_Engine_Horne</DataSourceName>
-        <CommandText>Select CONVERT(DATE,DATEADD(dd,-1,GETDATE())) as EndDate</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="EndDate">
-          <DataField>EndDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+        <Field Name="Hours">
+          <DataField>Hours</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ChargeAmount">
+          <DataField>ChargeAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="WIPAmount">
+          <DataField>WIPAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -155,85 +243,56 @@ ORDER BY CAST(e.ClientCreated AS DATE),
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="textbox1">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>1040 Clients</Value>
-                    <Style>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>20pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Color>#0857c3</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>textbox1</rd:DefaultName>
-            <Height>0.37in</Height>
-            <Width>29.45833in</Width>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Tablix Name="table1">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.3in</Width>
+                  <Width>2in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.11667in</Width>
+                  <Width>1.30208in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.26667in</Width>
+                  <Width>1.375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.75in</Width>
+                  <Width>1.70833in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.025in</Width>
+                  <Width>1.52083in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.475in</Width>
+                  <Width>3.23958in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.59375in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.5625in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.60417in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.65625in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.30208in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.98958in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>1.51042in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>1.5625in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.5in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.325in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.83333in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.35833in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.28333in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.225in</Width>
+                  <Width>7.125in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -249,7 +308,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Practice Group</Value>
+                                  <Value>Client</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -258,7 +317,9 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox2</rd:DefaultName>
@@ -294,7 +355,9 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox3</rd:DefaultName>
@@ -321,7 +384,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Client Created</Value>
+                                  <Value>Client Index</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -330,7 +393,10 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox4</rd:DefaultName>
@@ -357,7 +423,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Client Name</Value>
+                                  <Value>Client Department</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -366,226 +432,12 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox5</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#0857c3</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox10">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Address</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox10</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#0857c3</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox16">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>City</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox16</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#0857c3</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox12">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>State</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox12</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#0857c3</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox14">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Zip</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox14</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#0857c3</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox13">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Phone</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox13</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#0857c3</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox18">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Mobile</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox18</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -609,7 +461,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Client Email</Value>
+                                  <Value>Client Entity Type</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -618,10 +470,50 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#0857c3</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Client Group</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -645,7 +537,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Entity Type</Value>
+                                  <Value>Client Industry</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -654,10 +546,50 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#0857c3</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox14">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Staff Name</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -681,7 +613,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Service</Value>
+                                  <Value>Client Partner</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -690,7 +622,9 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox8</rd:DefaultName>
@@ -717,7 +651,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Client Partner</Value>
+                                  <Value>Client Manager</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -726,7 +660,9 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox9</rd:DefaultName>
@@ -746,14 +682,14 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox11">
+                        <Textbox Name="textbox10">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Service Manager</Value>
+                                  <Value>Client Status</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -762,10 +698,127 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <rd:DefaultName>textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#0857c3</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Date</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#0857c3</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox12">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Hours</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox12</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#0857c3</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox16">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Charge Amount</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox16</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -789,7 +842,7 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Client Office</Value>
+                                  <Value>WIP Amount</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -798,10 +851,50 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox15</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#0857c3</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox13">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Description</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox13</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -823,23 +916,25 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="PG">
+                        <Textbox Name="Client">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PG.Value</Value>
+                                  <Value>=Fields!Client.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>PG</rd:DefaultName>
+                          <rd:DefaultName>Client</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -868,7 +963,9 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>ClientCode</rd:DefaultName>
@@ -887,24 +984,25 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ClientCreated">
+                        <Textbox Name="ClientIndex">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ClientCreated.Value</Value>
+                                  <Value>=Fields!ClientIndex.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <Format>d</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ClientCreated</rd:DefaultName>
+                          <rd:DefaultName>ClientIndex</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -920,23 +1018,25 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ClientName">
+                        <Textbox Name="ClientDepartment">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ClientName.Value</Value>
+                                  <Value>=Fields!ClientDepartment.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ClientName</rd:DefaultName>
+                          <rd:DefaultName>ClientDepartment</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -952,23 +1052,25 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Address">
+                        <Textbox Name="ClientEntityType">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Address.Value</Value>
+                                  <Value>=Fields!ClientEntityType.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Address</rd:DefaultName>
+                          <rd:DefaultName>ClientEntityType</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -984,23 +1086,25 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="City">
+                        <Textbox Name="ClientGroup">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!City.Value</Value>
+                                  <Value>=Fields!ClientGroup.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>City</rd:DefaultName>
+                          <rd:DefaultName>ClientGroup</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1016,23 +1120,25 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="State">
+                        <Textbox Name="ClientIndustry">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!State.Value</Value>
+                                  <Value>=Fields!ClientIndustry.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>State</rd:DefaultName>
+                          <rd:DefaultName>ClientIndustry</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1048,183 +1154,25 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Zip">
+                        <Textbox Name="StaffName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Zip.Value</Value>
+                                  <Value>=Fields!StaffName.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Zip</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="ContPhone">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!ContPhone.Value</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>ContPhone</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="ContMobile">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!ContMobile.Value</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>ContMobile</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="ClientEmail">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!ClientEmail.Value</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>ClientEmail</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="EntityType">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!EntityType.Value</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>EntityType</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Service">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Service.Value</Value>
-                                  <Style>
-                                    <FontFamily>Tahoma</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Service</rd:DefaultName>
+                          <rd:DefaultName>StaffName</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1253,7 +1201,9 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>ClientPartner</rd:DefaultName>
@@ -1272,23 +1222,25 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ServiceManager">
+                        <Textbox Name="ClientManager">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ServiceManager.Value</Value>
+                                  <Value>=Fields!ClientManager.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ServiceManager</rd:DefaultName>
+                          <rd:DefaultName>ClientManager</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1304,23 +1256,198 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ClientOffice">
+                        <Textbox Name="ClientStatus">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ClientOffice.Value</Value>
+                                  <Value>=Fields!ClientStatus.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ClientOffice</rd:DefaultName>
+                          <rd:DefaultName>ClientStatus</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Date">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Date.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <Format>d</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Date</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Hours">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Hours.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Hours</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ChargeAmount">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ChargeAmount.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <Format>#,0.00;(#,0.00)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ChargeAmount</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="WIPAmount">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!WIPAmount.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <Format>#,0.00;(#,0.00)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>WIPAmount</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Description">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Description.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Description</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1378,56 +1505,21 @@ ORDER BY CAST(e.ClientCreated AS DATE),
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <NoRowsMessage>No 1040 Clients in date range.</NoRowsMessage>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.7311in</Top>
             <Height>0.43in</Height>
-            <Width>29.45833in</Width>
-            <ZIndex>1</ZIndex>
+            <Width>31.05207in</Width>
             <Style />
           </Tablix>
-          <Textbox Name="Textbox2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>="&lt;b&gt;Date Range:&lt;/b&gt; " &amp; Parameters!StartDate.Value &amp; " - " &amp;Parameters!EndDate.Value</Value>
-                    <MarkupType>HTML</MarkupType>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>0.43944in</Top>
-            <Height>0.25in</Height>
-            <Width>29.45833in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
         </ReportItems>
-        <Height>1.1611in</Height>
+        <Height>0.79in</Height>
         <Style />
       </Body>
-      <Width>29.45833in</Width>
+      <Width>31.05207in</Width>
       <Page>
-        <PageHeight>8.5in</PageHeight>
-        <PageWidth>30in</PageWidth>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -1435,29 +1527,23 @@ ORDER BY CAST(e.ClientCreated AS DATE),
   <ReportParameters>
     <ReportParameter Name="StartDate">
       <DataType>DateTime</DataType>
-      <DefaultValue>
-        <DataSetReference>
-          <DataSetName>StartDate</DataSetName>
-          <ValueField>StartDate</ValueField>
-        </DataSetReference>
-      </DefaultValue>
-      <Prompt>Start Date</Prompt>
+      <Prompt>StartDate</Prompt>
     </ReportParameter>
     <ReportParameter Name="EndDate">
       <DataType>DateTime</DataType>
-      <DefaultValue>
-        <DataSetReference>
-          <DataSetName>EndDate</DataSetName>
-          <ValueField>EndDate</ValueField>
-        </DataSetReference>
-      </DefaultValue>
-      <Prompt>End Date</Prompt>
+      <Prompt>EndDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ClientID">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ClientID</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
-      <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>1</NumberOfRows>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1469,11 +1555,16 @@ ORDER BY CAST(e.ClientCreated AS DATE),
           <RowIndex>0</RowIndex>
           <ParameterName>EndDate</ParameterName>
         </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ClientID</ParameterName>
+        </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>708c2e91-13c8-43d1-b07d-84dd1d08aea4</rd:ReportID>
+  <rd:ReportID>f242c18b-0c4e-4089-875f-1bb4d9909232</rd:ReportID>
 </Report>

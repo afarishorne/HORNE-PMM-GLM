@@ -8,11 +8,11 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide/Tax Services</TargetReportFolder>
-    <TargetDatasetFolder>Firmwide/Datasets</TargetDatasetFolder>
-    <TargetDatasourceFolder>Firmwide/Data Sources</TargetDatasourceFolder>
+    <TargetReportFolder>Construction/Time and Expense Reports</TargetReportFolder>
+    <TargetDatasetFolder>Construction/Time and Expense Reports/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Construction/Time and Expense Reports/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbi.horne.com/reportserver</TargetServerURL>
+    <TargetServerURL>https://powerbidev.horne.com/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -22,7 +22,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide</TargetReportFolder>
+    <TargetReportFolder>Construction Time and Expense</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -36,7 +36,7 @@
     <OverwriteDataSources>False</OverwriteDataSources>
     <TargetServerVersion>SSRS2016</TargetServerVersion>
     <Platform>Win32</Platform>
-    <TargetReportFolder>Firmwide</TargetReportFolder>
+    <TargetReportFolder>Construction Time and Expense</TargetReportFolder>
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -49,11 +49,11 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSource Include="Reporting_Engine_Horne.rds" />
+    <DataSource Include="PEReporting.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="1040 Clients.rdl" />
-    <Report Include="Tax Org Delivery List.rdl" />
+    <Report Include="Construction - Client Services Hours.rdl" />
+    <Report Include="Construction - Team Member Hours.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
