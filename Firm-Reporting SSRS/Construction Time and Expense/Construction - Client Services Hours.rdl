@@ -73,15 +73,7 @@ LEFT JOIN [Engine_Horne].dbo.tblClientServices cs
 LEFT JOIN [Engine_Horne].dbo.tblStaff ServicePartner  --Service Partner
     ON cs.ServPartner = ServicePartner.StaffIndex
 	
-WHERE staff.StaffName 
-	IN ('Alex Dunmire','Anthony Patel','Ashley Irons','Cody Hawks','Crystal Frazier','Denise Lowe','Donald Crabtree','Elissa Roybal','Elizabeth Nix','Emily Carpenter'
-,'Fatima Bracamonte','Greg Kurth','Jackson Breland','Jennifer Cook','Jessica Johnson','Joel Bobo','Jonathan Tatum','Joseph Kasal','Joseph Summers','Justin Egger'
-,'Kaylee McCormick','LauraKatherine Tannehill','Lauren Hicks','Lauren Simpson','Laurie Hailey','Lee Klein','Lindy Wilkinson','Lucas Fairley','Lydia Koetting'
-,'Marcus Mallory','Mary Morgan Windham','Matt Elkins','Matt Ferrell','Matt Parker','Mitch Beckwith','Molly Scott','Monique Blystad','Morgan Condie','Morgan Freeman'
-,'Natalie Lewis','Nick Dubuisson','Olivia Prescott','Ross Broome','Sarah Todd','Scott Polczynski','Sims Cauthen','Stefanie Grant','Stephanie Brown','Stephen Massey'
-,'Sydney Cumberland','Tami Davis','Tammye Lundy','Trish Hildebrand','Tyra Singleton','Wesley Williams','Wesley Winborne','William Kasal','Julianne Loper','Jonathan Tatum'
-,'Zack Harrington','Sam McCoy','Chandra Doughty','Alex West','Olivia Prescott','Terrintha McClellan', 'David Wise', 'Kelsie Burrows', 'Ashley Broome'
-,'Peyton Gordon','Kelsie Burrows','Madison Oster','Alison Watson','Janki Patel','Bruce Ma','Berto Le Roux','Kevin McDonald','Jeffrey White','Luke Horst','Lauren Burkes')
+WHERE staff.StaffDepartment ='CON'
 	and det.EntryDate Between @StartDate and @EndDate
 	AND (eng.ClientCode IN (@ClientID) OR @ClientID IS NULL)
 
@@ -133,15 +125,7 @@ LEFT JOIN [Engine_Horne].dbo.tblStaff ServicePartner  --Service Partner
     ON cs.ServPartner = ServicePartner.StaffIndex
 	
 	
-WHERE staff.StaffName 
-	IN ('Alex Dunmire','Anthony Patel','Ashley Irons','Cody Hawks','Crystal Frazier','Denise Lowe','Donald Crabtree','Elissa Roybal','Elizabeth Nix','Emily Carpenter'
-,'Fatima Bracamonte','Greg Kurth','Jackson Breland','Jennifer Cook','Jessica Johnson','Joel Bobo','Jonathan Tatum','Joseph Kasal','Joseph Summers','Justin Egger'
-,'Kaylee McCormick','LauraKatherine Tannehill','Lauren Hicks','Lauren Simpson','Laurie Hailey','Lee Klein','Lindy Wilkinson','Lucas Fairley','Lydia Koetting'
-,'Marcus Mallory','Mary Morgan Windham','Matt Elkins','Matt Ferrell','Matt Parker','Mitch Beckwith','Molly Scott','Monique Blystad','Morgan Condie','Morgan Freeman'
-,'Natalie Lewis','Nick Dubuisson','Olivia Prescott','Ross Broome','Sarah Todd','Scott Polczynski','Sims Cauthen','Stefanie Grant','Stephanie Brown','Stephen Massey'
-,'Sydney Cumberland','Tami Davis','Tammye Lundy','Trish Hildebrand','Tyra Singleton','Wesley Williams','Wesley Winborne','William Kasal','Julianne Loper','Jonathan Tatum'
-,'Zack Harrington','Sam McCoy','Chandra Doughty','Alex West','Olivia Prescott','Terrintha McClellan' ,'David Wise', 'Kelsie Burrows', 'Ashley Broome'
-,'Peyton Gordon','Kelsie Burrows','Madison Oster','Alison Watson','Janki Patel','Bruce Ma','Berto Le Roux','Kevin McDonald','Jeffrey White','Luke Horst','Lauren Burkes')
+WHERE staff.StaffDepartment ='CON'
 	and det.expDate Between @StartDate and @EndDate
 	AND (eng.ClientCode IN (@ClientID) OR @ClientID IS NULL)
 		

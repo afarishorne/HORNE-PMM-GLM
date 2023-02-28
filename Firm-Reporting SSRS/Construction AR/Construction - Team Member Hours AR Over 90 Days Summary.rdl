@@ -62,17 +62,7 @@ LEFT JOIN [Engine_Horne].[dbo].[tblStaff] ClientPartner
 LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip 
 	ON det.detailindex = wip.wipref
 
-WHERE staff.StaffName 
-	IN ('Alex Dunmire','Anthony Patel','Ashley Irons','Cody Hawks','Crystal Frazier','Denise Lowe','Donald Crabtree','Elissa Roybal','Elizabeth Nix','Emily Carpenter'
-,'Fatima Bracamonte','Greg Kurth','Jackson Breland','Jennifer Cook','Jessica Johnson','Joel Bobo','Jonathan Tatum','Joseph Kasal','Joseph Summers','Justin Egger'
-,'Kaylee McCormick','LauraKatherine Tannehill','Lauren Hicks','Lauren Simpson','Laurie Hailey','Lee Klein','Lindy Wilkinson','Lucas Fairley','Lydia Koetting'
-,'Marcus Mallory','Mary Morgan Windham','Matt Elkins','Matt Ferrell','Matt Parker','Mitch Beckwith','Molly Scott','Monique Blystad','Morgan Condie','Morgan Freeman'
-,'Natalie Lewis','Nick Dubuisson','Olivia Prescott','Ross Broome','Sarah Todd','Scott Polczynski','Sims Cauthen','Stefanie Grant','Stephanie Brown','Stephen Massey'
-,'Sydney Cumberland','Tami Davis','Tammye Lundy','Trish Hildebrand','Tyra Singleton','Wesley Williams','Wesley Winborne','William Kasal', 'Alexis Washington'
-,'Brittany Pierce', 'Ethan Elkins','Peyton Sowers','Renee Newborne','Taylor Santiago','Charissa Mallonee','Daniel Chong','Donald Thurman','Haley Williams','Jess McCormack','Jessica McCarthy'
-, 'Michael Byrd','Aly Goul','Matt Picou','Elizabeth Thomas','Carter Jones','Jackson Ware','Lauren Sit','Chloe Todd','Anna Grace Browning','Traci Byrd','Balinda Pegram'
-,'Brooke Braley','Elizabeth Demoran','Bruce Ma','Mallory Ivy','Julianne Loper','Jonathan Tatum','Zack Harrington','Sam McCoy','Chandra Doughty','Alex West','Olivia Prescott','Terrintha McClellan'
-,'David Wise','Kelsie Burrows','Ashley Broome','Peyton Gordon','Kelsie Burrows','Madison Oster','Alison Watson','Janki Patel','Bruce Ma','Berto Le Roux','Kevin McDonald','Jeffrey White','Luke Horst','Lauren Burkes')
+WHERE staff.StaffDepartment ='CON'
 
 	and det.EntryDate Between @StartDate and @EndDate
 	AND (eng.ClientCode IN (@ClientID) OR @ClientID IS NULL)
@@ -115,18 +105,7 @@ LEFT JOIN [Engine_Horne].[dbo].[tblStaff] ClientPartner
 LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip 
 	ON det.detailindex = wip.wipref
 	
-WHERE 
-	staff.StaffName 
-	IN ('Alex Dunmire','Anthony Patel','Ashley Irons','Cody Hawks','Crystal Frazier','Denise Lowe','Donald Crabtree','Elissa Roybal','Elizabeth Nix','Emily Carpenter'
-,'Fatima Bracamonte','Greg Kurth','Jackson Breland','Jennifer Cook','Jessica Johnson','Joel Bobo','Jonathan Tatum','Joseph Kasal','Joseph Summers','Justin Egger'
-,'Kaylee McCormick','LauraKatherine Tannehill','Lauren Hicks','Lauren Simpson','Laurie Hailey','Lee Klein','Lindy Wilkinson','Lucas Fairley','Lydia Koetting'
-,'Marcus Mallory','Mary Morgan Windham','Matt Elkins','Matt Ferrell','Matt Parker','Mitch Beckwith','Molly Scott','Monique Blystad','Morgan Condie','Morgan Freeman'
-,'Natalie Lewis','Nick Dubuisson','Olivia Prescott','Ross Broome','Sarah Todd','Scott Polczynski','Sims Cauthen','Stefanie Grant','Stephanie Brown','Stephen Massey'
-,'Sydney Cumberland','Tami Davis','Tammye Lundy','Trish Hildebrand','Tyra Singleton','Wesley Williams','Wesley Winborne','William Kasal', 'Alexis Washington'
-,'Brittany Pierce', 'Ethan Elkins','Peyton Sowers','Renee Newborne','Taylor Santiago','Charissa Mallonee','Daniel Chong','Donald Thurman','Haley Williams','Jess McCormack','Jessica McCarthy'
-, 'Michael Byrd','Aly Goul','Matt Picou','Elizabeth Thomas','Carter Jones','Jackson Ware','Lauren Sit','Chloe Todd','Anna Grace Browning','Traci Byrd','Balinda Pegram'
-,'Brooke Braley','Elizabeth Demoran','Bruce Ma','Mallory Ivy','Julianne Loper','Jonathan Tatum','Zack Harrington','Sam McCoy','Chandra Doughty','Alex West','Olivia Prescott','Terrintha McClellan'
-,'David Wise','Kelsie Burrows','Ashley Broome','Peyton Gordon','Kelsie Burrows','Madison Oster','Alison Watson','Janki Patel','Bruce Ma','Berto Le Roux','Kevin McDonald','Jeffrey White','Luke Horst','Lauren Burkes')
+WHERE staff.StaffDepartment ='CON'
 
 	and det.expDate Between @StartDate and @EndDate
 	AND (eng.ClientCode IN (@ClientID) OR @ClientID IS NULL)
@@ -141,7 +120,7 @@ SELECT DISTINCT
 ,ClientGroup
 ,Sum([Hours]) Hours
 ,Sum(WIPAmount) as WIPAmount
-,ar.AROutstanding as ClientAROver60Days
+,ar.AROutstanding as ClientAROver90Days
 
 FROM TOTAL t
 join
@@ -150,7 +129,7 @@ SELECT [ClientCode]
       ,[Client]
       ,Sum([AROutstanding]) as AROutstanding
   FROM [DashboardMaster].[dbo].[vw_FocusAreaARAgingDetails]
-  where FocusArea='Construction' and ARAging not in ('[0-30]', '[31-60]')
+  where FocusArea='Construction' and ARAging ='[90+]'
   and AROutstanding&gt;0
   group by
   [ClientCode]
@@ -195,8 +174,8 @@ group by
           <DataField>WIPAmount</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="ClientAROver60Days">
-          <DataField>ClientAROver60Days</DataField>
+        <Field Name="ClientAROver90Days">
+          <DataField>ClientAROver90Days</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
@@ -514,7 +493,7 @@ group by
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Client AR Over 60 Days</Value>
+                                  <Value>Client AR Over 90 Days</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -789,14 +768,14 @@ group by
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ClientAROver60Days">
+                        <Textbox Name="ClientAROver90Days">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ClientAROver60Days.Value</Value>
+                                  <Value>=Fields!ClientAROver90Days.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00;(0.00)</Format>
@@ -808,7 +787,7 @@ group by
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ClientAROver60Days</rd:DefaultName>
+                          <rd:DefaultName>ClientAROver90Days</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -906,7 +885,7 @@ group by
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Construction - Team Member Hours AR Over 60 Days Summary</Value>
+                    <Value>Construction - Team Member Hours AR Over 90 Days Summary</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
                       <FontSize>20pt</FontSize>

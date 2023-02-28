@@ -54,6 +54,8 @@
   <ItemGroup>
     <Report Include="Construction - Client Services Hours.rdl" />
     <Report Include="Construction - Team Member Hours.rdl" />
+    <Report Include="Staff Time and Expense Journal - CON Staff Department.rdl" />
+    <Report Include="Staff Time TEST.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

@@ -63,17 +63,7 @@ LEFT JOIN [Engine_Horne].[dbo].[tblStaff] ClientPartner
 LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip 
 	ON det.detailindex = wip.wipref
 
-WHERE staff.StaffName 
-	IN ('Alex Dunmire','Anthony Patel','Ashley Irons','Cody Hawks','Crystal Frazier','Denise Lowe','Donald Crabtree','Elissa Roybal','Elizabeth Nix','Emily Carpenter'
-,'Fatima Bracamonte','Greg Kurth','Jackson Breland','Jennifer Cook','Jessica Johnson','Joel Bobo','Jonathan Tatum','Joseph Kasal','Joseph Summers','Justin Egger'
-,'Kaylee McCormick','LauraKatherine Tannehill','Lauren Hicks','Lauren Simpson','Laurie Hailey','Lee Klein','Lindy Wilkinson','Lucas Fairley','Lydia Koetting'
-,'Marcus Mallory','Mary Morgan Windham','Matt Elkins','Matt Ferrell','Matt Parker','Mitch Beckwith','Molly Scott','Monique Blystad','Morgan Condie','Morgan Freeman'
-,'Natalie Lewis','Nick Dubuisson','Olivia Prescott','Ross Broome','Sarah Todd','Scott Polczynski','Sims Cauthen','Stefanie Grant','Stephanie Brown','Stephen Massey'
-,'Sydney Cumberland','Tami Davis','Tammye Lundy','Trish Hildebrand','Tyra Singleton','Wesley Williams','Wesley Winborne','William Kasal', 'Alexis Washington'
-,'Brittany Pierce', 'Ethan Elkins','Peyton Sowers','Renee Newborne','Taylor Santiago','Charissa Mallonee','Daniel Chong','Donald Thurman','Haley Williams','Jess McCormack','Jessica McCarthy'
-, 'Michael Byrd','Aly Goul','Matt Picou','Elizabeth Thomas','Carter Jones','Jackson Ware','Lauren Sit','Chloe Todd','Anna Grace Browning','Traci Byrd','Balinda Pegram'
-,'Brooke Braley','Elizabeth Demoran','Bruce Ma','Mallory Ivy','Julianne Loper','Jonathan Tatum','Zack Harrington','Sam McCoy','Chandra Doughty','Alex West','Olivia Prescott','Terrintha McClellan'
-,'David Wise','Kelsie Burrows','Ashley Broome','Peyton Gordon','Kelsie Burrows','Madison Oster','Alison Watson','Janki Patel','Bruce Ma','Berto Le Roux','Kevin McDonald','Jeffrey White','Luke Horst','Lauren Burkes')
+WHERE staff.StaffDepartment ='CON'
 
 	and det.EntryDate Between @StartDate and @EndDate
 	AND (eng.ClientCode IN (@ClientID) OR @ClientID IS NULL)
@@ -116,18 +106,7 @@ LEFT JOIN [Engine_Horne].[dbo].[tblStaff] ClientPartner
 LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip 
 	ON det.detailindex = wip.wipref
 	
-WHERE 
-	staff.StaffName 
-	IN ('Alex Dunmire','Anthony Patel','Ashley Irons','Cody Hawks','Crystal Frazier','Denise Lowe','Donald Crabtree','Elissa Roybal','Elizabeth Nix','Emily Carpenter'
-,'Fatima Bracamonte','Greg Kurth','Jackson Breland','Jennifer Cook','Jessica Johnson','Joel Bobo','Jonathan Tatum','Joseph Kasal','Joseph Summers','Justin Egger'
-,'Kaylee McCormick','LauraKatherine Tannehill','Lauren Hicks','Lauren Simpson','Laurie Hailey','Lee Klein','Lindy Wilkinson','Lucas Fairley','Lydia Koetting'
-,'Marcus Mallory','Mary Morgan Windham','Matt Elkins','Matt Ferrell','Matt Parker','Mitch Beckwith','Molly Scott','Monique Blystad','Morgan Condie','Morgan Freeman'
-,'Natalie Lewis','Nick Dubuisson','Olivia Prescott','Ross Broome','Sarah Todd','Scott Polczynski','Sims Cauthen','Stefanie Grant','Stephanie Brown','Stephen Massey'
-,'Sydney Cumberland','Tami Davis','Tammye Lundy','Trish Hildebrand','Tyra Singleton','Wesley Williams','Wesley Winborne','William Kasal', 'Alexis Washington'
-,'Brittany Pierce', 'Ethan Elkins','Peyton Sowers','Renee Newborne','Taylor Santiago','Charissa Mallonee','Daniel Chong','Donald Thurman','Haley Williams','Jess McCormack','Jessica McCarthy'
-, 'Michael Byrd','Aly Goul','Matt Picou','Elizabeth Thomas','Carter Jones','Jackson Ware','Lauren Sit','Chloe Todd','Anna Grace Browning','Traci Byrd','Balinda Pegram'
-,'Brooke Braley','Elizabeth Demoran','Bruce Ma','Mallory Ivy','Julianne Loper','Jonathan Tatum','Zack Harrington','Sam McCoy','Chandra Doughty','Alex West','Olivia Prescott','Terrintha McClellan'
-,'David Wise','Kelsie Burrows','Ashley Broome','Peyton Gordon','Kelsie Burrows','Madison Oster','Alison Watson','Janki Patel','Bruce Ma','Berto Le Roux','Kevin McDonald','Jeffrey White','Luke Horst','Lauren Burkes')
+WHERE staff.StaffDepartment ='CON'
 
 	and det.expDate Between @StartDate and @EndDate
 	AND (eng.ClientCode IN (@ClientID) OR @ClientID IS NULL)
@@ -151,7 +130,10 @@ SELECT DISTINCT
 ,[Description]
 ,Job_Name
 
-FROM TOTAL</CommandText>
+FROM TOTAL
+order by
+[StaffName],
+CONVERT(NVARCHAR(30),[Date], 101)</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>

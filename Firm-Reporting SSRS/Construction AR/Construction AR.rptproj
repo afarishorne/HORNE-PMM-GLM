@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Construction/AR/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Construction/AR/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>https://powerbi.horne.com/reportserver</TargetServerURL>
+    <TargetServerURL>https://powerbidev.horne.com/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -52,9 +52,10 @@
     <DataSource Include="Reporting_Engine_Horne.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Construction - AR Over 60 Days.rdl" />
-    <Report Include="Construction - Team Member Hours AR Over 60 Days Summary.rdl" />
-    <Report Include="Construction - Team Member Hours AR Over 60 Days.rdl" />
+    <Report Include="Construction - AR Over 90 Days.rdl" />
+    <Report Include="Construction - AR.rdl" />
+    <Report Include="Construction - Team Member Hours AR Over 90 Days Summary.rdl" />
+    <Report Include="Construction - Team Member Hours AR Over 90 Days.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
