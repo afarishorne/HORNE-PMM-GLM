@@ -12,21 +12,12 @@
     <DataSet Name="ClientGroup">
       <Query>
         <DataSourceName>PEReporting</DataSourceName>
-        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT DISTINCT
-       C.ContName
-FROM tblPortfolio_Selection P
-    INNER JOIN tblEngagement E
-        ON P.ContIndex = E.ContIndex
-    INNER JOIN tblContacts C
-        ON P.ClientHold = C.ContIndex
-UNION
-SELECT 'ALL';</CommandText>
+        <CommandText>SELECT 'ALL';</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="ContName">
-          <DataField>ContName</DataField>
+        <Field Name="ID">
+          <DataField />
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -89,20 +80,14 @@ ORDER BY StaffName;</CommandText>
     <DataSet Name="Client">
       <Query>
         <DataSourceName>PEReporting</DataSourceName>
-        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-
-SELECT ClientCode,
-       1 SortOrder
-FROM dbo.tblEngagement eng
-UNION
-SELECT 'ALL',
+        <CommandText>SELECT 'ALL',
        0 SortOrder
 ORDER BY SortOrder ASC;</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="ClientCode">
-          <DataField>ClientCode</DataField>
+        <Field Name="ID">
+          <DataField />
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="SortOrder">
@@ -949,12 +934,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                   <Width>0.75in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.125in</Width>
-                </TablixColumn>
-                <TablixColumn>
                   <Width>1.125in</Width>
                 </TablixColumn>
                 <TablixColumn>
@@ -1584,80 +1563,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                           </Paragraphs>
                           <rd:DefaultName>textbox18</rd:DefaultName>
                           <ZIndex>23</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox6">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Location Header</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox6</rd:DefaultName>
-                          <ZIndex>22</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox7">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Location Detail</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox7</rd:DefaultName>
-                          <ZIndex>21</ZIndex>
                           <Style>
                             <TopBorder>
                               <Style>Solid</Style>
@@ -2339,68 +2244,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="PELocation">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PELocation.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>PELocation</rd:DefaultName>
-                          <ZIndex>2</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="PELocationDetail">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PELocationDetail.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>PELocationDetail</rd:DefaultName>
-                          <ZIndex>1</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="GroupName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2517,8 +2360,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -2548,15 +2389,17 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
             </TablixRowHierarchy>
             <DataSetName>dsTEJournal</DataSetName>
             <Height>0.4in</Height>
-            <Width>19.375in</Width>
+            <Width>17.25in</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>0.4in</Height>
         <Style />
       </Body>
-      <Width>20.08333in</Width>
+      <Width>17.25in</Width>
       <Page>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>18in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>
@@ -2577,8 +2420,8 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
       <ValidValues>
         <DataSetReference>
           <DataSetName>ClientGroup</DataSetName>
-          <ValueField>ContName</ValueField>
-          <LabelField>ContName</LabelField>
+          <ValueField>ID</ValueField>
+          <LabelField>ID</LabelField>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
@@ -2612,8 +2455,8 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
       <ValidValues>
         <DataSetReference>
           <DataSetName>Client</DataSetName>
-          <ValueField>ClientCode</ValueField>
-          <LabelField>ClientCode</LabelField>
+          <ValueField>ID</ValueField>
+          <LabelField>ID</LabelField>
         </DataSetReference>
       </ValidValues>
       <MultiValue>true</MultiValue>
