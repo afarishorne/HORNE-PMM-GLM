@@ -83,7 +83,8 @@ SELECT DISTINCT
 	,c.ContName ClientGroup
 	,staff.StaffOffice
 	,ChargeAmount
-	,wip.WIPAmount	
+	--,wip.WIPAmount	
+,0 as WIPAmount
 	,'Description' = det.Description
 	,NULL AS Task_Subject
 	,j.Job_Name

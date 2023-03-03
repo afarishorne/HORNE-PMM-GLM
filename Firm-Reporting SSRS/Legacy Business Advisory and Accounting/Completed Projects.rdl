@@ -43,8 +43,7 @@
 FROM
 	dbo.vw_baa_projects_due_completed_jobs_report
 WHERE 
-	prep_complete BETWEEN @Start_Date AND @End_Date
-</CommandText>
+	Printed_Sent BETWEEN @Start_Date AND @End_Date</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -1549,7 +1548,7 @@ DATEADD(month, DATEDIFF(month, 0, GETDATE()), 0) AS Start_Date
           <ValueField>Start_Date</ValueField>
         </DataSetReference>
       </DefaultValue>
-      <Prompt>Prep Complete Start Date</Prompt>
+      <Prompt>Printed Sent Start Date</Prompt>
     </ReportParameter>
     <ReportParameter Name="End_Date">
       <DataType>DateTime</DataType>
@@ -1559,7 +1558,7 @@ DATEADD(month, DATEDIFF(month, 0, GETDATE()), 0) AS Start_Date
           <ValueField>End_Date</ValueField>
         </DataSetReference>
       </DefaultValue>
-      <Prompt>Prep Complete End Date</Prompt>
+      <Prompt>Printed Sent End Date</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
