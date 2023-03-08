@@ -292,6 +292,22 @@ ORDER BY
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="MostRecentCompletedPeriod">
+      <Query>
+        <DataSourceName>PE_Live</DataSourceName>
+        <CommandText>SELECT max(PeriodIndex) as Value
+FROM 
+	dbo.tblControlPeriods cp (NOLOCK)
+WHERE
+	PeriodStatus ='COMPLETE'</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Value">
+          <DataField>Value</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -6378,6 +6394,12 @@ ORDER BY
   <ReportParameters>
     <ReportParameter Name="Period">
       <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>MostRecentCompletedPeriod</DataSetName>
+          <ValueField>Value</ValueField>
+        </DataSetReference>
+      </DefaultValue>
       <Prompt>Select Financial Period</Prompt>
       <ValidValues>
         <DataSetReference>

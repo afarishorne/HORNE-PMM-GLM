@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Finance/PE Finance Live Data/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Finance/PE Finance Live Data/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>https://hornepowerbid01.horne.com/reportserver</TargetServerURL>
+    <TargetServerURL>https://powerbi.horne.com/reportserver</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -53,7 +53,6 @@
     <DataSource Include="PE Live.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="GS Time Reconciliation.rdl" />
     <Report Include="GS WIP Reconciliation.rdl" />
     <Report Include="Job Templates by Service Line-Active.rdl" />
   </ItemGroup>
