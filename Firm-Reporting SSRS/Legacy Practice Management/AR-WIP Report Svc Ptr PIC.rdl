@@ -74,17 +74,20 @@ ORDER BY
           <QueryParameter Name="@Staff">
             <Value>=Parameters!Staff.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@Office">
+            <Value>=Parameters!Office.Value</Value>
+          </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
-        <CommandText>client_usp_Do_Not_Work_List_SvcPtr</CommandText>
+        <CommandText>client_usp_Do_Not_Work_List_SvcPtr_PIC</CommandText>
       </Query>
       <Fields>
         <Field Name="ContIndex">
           <DataField>ContIndex</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="ClientEU">
-          <DataField>ClientEU</DataField>
+        <Field Name="ServDept">
+          <DataField>ServDept</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ClientID">

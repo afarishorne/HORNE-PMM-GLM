@@ -9,94 +9,20 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="ClientGroup">
-      <Query>
-        <DataSourceName>PEReporting</DataSourceName>
-        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT DISTINCT
-       C.ContName
-FROM tblPortfolio_Selection P
-    INNER JOIN tblEngagement E
-        ON P.ContIndex = E.ContIndex
-    INNER JOIN tblContacts C
-        ON P.ClientHold = C.ContIndex
-UNION
-SELECT 'ALL';</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-      <Fields>
-        <Field Name="ContName">
-          <DataField>ContName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="Office">
-      <Query>
-        <DataSourceName>PEReporting</DataSourceName>
-        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT DISTINCT
-       [StaffOffice]
-FROM [Engine_Horne].[dbo].[tblStaff]
-UNION
-SELECT 'ALL';</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-      <Fields>
-        <Field Name="StaffOffice">
-          <DataField>StaffOffice</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="Staff">
-      <Query>
-        <DataSourceName>PEReporting</DataSourceName>
-        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT DISTINCT
-       StaffCode,
-           StaffName
-FROM
-(
-    SELECT StaffCode,
-           StaffName
-    FROM dbo.tblStaff staff
-    WHERE staff.StaffDepartment='hea'
-	Union 
-    SELECT 'All1',
-           '(Choose Me for ALL)'
-    UNION
-    SELECT 'NOSTAFF',
-           'No Staff Allocated'
-    UNION
-    SELECT 'ALL',
-           'Catch-all'
-) t1
-ORDER BY StaffName;</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-      <Fields>
-        <Field Name="StaffCode">
-          <DataField>StaffCode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="StaffName">
-          <DataField>StaffName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
     <DataSet Name="Client">
       <Query>
         <DataSourceName>PEReporting</DataSourceName>
         <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-SELECT ClientCode,
-       1 SortOrder
-FROM dbo.tblEngagement eng
+SELECT DISTINCT 
+ClientCode,
+1 as SortOrder
+FROM dbo.tblEngagement eng 
+JOIN	dbo.tblClientServices cs ON cs.ContIndex = eng.ContIndex
+WHERE cs.ServDept='hea'
 UNION
 SELECT 'ALL',
-       0 SortOrder
+       0 as SortOrder
 ORDER BY SortOrder ASC;</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -111,129 +37,51 @@ ORDER BY SortOrder ASC;</CommandText>
         </Field>
       </Fields>
     </DataSet>
-    <DataSet Name="AnalysisCode">
-      <Query>
-        <DataSourceName>PEReporting</DataSourceName>
-        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; Select distinct 
-AnalysisCode
-from dbo.tblTSO_Details
-Union 
-Select distinct Disbcode
-from dbo.tblExpenseDetail det
-Union Select '901'
-Union Select '902'
-Union Select '903'
-Union 
-Select 'ALL'</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-      <Fields>
-        <Field Name="AnalysisCode">
-          <DataField>AnalysisCode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="Jobs">
-      <Query>
-        <DataSourceName>PEReporting</DataSourceName>
-        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT DISTINCT
-       J.Job_Name,
-       J.Job_Code
-FROM tblJob_Header J
-    LEFT JOIN tblContacts C
-        ON J.ContIndex = C.ContIndex
-    INNER JOIN dbo.tblEngagement eng
-        ON eng.ContIndex = C.ContIndex
-ORDER BY J.Job_Name;</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-      <Fields>
-        <Field Name="Job_Name">
-          <DataField>Job_Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Job_Code">
-          <DataField>Job_Code</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="Tasks">
-      <Query>
-        <DataSourceName>PEReporting</DataSourceName>
-        <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-SELECT DISTINCT
-       [Task_Subject]
-FROM [Engine_Horne].[dbo].[tblJob_Task] task
-    INNER JOIN tblJob_Header J
-        ON task.JobIdx = J.Job_Idx
-    LEFT JOIN tblContacts C
-        ON J.ContIndex = C.ContIndex
-    INNER JOIN dbo.tblEngagement eng
-        ON eng.ContIndex = C.ContIndex</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-      <Fields>
-        <Field Name="Task_Subject">
-          <DataField>Task_Subject</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
     <DataSet Name="dsTEJournal">
       <Query>
         <DataSourceName>PEReporting</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Billed1">
-            <Value>=Parameters!Billed1.Value</Value>
+          <QueryParameter Name="@BeginDate">
+            <Value>=Parameters!BeginDate.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@BillType1">
-            <Value>=Parameters!BillType1.Value</Value>
+          <QueryParameter Name="@EndDate">
+            <Value>=Parameters!EndDate.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@BeginDate1">
-            <Value>=Parameters!BeginDate1.Value</Value>
+          <QueryParameter Name="@Billed">
+            <Value>=Parameters!Billed.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@EndDate1">
-            <Value>=Parameters!EndDate1.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@TorE1">
-            <Value>=Parameters!TorE1.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Office">
-            <Value>=Parameters!Office.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@GroupName">
-            <Value>=Parameters!GroupName.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Staff">
-            <Value>=Parameters!Staff.Value</Value>
+          <QueryParameter Name="@TorE">
+            <Value>=Parameters!TorE.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@Client">
             <Value>=Parameters!Client.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@Analysis">
-            <Value>=Parameters!Analysis.Value</Value>
-          </QueryParameter>
         </QueryParameters>
         <CommandText>SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-DECLARE @Billed VARCHAR(50);
-DECLARE @BillType VARCHAR(50);
-DECLARE @BeginDate DATETIME;
-DECLARE @EndDate DATETIME;
---Declare @Client varchar(50)
-DECLARE @TorE VARCHAR(50);
-
-SELECT @Billed = @Billed1,
-       @BillType = @BillType1,
-       @BeginDate = @BeginDate1,
-       @EndDate = @EndDate1,
-       --,@Client = @Client1
-       @TorE = @TorE1;
 
 SELECT DISTINCT
-       *
+t.ClientID,
+t.EventId,
+t.workcodeid,
+t.ServDept,
+t.engagementid,
+t.Date,
+t.Hours,
+t.Amount,
+t.StaffName,
+t.ClientName,
+t.StaffLevel,
+t.expamount,
+t.Description,
+t.Company,
+t.DollarRate,
+t.StaffId,
+t.Task_Subject,
+t.DetailIndex,
+t.JobDescription,
+t.GroupName,
+t.PostedOn,
+t.PostedBy
 FROM
 (
     SELECT DISTINCT
@@ -243,31 +91,21 @@ FROM
 		   cs.ServDept,
            [ServiceCode] AS engagementid,
            EntryDate AS 'Date',
-           --DurationUnits as 'Hours',
            'Hours' = CASE
-                         WHEN tmp.StaffCode IS NULL THEN
+                         WHEN staff.StaffCode IS NULL THEN
                              DurationUnits
                          ELSE
                              CASE
-                                 WHEN (
-                                          'All' IN ( @Office )
-                                          OR tmp.StaffOffice IN ( @Office )
-                                      )
-                                      AND EntryDate &lt; tmp.StaffStarted THEN
+                                 WHEN EntryDate &lt; staff.StaffStarted THEN
                                      DurationUnits
-                                 WHEN (
-                                          'All' IN ( @Office )
-                                          OR staff.StaffOffice IN ( @Office )
-                                      )
-                                      AND EntryDate &gt;= tmp.StaffStarted THEN
+                                 WHEN EntryDate &gt;= staff.StaffStarted THEN
                                      DurationUnits
                                  ELSE
                                      0
                              END
                      END,
-           --Amount = ChargeAmount,	
            Amount = CASE
-                        WHEN tmp.StaffCode IS NULL THEN
+                        WHEN staff.StaffCode IS NULL THEN
                             CASE
                                 WHEN ChargeAmount != WIPOutstanding
                                      AND WIPOutstanding != 0 THEN
@@ -280,50 +118,31 @@ FROM
                             END
                         ELSE
                             CASE
-                                WHEN (
-                                         'All' IN ( @Office )
-                                         OR tmp.StaffOffice IN ( @Office )
-                                     )
-                                     AND EntryDate &lt; tmp.StaffStarted THEN
+                                WHEN EntryDate &lt; staff.StaffStarted THEN
                                     CASE
-                                        WHEN EntryDate
-                                             BETWEEN '7/28/2014' AND '7/30/2014'
-                                             AND staff.StaffName IN ( 'Michael Rawlinson', 'Tara Dinter' ) THEN
-                                            ROUND(ChargeRate * DurationUnits, 2)
+                                        
+                                        WHEN ChargeAmount != WIPOutstanding
+                                                AND WIPOutstanding != 0 THEN
+                                            WIPOutstanding
+                                        WHEN ChargeAmount != WIPBilled
+                                                AND WIPOutstanding = 0 THEN
+                                            WIPBilled
                                         ELSE
-                                            CASE
-                                                WHEN ChargeAmount != WIPOutstanding
-                                                     AND WIPOutstanding != 0 THEN
-                                                    WIPOutstanding
-                                                WHEN ChargeAmount != WIPBilled
-                                                     AND WIPOutstanding = 0 THEN
-                                                    WIPBilled
-                                                ELSE
-                                                    ROUND(ChargeRate * DurationUnits, 2)
-                                            END
+                                            ROUND(ChargeRate * DurationUnits, 2)
                                     END
-                                WHEN (
-                                         'All' IN ( @Office )
-                                         OR staff.StaffOffice IN ( @Office )
-                                     )
-                                     AND EntryDate &gt;= tmp.StaffStarted THEN
+                                WHEN EntryDate &gt;= staff.StaffStarted THEN
                                     CASE
-                                        WHEN EntryDate
-                                             BETWEEN '7/28/2014' AND '7/30/2014'
-                                             AND staff.StaffName IN ( 'Michael Rawlinson', 'Tara Dinter' ) THEN
-                                            ROUND(ChargeRate * DurationUnits, 2)
-                                        ELSE
-                                            CASE
-                                                WHEN ChargeAmount != WIPOutstanding
-                                                     AND WIPOutstanding != 0 THEN
-                                                    WIPOutstanding
-                                                WHEN ChargeAmount != WIPBilled
-                                                     AND WIPOutstanding = 0 THEN
-                                                    WIPBilled
-                                                ELSE
-                                                    ROUND(ChargeRate * DurationUnits, 2)
-                                            END
+                                        
+										WHEN ChargeAmount != WIPOutstanding
+												AND WIPOutstanding != 0 THEN
+											WIPOutstanding
+										WHEN ChargeAmount != WIPBilled
+												AND WIPOutstanding = 0 THEN
+											WIPBilled
+										ELSE
+											ROUND(ChargeRate * DurationUnits, 2)
                                     END
+                                    
                                 ELSE
                                     0
                             END
@@ -334,12 +153,12 @@ FROM
            expamount = NULL,
            'Description' = det.Description,
            Company = CASE
-                         WHEN tmp.StaffCode IS NULL THEN
+                         WHEN staff.StaffCode IS NULL THEN
                              staff.StaffOffice
                          ELSE
                              CASE
-                                 WHEN EntryDate &lt; tmp.StaffStarted THEN
-                                     tmp.StaffOffice
+                                 WHEN EntryDate &lt; staff.StaffStarted THEN
+                                     staff.StaffOffice
                                  ELSE
                                      staff.StaffOffice
                              END
@@ -353,199 +172,84 @@ FROM
            staff.StaffCode AS StaffId,
            Task_Subject,
            det.DetailIndex,
-           location_Header.JurisName AS PELocation,
-           location_Detail.JurisName AS PELocationDetail,
            Job_Name AS JobDescription,
            ContName AS GroupName,
            det.PostedOn,
            det.PostedBy
-    --WIPAmount, 
-    -- WIPWoff,
-    --WIPBilled
-
     FROM [Engine_Horne].[dbo].[tblTSO_Details] det
-        INNER JOIN [Engine_Horne].[dbo].[tblTSO_Header] head
-            ON det.HeaderIndex = head.HeaderIndex
-        INNER JOIN [Engine_Horne].[dbo].[tblStaff] staff
-            ON staff.StaffIndex = head.StaffIndex
-        INNER JOIN [Engine_Horne].[dbo].[tblEngagement] eng
-            ON eng.ContIndex = det.ClientIndex
-        LEFT JOIN [Engine_Horne].[dbo].[tblJob_Header] J
-            ON det.ServPeriod = J.Job_Idx
-        LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C
-            ON eng.ClientHold = C.ContIndex
-        LEFT JOIN [Engine_Horne].[dbo].[tblJob_Task] task
-            ON task.TaskIndex = det.TaskIndex
-        LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip
-            ON det.DetailIndex = wip.WIPRef
-               AND eng.ContIndex = wip.ContIndex
-        LEFT JOIN
-        (SELECT * FROM Engine_Horne.dbo.client_fn_Select_Sub_To_Perm() ) AS tmp
-            ON tmp.StaffCode = staff.StaffCode
-        LEFT JOIN [Engine_Horne].[dbo].[tblStateJurisdiction] location_Header
-            ON location_Header.JurisIndex = head.Location
-        LEFT JOIN [Engine_Horne].[dbo].[tblStateJurisdiction] location_Detail
-            ON location_Detail.JurisIndex = det.Location
-   INNER JOIN dbo.tblClientServices cs (NOLOCK)
-        ON eng.ContIndex = cs.ContIndex and wip.WipService = CS.ServIndex
-    WHERE (
-              cs.ServDept='hea'
-          )
-          AND 1 = CASE
-                      WHEN @Billed = 'All' THEN
-                          1
-                      WHEN @Billed = 'Billed'
-                           AND
-                           (
-                               (WIPAmount = WIPWoff)
-                               OR
-                               (
-                                   WIPBilled != 0
-                                   AND WIPBilled IS NOT NULL
-                               )
-                           ) THEN
-                          1
-                      WHEN @Billed = 'NotBilled'
-                           AND
-                           (
-                               (
-                                   WIPAmount != WIPWoff
-                                   AND
-                                   (
-                                       WIPBilled = 0
-                                       OR WIPBilled IS NULL
-                                   )
-                               )
-                               OR WIPRef IS NULL
-                           ) THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN 'ALL' IN ( @GroupName ) THEN
-                          1
-                      WHEN C.ContName IN ( @GroupName ) THEN
-                          1
-                      WHEN 'TXPA-9999' IN ( @GroupName )
-                           AND eng.ClientCode = 'TXPA-1111' THEN
-                          1
-                      WHEN 'Pm - General Project Management' IN ( @GroupName )
-                           AND eng.ClientCode = '1111PM' THEN
-                          1
-                      WHEN 'Small Rental  Assistance Program' IN ( @GroupName )
-                           AND eng.ClientCode = '1111SR' THEN
-                          1
-                      WHEN 'Small Rental Assistance Program II' IN ( @GroupName )
-                           AND eng.ClientCode = 'SR2-1111' THEN
-                          1
-                      WHEN 'Long Term Workforce Housing Program' IN ( @GroupName )
-                           AND eng.ClientCode = '1111LT' THEN
-                          1
-                      WHEN 'Hmgp Administrative' IN ( @GroupName )
-                           AND eng.ClientCode = '1111HM' THEN
-                          1
-                      WHEN 'MONITORING-TEXAS PA 3.0' IN ( @GroupName )
-                           AND eng.ClientCode = 'TXAF-1111' THEN
-                          1
-                      WHEN 'Texas Department of Information Resources' IN ( @GroupName )
-                           AND eng.ClientCode = 'MIS2601435' THEN
-                          1
-                      WHEN 'Texas - CDBG' IN ( @GroupName )
-                           AND eng.ClientCode IN ( 'TXCDBG1111', 'TCBRN1111', 'TCGL1-1111' ) THEN
-                          1
-                      WHEN 'SOUTH CAROLINA - PROGRAM MANAGEMENT' IN ( @GroupName )
-                           AND eng.ClientCode = 'SC-1111' THEN
-                          1
-                      WHEN 'GENERAL ADMINISTRATIVE' IN ( @GroupName )
-                           AND
-                           (
-                               eng.ClientCode = 'SPE1111'
-                               OR eng.ClientCode = 'SPE9999999'
-                           ) THEN
-                          1
-                      WHEN 'CALIFORNIA DEPARTMENT OF WATER RESOURCES' IN ( @GroupName )
-                           AND eng.ClientCode = 'CADWR-1111' THEN
-                          1
-                      WHEN 'NORTHWELL SIUH' IN ( @GroupName )
-                           AND eng.ClientCode = 'NWSIUH9999' THEN
-                          1
-                      WHEN 'PUERTO RICO' IN ( @GroupName )
-                           AND eng.ClientCode = 'PR-9999' THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN 'ALL' IN ( @Office ) THEN
-                          1
-                      WHEN CASE
-                               WHEN tmp.StaffCode IS NULL THEN
-                                   staff.StaffOffice
-                               ELSE
-                                   CASE
-                                       WHEN EntryDate &lt; tmp.StaffStarted THEN
-                                           tmp.StaffOffice
-                                       WHEN EntryDate &gt;= tmp.StaffStarted THEN
-                                           staff.StaffOffice
-                                   END
-                           END IN ( @Office ) THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND det.EntryDate
-          BETWEEN @BeginDate AND @EndDate
-          AND 1 = CASE
-                      WHEN @BillType = 'Billable'
-                           AND [ServiceCode] = 'BAA' THEN
-                          1
-                      WHEN @BillType = 'Non-Billable'
-                           AND [ServiceCode] != 'BAA' THEN
-                          1
-                      WHEN @BillType = 'Both' THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN @TorE = 'Expenses' THEN
-                          0
-                      ELSE
-                          1
-                  END
-          AND 1 = CASE
-                      WHEN 'All1' IN ( @Staff ) THEN
-                          1
-                      WHEN staff.StaffCode IN ( @Staff ) THEN
-                          1
-                      WHEN 'Z-AnchorStaff' IN ( @Staff )
-                           AND staff.StaffOffice = 'Z-Anchor' THEN
-                          1
-                      WHEN 'Z-TidalStaff' IN ( @Staff )
-                           AND staff.StaffOffice = 'Z-TIDAL' THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN 'All' IN ( @Client ) THEN
-                          1
-                      WHEN eng.ClientCode IN ( @Client ) THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN 'All' IN ( @Analysis ) THEN
-                          1
-                      WHEN AnalysisCode IN ( @Analysis ) THEN
-                          1
-                      ELSE
-                          0
-                  END
-    UNION ALL
-    SELECT DISTINCT
+	JOIN [Engine_Horne].[dbo].[tblTSO_Header] head ON det.HeaderIndex = head.HeaderIndex
+	LEFT JOIN [Engine_Horne].[dbo].[tblStaff] staff ON staff.StaffIndex = head.StaffIndex
+	LEFT JOIN [Engine_Horne].[dbo].[tblEngagement] eng ON eng.ContIndex = det.ClientIndex
+	LEFT JOIN [Engine_Horne].[dbo].[tblJob_Header] J ON det.ServPeriod = J.Job_Idx
+	LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C ON eng.ClientHold = C.ContIndex
+	LEFT JOIN [Engine_Horne].[dbo].[tblJob_Task] task ON task.TaskIndex = det.TaskIndex
+	LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip ON det.DetailIndex = wip.WIPRef AND eng.ContIndex = wip.ContIndex
+	LEFT JOIN dbo.tblClientServices cs (NOLOCK) ON eng.ContIndex = cs.ContIndex AND cs.ServIndex=det.ServiceCode
+    WHERE 
+	(
+		cs.ServDept='hea'
+    ) 
+	AND det.EntryDate BETWEEN @BeginDate AND @EndDate
+	AND 1 = CASE
+				WHEN @Billed = 'All' THEN 1
+                WHEN @Billed = 'Billed'
+                AND
+                (
+					(WIPAmount = WIPWoff)
+                    OR	(COALESCE(wip.WIPBilled,0) &lt;&gt; 0)
+                ) THEN 1
+                WHEN @Billed = 'NotBilled'
+                AND
+                (
+					(
+						WIPAmount != WIPWoff
+                        AND
+                        (
+							COALESCE(wip.WIPBilled,0) = 0
+                        )
+                    )
+                    OR WIPRef IS NULL
+				) THEN 1
+				ELSE 0
+			END
+	AND 1 = CASE
+                WHEN @TorE = 'Expenses' THEN 0
+                ELSE 1
+            END
+	AND 1 = CASE
+				WHEN 'All' IN ( @Client ) THEN 1
+				WHEN eng.ClientCode IN ( @Client ) THEN 1
+				ELSE 0
+            END
+) t
+
+UNION
+
+SELECT
+t1.ClientID,
+t1.EventId,
+t1.workcodeid,
+t1.ServDept,
+t1.engagementid,
+t1.Date,
+t1.Hours,
+t1.Amount,
+t1.StaffName,
+t1.ClientName,
+t1.StaffLevel,
+t1.expamount,
+t1.Description,
+t1.Company,
+t1.DollarRate,
+t1.StaffId,
+t1.Task_Subject,
+t1.DetailIndex,
+t1.JobDescription,
+t1.GroupName,
+t1.postedon,
+t1.postedby
+FROM (
+	SELECT DISTINCT
            eng.ClientCode AS ClientID,
            [Job_Code] AS EventId,
            [DisbCode] AS workcodeid,
@@ -559,35 +263,25 @@ FROM
            StaffNextOfKin AS StaffLevel,
            expamount = --ChargeAmount	
            CASE
-               WHEN tmp.StaffCode IS NULL THEN
+               WHEN staff.StaffCode IS NULL THEN
                    ChargeAmount
                ELSE
                    CASE
-                       WHEN (
-                                'All' IN ( @Office )
-                                OR tmp.StaffOffice IN ( @Office )
-                            )
-                            AND det.ExpDate &lt; tmp.StaffStarted THEN
-                           ChargeAmount
-                       WHEN (
-                                'All' IN ( @Office )
-                                OR staff.StaffOffice IN ( @Office )
-                            )
-                            AND det.ExpDate &gt;= tmp.StaffStarted THEN
-                           ChargeAmount
+                       WHEN det.ExpDate &lt; staff.StaffStarted THEN ChargeAmount
+                       WHEN det.ExpDate &gt;= staff.StaffStarted THEN ChargeAmount
                        ELSE
                            0
                    END
            END,
            'Description' = det.Description,
            Company = CASE
-                         WHEN tmp.StaffCode IS NULL THEN
+                         WHEN staff.StaffCode IS NULL THEN
                              staff.StaffOffice
                          ELSE
                              CASE
-                                 WHEN det.ExpDate &lt; tmp.StaffStarted THEN
-                                     tmp.StaffOffice
-                                 WHEN det.ExpDate &gt;= tmp.StaffStarted THEN
+                                 WHEN det.ExpDate &lt; staff.StaffStarted THEN
+                                     staff.StaffOffice
+                                 WHEN det.ExpDate &gt;= staff.StaffStarted THEN
                                      staff.StaffOffice
                                  ELSE
                                      staff.StaffOffice
@@ -597,189 +291,54 @@ FROM
            staff.StaffCode AS StaffId,
            NULL AS Task_Subject,
            det.DetailIndex,
-           --WIPAmount, 
-           -- WIPWoff,
-           --WIPBilled
-           NULL AS PELocation,
-           NULL AS PELocationDetail,
            Job_Name AS JobDescription,
            ContName AS GroupName,
            NULL AS postedon,
            NULL AS postedby
     FROM [Engine_Horne].[dbo].[tblExpenseDetail] det
-        INNER JOIN [Engine_Horne].[dbo].[tblExpenseHeader] head
-            ON det.ExpIndex = head.ExpIndex
-        INNER JOIN [Engine_Horne].[dbo].[tblStaff] staff
-            ON staff.StaffIndex = head.ExpStaff
-        INNER JOIN [Engine_Horne].[dbo].[tblEngagement] eng
-            ON eng.ContIndex = det.ClientIndex
-        LEFT JOIN [Engine_Horne].[dbo].[tblJob_Header] J
-            ON det.ServPeriod = J.Job_Idx
-        LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C
-            ON eng.ClientHold = C.ContIndex
-        LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip
-            ON det.DetailIndex = wip.WIPRef
-               AND WIPType = 'DISB'
-               AND eng.ContIndex = wip.ContIndex
-        LEFT JOIN
-        (SELECT * FROM Engine_Horne.dbo.client_fn_Select_Sub_To_Perm() ) AS tmp
-            ON tmp.StaffCode = staff.StaffCode
-INNER JOIN dbo.tblClientServices cs (NOLOCK)
-        ON eng.ContIndex = cs.ContIndex and wip.WipService = CS.ServIndex
-		
-    WHERE (
-              cs.ServDept='hea'
-          )
-          AND 1 = CASE
-                      WHEN @Billed = 'All' THEN
-                          1
-                      WHEN @Billed = 'Billed'
-                           AND
-                           (
-                               (WIPAmount = WIPWoff)
-                               OR
-                               (
-                                   WIPBilled != 0
-                                   AND WIPBilled IS NOT NULL
-                               )
-                           ) THEN
-                          1
-                      WHEN @Billed = 'NotBilled'
-                           AND
-                           (
-                               (
-                                   WIPAmount != WIPWoff
-                                   AND
-                                   (
-                                       WIPBilled = 0
-                                       OR WIPBilled IS NULL
-                                   )
-                               )
-                               OR WIPRef IS NULL
-                           ) THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN 'ALL' IN ( @GroupName ) THEN
-                          1
-                      WHEN C.ContName IN ( @GroupName ) THEN
-                          1
-                      WHEN 'TXPA-9999' IN ( @GroupName )
-                           AND eng.ClientCode = 'TXPA-1111' THEN
-                          1
-                      WHEN 'Pm - General Project Management' IN ( @GroupName )
-                           AND eng.ClientCode = '1111PM' THEN
-                          1
-                      WHEN 'Small Rental  Assistance Program' IN ( @GroupName )
-                           AND eng.ClientCode = '1111SR' THEN
-                          1
-                      WHEN 'Small Rental Assistance Program II' IN ( @GroupName )
-                           AND eng.ClientCode = 'SR2-1111' THEN
-                          1
-                      WHEN 'Long Term Workforce Housing Program' IN ( @GroupName )
-                           AND eng.ClientCode = '1111LT' THEN
-                          1
-                      WHEN 'Hmgp Administrative' IN ( @GroupName )
-                           AND eng.ClientCode = '1111HM' THEN
-                          1
-                      WHEN 'MONITORING-TEXAS PA 3.0' IN ( @GroupName )
-                           AND eng.ClientCode = 'TXAF-1111' THEN
-                          1
-                      WHEN 'Texas Department of Information Resources' IN ( @GroupName )
-                           AND eng.ClientCode = 'MIS2601435' THEN
-                          1
-                      WHEN 'Texas - CDBG' IN ( @GroupName )
-                           AND eng.ClientCode IN ( 'TXCDBG1111', 'TCBRN1111', 'TCGL1-1111' ) THEN
-                          1
-                      WHEN 'SOUTH CAROLINA - PROGRAM MANAGEMENT' IN ( @GroupName )
-                           AND eng.ClientCode = 'SC-1111' THEN
-                          1
-                      WHEN 'GENERAL ADMINISTRATIVE' IN ( @GroupName )
-                           AND
-                           (
-                               eng.ClientCode = 'SPE1111'
-                               OR eng.ClientCode = 'SPE9999999'
-                           ) THEN
-                          1
-                      WHEN 'CALIFORNIA DEPARTMENT OF WATER RESOURCES' IN ( @GroupName )
-                           AND eng.ClientCode = 'CADWR-1111' THEN
-                          1
-                      WHEN 'NORTHWELL SIUH' IN ( @GroupName )
-                           AND eng.ClientCode = 'NWSIUH9999' THEN
-                          1
-                      WHEN 'PUERTO RICO' IN ( @GroupName )
-                           AND eng.ClientCode = 'PR-9999' THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN 'ALL' IN ( @Office ) THEN
-                          1
-                      WHEN CASE
-                               WHEN tmp.StaffCode IS NULL THEN
-                                   staff.StaffOffice
-                               ELSE
-                                   CASE
-                                       WHEN det.ExpDate &lt; tmp.StaffStarted THEN
-                                           tmp.StaffOffice
-                                       WHEN det.ExpDate &gt;= tmp.StaffStarted THEN
-                                           staff.StaffOffice
-                                   END
-                           END IN ( @Office ) THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND det.ExpDate
-          BETWEEN @BeginDate AND @EndDate
-          AND 1 = CASE
-                      WHEN @BillType = 'Billable'
-                           AND [ServiceCode] = 'BAA' THEN
-                          1
-                      WHEN @BillType = 'Non-Billable'
-                           AND [ServiceCode] != 'BAA' THEN
-                          1
-                      WHEN @BillType = 'Both' THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN @TorE = 'Time' THEN
-                          0
-                      ELSE
-                          1
-                  END
-          AND 1 = CASE
-                      WHEN 'All1' IN ( @Staff ) THEN
-                          1
-                      WHEN staff.StaffCode IN ( @Staff ) THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN 'All' IN ( @Client ) THEN
-                          1
-                      WHEN eng.ClientCode IN ( @Client ) THEN
-                          1
-                      ELSE
-                          0
-                  END
-          AND 1 = CASE
-                      WHEN 'All' IN ( @Analysis ) THEN
-                          1
-                      WHEN [DisbCode] IN ( @Analysis ) THEN
-                          1
-                      ELSE
-                          0
-                  END
+    JOIN [Engine_Horne].[dbo].[tblExpenseHeader] head ON det.ExpIndex = head.ExpIndex
+    JOIN [Engine_Horne].[dbo].[tblStaff] staff ON staff.StaffIndex = head.ExpStaff
+    JOIN [Engine_Horne].[dbo].[tblEngagement] eng ON eng.ContIndex = det.ClientIndex
+    JOIN dbo.tblClientServices cs (NOLOCK) ON eng.ContIndex = cs.ContIndex and det.ServiceCode = CS.ServIndex
+	LEFT JOIN [Engine_Horne].[dbo].[tblJob_Header] J ON det.ServPeriod = J.Job_Idx
+    LEFT JOIN [Engine_Horne].[dbo].[tblContacts] C ON eng.ClientHold = C.ContIndex
+    LEFT JOIN [Engine_Horne].[dbo].[tblTranWIP] wip ON det.DetailIndex = wip.WIPRef AND WIPType = 'DISB' AND eng.ContIndex = wip.ContIndex			
+    WHERE 
+	(
+		cs.ServDept='hea'
+	)
+    AND det.ExpDate BETWEEN @BeginDate AND @EndDate
+	AND 1 = CASE
+				WHEN @Billed = 'All' THEN 1
+				WHEN @Billed = 'Billed'
+				AND
+				(
+						WIPAmount = WIPWoff
+					OR	COALESCE(wip.WIPBilled,0) &lt;&gt; 0
+				) THEN 1
+				WHEN @Billed = 'NotBilled'
+				AND
+				(
+					(
+							WIPAmount != WIPWoff
+						AND COALESCE(wip.WIPBilled,0) = 0						
+					)
+					OR WIPRef IS NULL
+				) THEN 1
+				ELSE 0
+			END
+	AND 1 = CASE
+            WHEN @TorE = 'Time' THEN 0
+            ELSE 1
+        END
+	AND 1 = CASE
+				WHEN 'All' IN ( @Client ) THEN 1
+				WHEN eng.ClientCode IN ( @Client ) THEN 1
+				ELSE 0
+            END
+         
 ) t1
-ORDER BY t1.StaffId,
-         Date;</CommandText>
+ORDER BY StaffId,Date;</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -851,17 +410,9 @@ ORDER BY t1.StaffId,
           <DataField>Task_Subject</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="detailindex">
+        <Field Name="DetailIndex">
           <DataField>DetailIndex</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="PELocation">
-          <DataField>PELocation</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PELocationDetail">
-          <DataField>PELocationDetail</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="JobDescription">
           <DataField>JobDescription</DataField>
@@ -963,19 +514,7 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                   <Width>0.75in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
-                </TablixColumn>
-                <TablixColumn>
                   <Width>1.125in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.125in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.71875in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.40625in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1026,6 +565,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                       <CellContents>
                         <Textbox Name="textbox56">
                           <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!StaffId.Value</SortExpression>
+                          </UserSort>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1044,6 +586,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                           <rd:DefaultName>textbox56</rd:DefaultName>
                           <ZIndex>38</ZIndex>
                           <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
                             <TopBorder>
                               <Style>Solid</Style>
                             </TopBorder>
@@ -1063,6 +608,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                       <CellContents>
                         <Textbox Name="textbox11">
                           <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!StaffName.Value</SortExpression>
+                          </UserSort>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1081,6 +629,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                           <rd:DefaultName>textbox11</rd:DefaultName>
                           <ZIndex>37</ZIndex>
                           <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
                             <TopBorder>
                               <Style>Solid</Style>
                             </TopBorder>
@@ -1137,6 +688,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                       <CellContents>
                         <Textbox Name="textbox1">
                           <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!ClientID.Value</SortExpression>
+                          </UserSort>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1155,6 +709,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                           <rd:DefaultName>textbox1</rd:DefaultName>
                           <ZIndex>35</ZIndex>
                           <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
                             <TopBorder>
                               <Style>Solid</Style>
                             </TopBorder>
@@ -1174,6 +731,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                       <CellContents>
                         <Textbox Name="textbox25">
                           <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!ClientName.Value</SortExpression>
+                          </UserSort>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1192,6 +752,9 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                           <rd:DefaultName>textbox25</rd:DefaultName>
                           <ZIndex>34</ZIndex>
                           <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
                             <TopBorder>
                               <Style>Solid</Style>
                             </TopBorder>
@@ -1651,80 +1214,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="textbox6">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Location Header</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox6</rd:DefaultName>
-                          <ZIndex>22</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox7">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Location Detail</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox7</rd:DefaultName>
-                          <ZIndex>21</ZIndex>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="textbox9">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1760,80 +1249,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                         </Textbox>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox14">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Posted On</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox14</rd:DefaultName>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox12">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Posted By</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox12</rd:DefaultName>
-                          <Style>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -1841,14 +1256,14 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="detailindex">
+                        <Textbox Name="DetailIndex">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!detailindex.Value</Value>
+                                  <Value>=Fields!DetailIndex.Value</Value>
                                   <Style>
                                     <FontFamily />
                                     <FontSize>8pt</FontSize>
@@ -1861,7 +1276,7 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>detailindex</rd:DefaultName>
+                          <rd:DefaultName>DetailIndex</rd:DefaultName>
                           <ZIndex>19</ZIndex>
                           <Style>
                             <FontFamily />
@@ -2417,68 +1832,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="PELocation">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PELocation.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>PELocation</rd:DefaultName>
-                          <ZIndex>2</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="PELocationDetail">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PELocationDetail.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>PELocationDetail</rd:DefaultName>
-                          <ZIndex>1</ZIndex>
-                          <Style>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="GroupName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2507,78 +1860,12 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
                         </Textbox>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="PostedOn">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PostedOn.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>PostedOn</rd:DefaultName>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="PostedBy">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PostedBy.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>PostedBy</rd:DefaultName>
-                          <Style>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -2627,7 +1914,7 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
             </TablixRowHierarchy>
             <DataSetName>dsTEJournal</DataSetName>
             <Height>0.4in</Height>
-            <Width>20.375in</Width>
+            <Width>15.125in</Width>
             <Style />
           </Tablix>
         </ReportItems>
@@ -2645,40 +1932,6 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="GroupName">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>ALL</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Client Group</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>ClientGroup</DataSetName>
-          <ValueField>ContName</ValueField>
-          <LabelField>ContName</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
-    </ReportParameter>
-    <ReportParameter Name="Office">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>ALL</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Office</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Office</DataSetName>
-          <ValueField>StaffOffice</ValueField>
-          <LabelField>StaffOffice</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
-    </ReportParameter>
     <ReportParameter Name="Client">
       <DataType>String</DataType>
       <DefaultValue>
@@ -2697,46 +1950,7 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
       </ValidValues>
       <MultiValue>true</MultiValue>
     </ReportParameter>
-    <ReportParameter Name="Staff">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>All1</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Staff</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Staff</DataSetName>
-          <ValueField>StaffCode</ValueField>
-          <LabelField>StaffName</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
-    </ReportParameter>
-    <ReportParameter Name="BillType1">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Both</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>BillType</Prompt>
-      <ValidValues>
-        <ParameterValues>
-          <ParameterValue>
-            <Value>Both</Value>
-          </ParameterValue>
-          <ParameterValue>
-            <Value>Billable</Value>
-          </ParameterValue>
-          <ParameterValue>
-            <Value>Non-Billable</Value>
-          </ParameterValue>
-        </ParameterValues>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="TorE1">
+    <ReportParameter Name="TorE">
       <DataType>String</DataType>
       <DefaultValue>
         <Values>
@@ -2748,34 +1962,20 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
         <ParameterValues>
           <ParameterValue>
             <Value>Both</Value>
+            <Label>Both</Label>
           </ParameterValue>
           <ParameterValue>
             <Value>Time</Value>
+            <Label>Time</Label>
           </ParameterValue>
           <ParameterValue>
             <Value>Expenses</Value>
+            <Label>Expenses</Label>
           </ParameterValue>
         </ParameterValues>
       </ValidValues>
     </ReportParameter>
-    <ReportParameter Name="Analysis">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>ALL</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Analysis</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>AnalysisCode</DataSetName>
-          <ValueField>AnalysisCode</ValueField>
-          <LabelField>AnalysisCode</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
-    </ReportParameter>
-    <ReportParameter Name="Billed1">
+    <ReportParameter Name="Billed">
       <DataType>String</DataType>
       <DefaultValue>
         <Values>
@@ -2791,6 +1991,7 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
           </ParameterValue>
           <ParameterValue>
             <Value>Billed</Value>
+            <Label>Billed</Label>
           </ParameterValue>
           <ParameterValue>
             <Value>NotBilled</Value>
@@ -2799,69 +2000,44 @@ DATEADD(ss, -1, DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) as EndDate1</C
         </ParameterValues>
       </ValidValues>
     </ReportParameter>
-    <ReportParameter Name="BeginDate1">
+    <ReportParameter Name="BeginDate">
       <DataType>DateTime</DataType>
-      <Prompt>BeginDate1</Prompt>
+      <Prompt>BeginDate</Prompt>
     </ReportParameter>
-    <ReportParameter Name="EndDate1">
+    <ReportParameter Name="EndDate">
       <DataType>DateTime</DataType>
-      <Prompt>EndDate1</Prompt>
+      <Prompt>EndDate</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>5</NumberOfRows>
+      <NumberOfRows>3</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>GroupName</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>Office</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
           <ParameterName>Client</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>TorE</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>Staff</ParameterName>
+          <ParameterName>Billed</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>BillType1</ParameterName>
+          <ParameterName>BeginDate</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>TorE1</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>Analysis</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>Billed1</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>4</RowIndex>
-          <ParameterName>BeginDate1</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>4</RowIndex>
-          <ParameterName>EndDate1</ParameterName>
+          <ParameterName>EndDate</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
