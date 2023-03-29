@@ -49,6 +49,7 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
+    <DataSource Include="EIM.rds" />
     <DataSource Include="HORNE.rds" />
     <DataSource Include="HorneReports.rds" />
     <DataSource Include="Metastorm9.rds" />
@@ -61,6 +62,7 @@
     <Report Include="New Hire Listing.rdl" />
     <Report Include="New Hire Onboarding.rdl" />
     <Report Include="PMM Team Member Listing.rdl" />
+    <Report Include="Smartsheet Users List .rdl" />
     <Report Include="Talent Pipeline Summary.rdl" />
     <Report Include="Team Member Events.rdl" />
     <Report Include="Team Member Listing Update.rdl" />
