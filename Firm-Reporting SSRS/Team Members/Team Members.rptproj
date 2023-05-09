@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Firmwide/Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Firmwide/Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://powerbi.horne.com/reports</TargetServerURL>
+    <TargetServerURL>https://powerbi.horne.com/reports</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -67,6 +67,7 @@
     <Report Include="Team Member Events.rdl" />
     <Report Include="Team Member Listing Update.rdl" />
     <Report Include="Team Member Listing.rdl" />
+    <Report Include="Team Members Termination List.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
